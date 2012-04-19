@@ -62,18 +62,35 @@
 				));
 				?>
 				<div class="app-name">Production Manager Tool</div>
+				<?php
+					$username = $session->read('Auth.User.username');
+					if(!empty($username)):
+				?>
+				<div class="user-info">
+				<?php 
+					echo "Welcome". $this->Html->link($username,array('controller'=>'users','action'=>'account'))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+				?>
+				</div>
+				<?php
+					endif;
+				?>
 				</div>
 				<div class="clear"></div>
+				<?php
+					if(!empty($username)):
+				?>
 			<div id='navbar'>
 					<?php echo $this->element('nav',array('cache'=>false)); ?>
 			</div><!-- end of navbar -->
-	
+				<?php
+					endif;
+				?>
 		</div><!-- end of header? -->
 		
 		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
 			
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->Session->flash('auth'); ?>
 			<?php echo $content_for_layout; ?>
 		</div>
 		<div id="footer">

@@ -599,3 +599,22 @@ div.side-by-side { width: 100%; margin: 1em 0 1em 0; }
 div.side-by-side > div { float: left; width: 50%;}
 div.side-by-side > div > em { margin-bottom: 10px; display: block; }
 /** END CHOSEN SELECT BOXES */
+
+
+/** V2.0 **/
+div.user-info{
+	position: relative;
+	float: right;
+	font-size: 12px;
+	margin-right: 25px;
+}
+div.user-info a:link,
+div.user-info a:visited,
+div.user-info a:active{
+	color: #ffffff;
+	text-decoration: underline !important;
+}
+div.user-info a:hover{
+	color: #666666;
+}
+/** END V2.0 **/

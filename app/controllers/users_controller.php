@@ -8,8 +8,11 @@ class UsersController extends AppController {
 	 * Runs automatically before the controller action is called
 	*/
 	function beforeFilter(){
-		$this->Auth->allow('create');
 		parent::beforeFilter();
+		$this->Auth->allow('create');
+		$this->Auth->fields = array('username' => 'username', 'password' => 'password');
+		$this->Auth->autoRedirect = false;
+		$this->Auth->loginRedirect = array('controller' => 'projects', 'action' => 'index');
 	}
 	
 	/**
@@ -40,15 +43,22 @@ class UsersController extends AppController {
 				$passValidation = true;
 			}
 			if($passValidation == true){
+				//Set initial last_login
+				$this->data['User']['lastlogin'] = date('Y-m-d H:i:s');
+				
 				if ($this->User->save($this->data)) {
-					
-					$this->Auth->login($this->data); //Log the new user in
-					
 					$this->Session->setFlash(__('Your account has been created.', true));
-					$this->redirect(array('controller'=>'projects','action' => 'index'));
+					
+					$user['User']['username'] = $this->data['User']['username'];
+					$user['User']['password'] = $this->data['User']['password'];
+					$this->Auth->login($user); //Log the new user in
+					
+					$this->redirect($this->Auth->loginRedirect);
 				} else {
-					$this->Session->setFlash(__('Your account could not be create. Please contact <a href="mailto:rob.sawyer@razorfish.com">rob.sawyer@razorfish.com</a>.', true));
+					$this->Session->setFlash(__('Your account could not be created. Please contact <a href="mailto:rob.sawyer@razorfish.com">rob.sawyer@razorfish.com</a>.', true));
 				}
+			}else{
+				$this->Session->setFlash(__('Your account could not be created because you are not currently in the system. Please contact <a href="mailto:rob.sawyer@razorfish.com">rob.sawyer@razorfish.com</a> to have your information added.', true));
 			}
 		}
 	}
@@ -58,11 +68,49 @@ class UsersController extends AppController {
      *  for login, so you can leave this function blank.
      */
 	function login() { 
-		debug($this->Auth->user());
+		// Check for a successful login
+		if (!empty($this->data) && $id = $this->Auth->user('id')) {
+
+			// Set the lastlogin time
+			$fields = array('lastlogin' => date('Y-m-d H:i:s'), 'modified' => false);
+			$this->User->id = $id;
+			$this->User->save($fields, false, array('lastlogin'));
+			
+			// Redirect the user
+			if ($this->Session->check('Auth.redirect')) {
+				$url = $this->Session->read('Auth.redirect');
+			}
+			$this->redirect($this->Auth->loginRedirect);
+		}
 	}
 
 	function logout() {
 		$this->redirect($this->Auth->logout());
+	}
+	
+	/**
+	 * Account details page (change password)
+	 */
+	function account() {
+		// Set User's ID in model which is needed for validation
+		$this->User->id = $this->Auth->user('id');
+
+		// Load the user (avoid populating $this->data)
+		$current_user = $this->User->findById($this->User->id);
+		$this->set('current_user', $current_user);
+
+		$this->User->useValidationRules('ChangePassword');
+		$this->User->validate['password_confirm']['compare']['rule'] =
+			array('password_match', 'password', false);
+
+		$this->User->set($this->data);
+		if (!empty($this->data) && $this->User->validates()) {
+			$password = $this->Auth->password($this->data['User']['password']);
+			$this->User->saveField('password', $password);
+
+			$this->Session->setFlash('Your password has been updated');
+			$this->redirect(array('action' => 'account'));
+		}
 	}
 }
 ?>

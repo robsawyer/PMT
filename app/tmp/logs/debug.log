@@ -3592,3 +3592,6 @@
 2012-04-17 19:25:54 Notice: Notice (8): Undefined index: ProjectNotes in [/Users/robsa/Sites/PMT/app/views/themed/default/projects/add.ctp, line 154]
 2012-04-17 19:26:12 Notice: Notice (8): Undefined index: ProjectNotes in [/Users/robsa/Sites/PMT/app/views/themed/default/projects/add.ctp, line 154]
 2012-04-18 00:01:15 Notice: Notice (8): Undefined variable: data in [/Users/robsa/Sites/PMT/app/views/themed/default/projects/find.ctp, line 24]
+2012-04-19 00:52:14 Notice: Notice (8): Undefined variable: user in [/Users/robsa/Sites/PMT/app/views/themed/default/layouts/default.ctp, line 65]
+2012-04-19 00:52:20 Notice: Notice (8): Undefined variable: auth in [/Users/robsa/Sites/PMT/app/views/themed/default/layouts/default.ctp, line 65]
+2012-04-19 01:01:52 Notice: Notice (8): Undefined index: name in [/Users/robsa/Sites/PMT/app/views/themed/default/users/account.ctp, line 7]
