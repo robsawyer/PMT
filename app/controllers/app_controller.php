@@ -34,24 +34,11 @@
  */
 class AppController extends Controller {
 	
-	var $components = array('Auth','RequestHandler','Session','Email');
+	var $components = array('RequestHandler','Session','Email');
 	var $helpers = array('Js' => array('Jquery'),'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text');
 	
 	public $view = 'Theme';
 	public $theme = 'default';	
-	
-	/**
-	* Before Render
-	*/
-	function beforeRender(){
-		unset($this->data['User']['password']);
-		unset($this->data['User']['password_confirm']);
-	}
-	
-	//Alow everything and in each controller set specific permissions
-	function beforeFilter() {
-		//$this->Auth->allow('*');
-	}
 	
 	function toSlug($string) {
 		return Inflector::slug(utf8_encode(strtolower($string)), '-');

@@ -27,7 +27,7 @@ class Project extends AppModel {
 			'order' => ''
 		)
 	);
-	
+
 	var $hasAndBelongsToMany = array(
 		'Developer' => array(
 			'className' => 'Developer',
