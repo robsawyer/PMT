@@ -8,18 +8,21 @@
 			'CWK' => 'Contractor (CWK)', 
 			'FTE' => 'Employee (FTE)'
 		);
+		echo '<div class="side-by-side clearfix"><div>';
 		echo $this->Form->input('type', array(
 													'type' =>'select', 
 													'options' => $options,
-													'empty' => 'Please Select'
+													'empty' => 'Please Select',
+													'style'=>'width:300px',
+													'class'=>'chzn-select'
 													));
-													
+		echo '</div></div>';
 		echo $this->Form->input('fullname',array('label'=>'Full Name'));
 		echo $this->Form->input('email');
 		echo $this->Form->input('phone_number');
 		echo $this->Form->input('location',array('after'=>'<div class="subtext">Example: Portland, OR.</div>'));
 		echo $this->Form->input('offshore');
-		echo $this->Form->input('Project');
+		//echo $this->Form->input('Project');
 
 	?>
 	</fieldset>
@@ -35,3 +38,4 @@
 		<li><?php echo $this->Html->link(__('New Project', true), array('controller' => 'projects', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
+<script type="text/javascript"> $(".chzn-select").chosen(); </script>

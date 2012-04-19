@@ -155,11 +155,8 @@
 		if(!empty($upcomingProjectID)){
 			echo $this->Form->input('upcoming_project_id',array('type'=>'hidden','value'=>$upcomingProjectID));
 		}
-		//echo $this->Form->input('ProjectManager');
-		//echo $this->Form->input('OffshoreProjectManager');
-		//echo $this->Form->input('Developer');
-		//echo $this->Form->input('Producer');
-		//echo $this->Form->input('QaResource');
+		//Get the current user logged in
+		echo $this->Form->input('user_id',array('type'=>'hidden','value'=>$session->read('Auth.User.id')));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
