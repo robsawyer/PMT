@@ -1,0 +1,250 @@
+<div class="productionManagers view">
+<h2><?php 
+		__($production_manager['ProductionManager']['fullname']); 
+		if(isset($production_manager['ProductionManager']['location'])) echo " - ".$production_manager['ProductionManager']['location'];
+	?>- <span><?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $production_manager['ProductionManager']['id'])); ?> </span></h2> 
+<ul class="details">
+	<li>Total projects: <span class="number-count"><?php echo count($incompleteProjects) + count($completeProjects) ; ?></span></li>
+	<li class="complete-project-row"><?php echo __("Complete projects",true); ?>: <span class="number-count"><?php echo count($completeProjects); ?></span></li>
+	<li><?php echo __("Incomplete projects",true);?>: <span class="number-count"><?php echo count($incompleteProjects); ?></span></li>
+</ul>
+	<dl><?php $i = 0; $class = ' class="altrow"';?>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Employee Type'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $production_manager['ProductionManager']['type']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Email'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php 
+				$email_addresses = split(",",$production_manager['ProductionManager']['email']);
+				if(count($email_addresses)>1){
+					$counter = 0;
+					foreach($email_addresses as $address){
+						if($counter == count($email_addresses)-1){
+							echo $this->Html->link($address,'mailto:'.$address);
+						}else{
+							echo $this->Html->link($address,'mailto:'.$address).", ";
+						}
+						$counter++;
+					}
+				}else{
+					echo $this->Html->link($production_manager['ProductionManager']['email'],'mailto:'.$production_manager['ProductionManager']['email']);
+				}
+
+			?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Phone Number'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php 
+				echo $production_manager['ProductionManager']['phone_number'];
+			?>
+			&nbsp;
+		</dd>
+		<!--<dt<?php //if ($i % 2 == 0) echo $class;?>><?php //__('Location'); ?></dt>
+		<dd<?php //if ($i++ % 2 == 0) echo $class;?>>
+			<?php //echo $production_manager['ProductionManager']['location']; ?>
+			&nbsp;
+		</dd>-->
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Offshore'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php 
+				if($production_manager['ProductionManager']['offshore'] == 0){
+					echo "No";
+				}else{
+					echo "Yes";
+				}
+			?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $this->Time->nice($production_manager['ProductionManager']['created']); ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $this->Time->nice($production_manager['ProductionManager']['modified']); ?>
+			&nbsp;
+		</dd>
+	</dl>
+</div>
+<div class="download-actions">
+	Export options:
+	<?php
+		echo $this->Html->image('excel_icon.gif',array('title'=>'Download xls version',
+																	'url'=>array('../exportxls/'.$production_manager['ProductionManager']['id']),
+																	'alt'=>'Excel version'
+																	));
+		/*echo $this->Html->image('pdf_icon.gif',array('title'=>'Download pdf version',
+																	'url'=>array('../exportpdf'),
+																	'alt'=>'PDF version'
+																	));*/
+		/*echo $this->Html->image('rtf_icon.gif',array('title'=>'Download rtf version',
+																	'url'=>array(),
+																	'alt'=>'rtf version'
+																	));*/
+	?>
+</div>
+<div class="related">
+	<h3><?php echo 'Working Projects'." (".count($incompleteProjects).")";?></h3>
+	<?php if (!empty($production_manager['Project'])):?>
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th style="display:none"><?php //__('Id'); ?></th>
+		<th><?php __('Number'); ?></th>
+		<th><?php __('Client'); ?></th>
+		<th><?php __('Title (rollover to see description)'); ?></th>
+		<th><?php __('Url');?></th>
+		<th><?php __('Tota Units');?></th>
+		<th><?php __('Offshore');?></th>
+		<th><?php __('Started');?></th>
+		<th><?php __('Complete');?></th>
+		<th><?php __('On Hold');?></th>
+		<th><?php __('In QA');?></th>
+		<th><?php __('Progress');?></th>
+		<th><?php __('Priority');?></th>
+		<th><?php __('Start'); ?></th>
+		<th><?php __('Due'); ?></th>
+		<th><?php __('Notes'); ?></th>
+		<th style="display:none"><?php __('Created'); ?></th>
+		<th style="display:none"><?php __('Modified'); ?></th>
+		<th class="actions" style="display:none"><?php __('Actions');?></th>
+	</tr>
+	<?php
+		$i = 0;
+		//debug($production_manager['Project']);
+		$production_manager['Project'] = Set::sort($production_manager['Project'], '{n}.complete', 'asc');
+		foreach ($production_manager['Project'] as $project):
+			$class = null;
+			if($project['complete']==0){
+				if ($i++ % 2 == 0) {
+					$class = ' class="altrow"';
+				}
+			}else{
+				if ($i++ % 2 == 0) {
+					$class = ' class="altrow complete-project-row"';
+				}else{
+					$class = ' class="complete-project-row"';
+				}
+			}
+		?>
+		<?php //if($project['complete']==0): ?>
+		<tr<?php echo $class;?>>
+			<td style="display:none"><?php //echo $project['id'];?></td>
+			<td><?php echo $project['number'];?></td>
+			<td><?php echo $project['Client']['name'];?></td>
+			<td width="25%"><?php echo $this->Html->link(__($project['title'],true),array('controller'=>'projects','action'=>'view',$project['id']),array('title'=>$project['description']));?></td>
+			<?php
+				if($project['on_hold']==1){ 
+					$class = ' class="onhold-project-row"';
+					if($project['on_hold']==1){ 
+						//$class = ' class="offshore-project-complete-row"';
+					}
+				}else{
+					if($project['on_hold']==1){ 
+						$class = ' class="onhold-project-row"';
+					}
+				}
+			?>
+			<td width="15%"><?php 
+				//Clean up the Jira link
+				//Remove the 'https://razorfish.jira.com/browse/' and replace with just the task URL
+				$cleanURL = str_replace("https://razorfish.jira.com/browse/","",$project['url']);
+
+				if($project['url']){
+					echo $this->Html->link($cleanURL,$project['url'],array('target'=>'_blank'));
+				} 
+				?>&nbsp;</td>
+			<td width="5%"><?php 
+				echo $project['total_units'];
+				?>&nbsp;</td>
+			<td><?php 
+				if($project['offshore'] == 1){
+					echo "&#x2713;"; 
+				}else{
+					echo "X"; 
+				}
+			?>&nbsp;</td>
+			<td><?php 
+				if($project['started'] == 1){
+					echo "&#x2713;"; 
+				}else{
+					echo "X"; 
+				}
+
+			?>&nbsp;</td>
+			<td><?php 
+				if($project['complete'] == 1){
+					echo "&#x2713;"; 
+				}else{
+					echo "X"; 
+				}
+			?>&nbsp;</td>
+			<?php 
+				if($project['on_hold'] == 1){
+					$holdVal = "&#x2713;"; 
+					$holdClass = ' class="on-hold"';
+				}else{
+					$holdVal = "X"; 
+					$holdClass = '';
+				}
+			?>
+			<td<?php echo $holdClass; ?>><?php 
+				echo $holdVal;
+			?>&nbsp;</td>
+			<?php
+			if($project['in_qa'] == 1){
+				$qaVal = "&#x2713;";
+				$QAClass = ' class="in-qa"';
+			}else{
+				$qaVal = "X"; 
+				$QAClass = '';
+			}
+			?>
+			<td<?php echo $QAClass; ?>><?php 
+				echo $qaVal;
+			?>&nbsp;</td>
+			<td><?php 
+					echo $project['progress']."%";
+			?>&nbsp;</td>
+			<td style="display:none"><?php //echo $this->Time->relativeTime($project['start']); ?>&nbsp;</td>
+			<td><?php 
+					switch($project['priority']){
+						case 1:
+							echo "Low";
+							break;
+						case 2:
+							echo "Medium";
+							break;
+						case 3:
+							echo "High";
+							break;
+						case 4:
+							echo "Critical";
+							break;
+					}
+				?>&nbsp;</td>
+			
+			<td><?php echo $this->Time->format($format='m/d/Y',$project['start']);?></td>
+			<td><?php echo $this->Time->format($format='m/d/Y',$project['due']);?></td>
+			<td width="25%"><?php echo $project['notes'];?></td>
+			<td style="display: none"><?php echo $project['created'];?></td>
+			<td style="display: none"><?php echo $project['modified'];?></td>
+			<td class="actions" style="display:none">
+				<?php echo $this->Html->link(__('View', true), array('controller' => 'projects', 'action' => 'view', $project['id'])); ?>
+				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'projects', 'action' => 'edit', $project['id'])); ?>
+				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'projects', 'action' => 'delete', $project['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['id'])); ?>
+			</td>
+		</tr>
+		<?php //endif; ?>
+	<?php endforeach; ?>
+	</table>
+	<?php endif; ?>
+	<div class="actions">
+		<ul>
+			<li><?php echo $this->Html->link(__('New Project', true), array('controller' => 'projects', 'action' => 'add'));?> </li>
+		</ul>
+	</div>
+</div>

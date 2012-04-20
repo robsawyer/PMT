@@ -1,0 +1,51 @@
+<div class="projects form">
+<?php echo $this->Form->create('Project');?>
+	<fieldset>
+ 		<legend><?php __('Duplicate Project'); ?></legend>
+	<?php
+		//echo $this->Form->input('id');
+		$options = array(
+			'Rich Media' => 'Rich Media', 
+			'Standard Media' => 'Standard Media',
+			'Both' => 'Both',
+			'Other' => 'Other'
+		);
+		echo $this->Form->input('type', array(
+													'label'=>'Media Type',
+													'type' =>'select', 
+													'options' => $options,
+													'selected' => $this->data['Project']['type'],
+													'empty' => 'Please Select'
+													));
+		echo $this->Form->input('number',array(
+															'label'=>'Project #',
+															'style'=>'width: 150px'
+															));
+		echo $this->Form->input('client_id',array('empty'=>' Please Select '));
+		echo $this->Form->input('title',array('label'=>'Project Name'));
+		echo $this->Form->input('description');
+		echo $this->Form->input('url');
+		echo $this->Form->input('offshore');
+		echo $this->Form->input('started');
+		echo $this->Form->input('complete');
+		echo $this->Form->input('start');
+		echo $this->Form->input('due');
+		echo $this->Form->input('ProjectManager');
+		echo $this->Form->input('OffshoreProjectManager');
+		echo $this->Form->input('Developer');
+		echo $this->Form->input('Producer');
+		echo $this->Form->input('QaResource');
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Submit', true));?>
+</div>
+<div class="actions" style="display:none">
+	<h3><?php __('Actions'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('List Projects', true), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List Developers', true), array('controller' => 'developers', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Developer', true), array('controller' => 'developers', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Producers', true), array('controller' => 'producers', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Producer', true), array('controller' => 'producers', 'action' => 'add')); ?> </li>
+	</ul>
+</div>
