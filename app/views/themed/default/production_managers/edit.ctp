@@ -25,7 +25,23 @@
 		//echo $this->Form->input('Project');
 
 	?>
-	<p>If you'd like to update your password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account')); ?>.</p>
+	<?php
+	if($admin && $this->data['ProductionManager']['id'] != $userAccount['User']['production_manager_id']):
+		if(!empty($userAccount)):
+	?>
+		<p>If you'd like to update the account password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account',$userAccount['User']['id'])); ?>.</p>
+	<?php
+		else:
+	?>
+		<p style="color:red">This user does not have a user account setup.</p>
+	<?php
+		endif;
+	else:
+	?>
+		<p>If you'd like to update your password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account')); ?>.</p>
+	<?php
+	endif;
+	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>

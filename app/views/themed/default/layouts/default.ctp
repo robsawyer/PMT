@@ -63,8 +63,8 @@
 				?>
 				<div class="app-name">Production Manager Tool</div>
 				<?php
-					$current_user = $session->read('Auth.User');
-					$username = $session->read('Auth.User.username');
+					$current_user = $this->Session->read('Auth.User');
+					$username = $this->Session->read('Auth.User.username');
 					if(!empty($username)):
 				?>
 				<div class="user-info">
@@ -77,7 +77,11 @@
 						$controller = "production_managers";
 						$id = $current_user['production_manager_id'];
 					}
-					echo "Welcome". $this->Html->link($username,array('controller'=>$controller,'action'=>'edit',$id))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+					if($current_user['role'] == "admin"){
+						echo "You are logged in as". $this->Html->link($username." (Admin)",array('controller'=>$controller,'action'=>'edit',$id)).". | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+					}else{
+						echo "Welcome". $this->Html->link($username,array('controller'=>$controller,'action'=>'edit',$id))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+					}
 				?>
 				</div>
 				<?php

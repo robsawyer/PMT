@@ -160,10 +160,13 @@ class ProductionManagersController extends AppController {
 		$this->ProductionManager->id = $this->Auth->user('id');
 		$this->ProductionManager->role = $this->Auth->user('role');
 		
+		$admin = false;
 		if(!empty($this->ProductionManager->role)){
 			//Only allow the user to update his own profile unless the person has the admin role
 			if($this->ProductionManager->role != "admin"){
 				$id = $this->ProductionManager->id;
+			}else{
+				$admin = true;
 			}
 		}else{
 			$this->Session->setFlash(__('There was an error with your role. Please contact the administrator.', true));
@@ -186,7 +189,12 @@ class ProductionManagersController extends AppController {
 		
 		//Set the default user data
 		if (empty($this->data)) {
+			//Find the user's account id
+			$userAccount = $this->ProductionManager->User->find('first',array('conditions'=>array(
+																					'User.production_manager_id'=>$id
+																					)));
 			$this->data = $this->ProductionManager->read(null, $id);
+			$this->set(compact('userAccount'));
 		}
 		
 		//Find associated projects

@@ -51,6 +51,15 @@ class AppController extends Controller {
 	//Alow everything and in each controller set specific permissions
 	function beforeFilter() {
 		//$this->Auth->allow('*');
+		$user = $this->Auth->user();
+		if(!empty($user)){
+			if($this->Auth->user('role') == "admin"){
+				$admin = true;
+			}else{
+				$admin = false;
+			}
+			$this->set(compact('admin'));
+		}
 	}
 	
 	function toSlug($string) {

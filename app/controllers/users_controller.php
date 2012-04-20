@@ -90,18 +90,24 @@ class UsersController extends AppController {
 	
 	/**
 	 * Account details page (change password)
+	 * @param model The model to target
+	 * @param id The user account id to edit
 	 */
-	function account() {
+	function account($id=null) {
+		$role = $this->Auth->user('role');
 		// Set User's ID in model which is needed for validation
 		$this->User->id = $this->Auth->user('id');
-
+		
+		if($role == "admin" && !empty($id)){
+			$this->User->id = $id;
+		}
+		
 		// Load the user (avoid populating $this->data)
 		$current_user = $this->User->findById($this->User->id);
 		$this->set('current_user', $current_user);
 
 		$this->User->useValidationRules('ChangePassword');
-		$this->User->validate['password_confirm']['compare']['rule'] =
-			array('password_match', 'password', false);
+		$this->User->validate['password_confirm']['compare']['rule'] = array('password_match', 'password', false);
 
 		$this->User->set($this->data);
 		if (!empty($this->data) && $this->User->validates()) {
