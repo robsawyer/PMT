@@ -61,7 +61,7 @@
 				    'url' => array('controller' => '/')
 				));
 				?>
-				<div class="app-name">Production Manager Tool</div>
+				<div class="app-name">Production Manager Tool YYY</div>
 				</div>
 				<div class="clear"></div>
 			<div id='navbar'>
