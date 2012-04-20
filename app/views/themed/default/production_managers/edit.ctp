@@ -1,7 +1,7 @@
 <div class="productionManagers form">
 <?php echo $this->Form->create('ProductionManager');?>
 	<fieldset>
- 		<legend><?php __('Edit Production Manager'); ?></legend>
+ 		<legend><?php __('Editing '.$this->data['ProductionManager']['fullname'].'\'s Profile'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		$options = array(
@@ -10,12 +10,12 @@
 		);
 		echo '<div class="side-by-side clearfix"><div>';
 		echo $this->Form->input('type', array(
-													'type' =>'select', 
-													'options' => $options,
-													'empty' => 'Please Select',
-													'style'=>'width:300px',
-													'class'=>'chzn-select'
-													));
+											'type' =>'select', 
+											'options' => $options,
+											'empty' => 'Please Select',
+											'style'=>'width:300px',
+											'class'=>'chzn-select'
+											));
 		echo '</div></div>';
 		echo $this->Form->input('fullname',array('label'=>'Full Name'));
 		echo $this->Form->input('email');
@@ -25,10 +25,11 @@
 		//echo $this->Form->input('Project');
 
 	?>
+	<p>If you'd like to update your password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account')); ?>.</p>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
-<div class="actions">
+<div class="actions" style="display: none">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
 

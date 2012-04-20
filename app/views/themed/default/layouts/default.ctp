@@ -63,12 +63,21 @@
 				?>
 				<div class="app-name">Production Manager Tool</div>
 				<?php
+					$current_user = $session->read('Auth.User');
 					$username = $session->read('Auth.User.username');
 					if(!empty($username)):
 				?>
 				<div class="user-info">
 				<?php 
-					echo "Welcome". $this->Html->link($username,array('controller'=>'users','action'=>'account'))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+					if(!empty($current_user['project_manager_id'])){
+						$controller = "project_managers";
+						$id = $current_user['project_manager_id'];
+					}
+					if(!empty($current_user['production_manager_id'])){
+						$controller = "production_managers";
+						$id = $current_user['production_manager_id'];
+					}
+					echo "Welcome". $this->Html->link($username,array('controller'=>$controller,'action'=>'edit',$id))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 				?>
 				</div>
 				<?php

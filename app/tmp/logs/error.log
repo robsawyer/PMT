@@ -374,3 +374,4 @@
 2012-04-17 23:55:03 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /Users/robsa/Sites/PMT/cake/basics.php:110) in [/Users/robsa/Sites/PMT/cake/libs/controller/controller.php, line 742]
 2012-04-17 23:57:21 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /Users/robsa/Sites/PMT/cake/basics.php:110) in [/Users/robsa/Sites/PMT/cake/libs/controller/controller.php, line 742]
 2012-04-19 00:53:06 Warning: Warning (4096): Object of class SessionHelper could not be converted to string in [/Users/robsa/Sites/PMT/app/views/themed/default/layouts/default.ctp, line 65]
+2012-04-20 11:53:36 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /Users/robsa/Sites/PMT/cake/basics.php:110) in [/Users/robsa/Sites/PMT/cake/libs/controller/controller.php, line 742]

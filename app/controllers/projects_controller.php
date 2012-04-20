@@ -162,6 +162,25 @@ class ProjectsController extends AppController {
 		$this->RequestHandler->respondAs('rss');
 	}
 	
+	function offshore_rss() {
+		Configure::write ('debug', 0);
+		$this->viewPath .= '/rss';
+		$this->layoutPath = 'rss';
+		
+		$projects = $this->Project->find('all',array('conditions'=>array('Project.complete'=>0,'Project.offshore'=>1)));
+		$channel_data = array(
+				'title' => "PMT | Production Manager Tool",
+				'description' => '',
+				//'link' => '/projects/offshore/rss',
+				//'url' => '/projects/offshore/rss',
+				'language' => 'en',
+				'image' => "<url>http://pmt.razorfishcreative.com/img/sa/razorfish.png</url><title>PMT | Production Manager Tool</title><link>http://pmt.razorfishcreative.com/</link><width>203</width><height>56</height>"
+		);
+		$this->set('channel', $channel_data);
+		$this->set(compact('projects'));
+		$this->RequestHandler->respondAs('rss');
+	}
+	
 	function find() {
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Project->parseCriteria($this->passedArgs);

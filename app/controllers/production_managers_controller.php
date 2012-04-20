@@ -155,6 +155,21 @@ class ProductionManagersController extends AppController {
 	}
 
 	function edit($id = null) {
+		
+		// Set User's ID in model which is needed for validation
+		$this->ProductionManager->id = $this->Auth->user('id');
+		$this->ProductionManager->role = $this->Auth->user('role');
+		
+		if(!empty($this->ProductionManager->role)){
+			//Only allow the user to update his own profile unless the person has the admin role
+			if($this->ProductionManager->role != "admin"){
+				$id = $this->ProductionManager->id;
+			}
+		}else{
+			$this->Session->setFlash(__('There was an error with your role. Please contact the administrator.', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid production manager', true));
 			$this->redirect(array('action' => 'index'));
@@ -168,9 +183,13 @@ class ProductionManagersController extends AppController {
 				$this->Session->setFlash(__('The production manager could not be saved. Please, try again.', true));
 			}
 		}
+		
+		//Set the default user data
 		if (empty($this->data)) {
 			$this->data = $this->ProductionManager->read(null, $id);
 		}
+		
+		//Find associated projects
 		$all_projects = $this->ProductionManager->Project->find('all');
 		$projects = array();
 		foreach($all_projects as $project){

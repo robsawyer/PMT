@@ -53,30 +53,29 @@
 		echo $this->Form->input('url', array('after'=>''));
 		echo $this->Form->input('total_units', array('value'=>'0','style'=>'width:150px','label'=>"Total # of units"));
 		echo $this->Form->input('offshore');
-		
 		echo $this->Form->input('started');
-		
 		echo $this->Form->input('complete');
 		echo $this->Form->input('on_hold');
 		echo $this->Form->input('in_qa', array('label'=>'In QA'));
 		echo $this->Form->input('progress',array(
-															'label'=>'Total progress (%)',
-															'style'=>'width: 150px',
-															'after'=>'<span class="next-to" style="font-size: 18px; font-weight: bold;margin-left:10px;">%</span>'
-															));
+												'label'=>'Total progress (%)',
+												'style'=>'width: 150px',
+												'value'=>'0',
+												'after'=>'<span class="next-to" style="font-size: 18px; font-weight: bold;margin-left:10px;">%</span>'
+												));
 		echo $this->Form->input('start', array('type'  => 'date',
 														'label' => 'Start Date',
 														'minYear' => 2011,
-														'maxYear' => 2020,
+														'maxYear' => 2030,
 														# default order m/d/y,
 														));
 		//echo $this->Form->input('due');
 		echo $this->Form->input('due', array('type'  => 'date',
 														'label' => 'Due Date',
 														'minYear' => 2011,
-														'maxYear' => 2020,
+														'maxYear' => 2030
 														# default order m/d/y,
-														'empty' => true
+														//'empty' => true
 														));
 		?>
 		<div class="side-by-side clearfix"><div>

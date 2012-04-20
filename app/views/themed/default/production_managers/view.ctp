@@ -8,7 +8,7 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 <h2><?php 
 		__($production_manager['ProductionManager']['fullname']); 
 		if(isset($production_manager['ProductionManager']['location'])) echo " - ".$production_manager['ProductionManager']['location'];
-	?>- <span><?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $production_manager['ProductionManager']['id'])); ?> </span></h2> 
+	?></h2> 
 <ul class="details">
 	<li>Total projects: <span class="number-count"><?php echo count($incompleteProjects) + count($completeProjects) ; ?></span></li>
 	<li class="complete-project-row"><?php echo __("Complete projects",true); ?>: <span class="number-count"><?php echo count($completeProjects); ?></span></li>
