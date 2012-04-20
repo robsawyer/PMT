@@ -33,6 +33,11 @@ class UsersController extends AppController {
 																				'conditions'=>array('ProjectManager.email' => $user_email),
 																				'recursive' => -1
 																				));
+			$offshore_project_manager = $this->User->OffshoreProjectManager->find('first',array(
+																				'conditions'=>array('OffshoreProjectManager.email' => $user_email),
+																				'recursive' => -1
+																				));
+																																				
 			$passValidation = false;
 			if(!empty($production_manager)){
 				$this->data['User']['production_manager_id'] = $production_manager['ProductionManager']['id'];
@@ -40,6 +45,10 @@ class UsersController extends AppController {
 			}
 			if(!empty($project_manager)){
 				$this->data['User']['project_manager_id'] = $production_manager['ProjectManager']['id'];
+				$passValidation = true;
+			}
+			if(!empty($offshore_project_manager)){
+				$this->data['User']['offshore_project_manager_id'] = $offshore_production_manager['OffshoreProjectManager']['id'];
 				$passValidation = true;
 			}
 			if($passValidation == true){
@@ -55,10 +64,10 @@ class UsersController extends AppController {
 					
 					$this->redirect($this->Auth->loginRedirect);
 				} else {
-					$this->Session->setFlash(__('Your account could not be created. Please contact <a href="mailto:rob.sawyer@razorfish.com">rob.sawyer@razorfish.com</a>.', true));
+					$this->Session->setFlash(__('Your account could not be created. Please contact an administrator.', true));
 				}
 			}else{
-				$this->Session->setFlash(__('Your account could not be created because you are not currently in the system. Please contact <a href="mailto:rob.sawyer@razorfish.com">rob.sawyer@razorfish.com</a> to have your information added.', true));
+				$this->Session->setFlash(__('Your account could not be created because you are not currently in the system. Please contact an administrator to have your information added.', true));
 			}
 		}
 	}
