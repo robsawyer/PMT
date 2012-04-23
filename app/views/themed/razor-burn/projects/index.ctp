@@ -55,6 +55,7 @@
 </ul>
 </li>
 </ul>
+
 <SCRIPT>
 $("#accordion > li > div").click(function(){
 	if(false == $(this).next().is(':visible')) {
@@ -67,12 +68,6 @@ $('#accordion ul:eq(0)').show();
 //$('#accordion ul:eq(2)').show();
 //$('#accordion ul:eq(3)').show();
 </SCRIPT>
-
-
-
-
-
-
 
 
 <div class="clear"></div>

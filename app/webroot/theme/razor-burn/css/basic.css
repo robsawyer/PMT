@@ -469,7 +469,7 @@ div.nippleBox div.bar h4{
 }
 
 
-table td.cli, table td.actions{
+table td.cli, table td.actions, table td.act{
 	border-right:1px solid #ddd;
 }
 table td.cli{
@@ -567,7 +567,7 @@ ul.details-panel li.new-row{
 .download-actions a img{
 	height: auto;
 	width: 20px;
-	margin: 0 !important;
+	margin: 4px 0 -4px 0 !important;
 	padding: 0 !important;
 }
 
