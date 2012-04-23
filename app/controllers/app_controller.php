@@ -46,6 +46,9 @@ class AppController extends Controller {
 	function beforeRender(){
 		unset($this->data['User']['password']);
 		unset($this->data['User']['password_confirm']);
+		//Gives $userRole to all views
+		$userRole = $this->Auth->user('role');
+		$this->set(compact('userRole'));
 	}
 	
 	//Alow everything and in each controller set specific permissions
@@ -53,7 +56,8 @@ class AppController extends Controller {
 		//$this->Auth->allow('*');
 		$user = $this->Auth->user();
 		if(!empty($user)){
-			if($this->Auth->user('role') == "admin"){
+			$userRole = $this->Auth->user('role');
+			if($userRole == "admin"){
 				$admin = true;
 			}else{
 				$admin = false;
