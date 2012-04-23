@@ -87,25 +87,6 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 		</dd>
 	</dl>
 </div>
-<div class="profile-info">
-	<?php
-	if($admin && $production_manager['ProductionManager']['id'] != $userAccount['User']['production_manager_id']):
-		if(!empty($userAccount)):
-	?>
-		<p>If you'd like to update the account password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account',$userAccount['User']['id'])); ?>.</p>
-	<?php
-		else:
-	?>
-		<p style="color:red">This user does not have a user account setup.</p>
-	<?php
-		endif;
-	else:
-	?>
-		<p>If you'd like to update your password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account')); ?>.</p>
-	<?php
-	endif;
-	?>
-</div>
 <div class="download-actions">
 	Export options:
 	<?php
