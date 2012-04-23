@@ -38,7 +38,7 @@ class AppController extends Controller {
 	var $helpers = array('Js' => array('Jquery'),'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text');
 	
 	public $view = 'Theme';
-	public $theme = 'default';	
+	public $theme = 'razor-burn';	
 	
 	/**
 	* Before Render
