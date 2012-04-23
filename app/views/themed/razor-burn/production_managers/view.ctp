@@ -5,10 +5,21 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 }
 ?>
 <div class="productionManagers view">
-<h2><?php 
+	<h2>
+	<?php 
 		__($production_manager['ProductionManager']['fullname']); 
 		if(isset($production_manager['ProductionManager']['location'])) echo " - ".$production_manager['ProductionManager']['location'];
-	?>- <span><?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $production_manager['ProductionManager']['id'])); ?> </span></h2> 
+	?>
+	<?php
+	if($admin && $production_manager['ProductionManager']['id'] != $userAccount['User']['production_manager_id']):
+		if(!empty($userAccount)):
+			echo " - ".$this->Html->link('Edit Profile',array('action'=>'edit',$production_manager['ProductionManager']['id'])); 
+		endif;
+	else:
+		echo " - ".$this->Html->link('Edit Profile',array('action'=>'edit',$production_manager['ProductionManager']['id']));
+	endif;
+	?>
+	</h2>
 <ul class="details">
 	<li>Total projects: <span class="number-count"><?php echo count($incompleteProjects) + count($completeProjects) ; ?></span></li>
 	<li class="complete-project-row"><?php echo __("Complete projects",true); ?>: <span class="number-count"><?php echo count($completeProjects); ?></span></li>
@@ -75,6 +86,25 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 			&nbsp;
 		</dd>
 	</dl>
+</div>
+<div class="profile-info">
+	<?php
+	if($admin && $production_manager['ProductionManager']['id'] != $userAccount['User']['production_manager_id']):
+		if(!empty($userAccount)):
+	?>
+		<p>If you'd like to update the account password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account',$userAccount['User']['id'])); ?>.</p>
+	<?php
+		else:
+	?>
+		<p style="color:red">This user does not have a user account setup.</p>
+	<?php
+		endif;
+	else:
+	?>
+		<p>If you'd like to update your password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account')); ?>.</p>
+	<?php
+	endif;
+	?>
 </div>
 <div class="download-actions">
 	Export options:

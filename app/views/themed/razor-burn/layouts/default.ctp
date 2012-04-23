@@ -79,7 +79,7 @@
 				$id = $current_user['production_manager_id'];
 			}
 			if($current_user['role'] == "admin"){
-				echo "You are logged in as". $this->Html->link($username." (Admin)",array('controller'=>$controller,'action'=>'edit',$id)).". | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+				echo "You are logged in as". $this->Html->link($username." (Admin)",array('controller'=>$controller,'action'=>'view',$id)).". | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 			}else{
 				echo "Welcome". $this->Html->link($username,array('controller'=>$controller,'action'=>'edit',$id))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 			}
