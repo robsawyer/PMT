@@ -1,24 +1,24 @@
 <div class="upcomingProjects index">
 	<h2><?php __('Upcoming Projects');?></h2>
-	<h3>Note: The ones in green have been added to the PMT already.</h3>
+	<p><strong>Note:</strong> The ones in <span class="grn">green</span> have been added to the PMT already.</p>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('project_manager');?></th>
-			<th><?php echo $this->Paginator->sort('contact_email');?></th>
-			<th><?php echo $this->Paginator->sort('project_number');?></th>
-			<th><?php echo $this->Paginator->sort('name');?></th>
-			<th><?php echo $this->Paginator->sort('total_units');?></th>
-			<th><?php echo $this->Paginator->sort('start');?></th>
-			<th><?php echo $this->Paginator->sort('due');?></th>
-			<th><?php echo $this->Paginator->sort('url');?></th>
-			<th><?php echo $this->Paginator->sort('production_manager_id');?></th>
-			<th><?php echo $this->Paginator->sort('Added to PMT?');?></th>
-			<th><?php echo $this->Paginator->sort('notes');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('modified');?></th>
-			<th><?php echo $this->Paginator->sort('type');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('ID');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('PM');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('email');?></th>
+            <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
+            <th valign="bottom"><?php echo $this->Paginator->sort('name');?></th>
+            <th valign="bottom"><?php echo $this->Paginator->sort('URL');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('project_number');?></th>
+			<!--<th valign="bottom"><?php echo $this->Paginator->sort('total_units');?></th>-->
+			<th valign="bottom"><?php echo $this->Paginator->sort('start');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('due');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('production_manager_id');?></th>
+			<th valign="bottom" nowrap><?php echo $this->Paginator->sort('In PMT');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('created');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('modified');?></th>
+            <th valign="bottom"><?php echo $this->Paginator->sort('notes');?></th>
+			<th valign="bottom" class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -41,29 +41,29 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $upcomingProject['UpcomingProject']['id']; ?>&nbsp;</td>
+		<td class="cli"><?php echo $upcomingProject['UpcomingProject']['id']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['project_manager']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['contact_email']; ?>&nbsp;</td>
+        <td><?php echo $upcomingProject['UpcomingProject']['type']; ?>&nbsp;</td>
+        <td><?php echo $upcomingProject['UpcomingProject']['name']; ?>&nbsp;</td>
+        <td><?php echo $upcomingProject['UpcomingProject']['url']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['project_number']; ?>&nbsp;</td>
-		<td><?php echo $upcomingProject['UpcomingProject']['name']; ?>&nbsp;</td>
-		<td><?php echo $upcomingProject['UpcomingProject']['total_units']; ?>&nbsp;</td>
+		<!--<td><?php echo $upcomingProject['UpcomingProject']['total_units']; ?>&nbsp;</td>-->
 		<td><?php echo $upcomingProject['UpcomingProject']['start']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['due']; ?>&nbsp;</td>
-		<td><?php echo $upcomingProject['UpcomingProject']['url']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($upcomingProject['ProductionManager']['fullname'], array('controller' => 'production_managers', 'action' => 'view', $upcomingProject['ProductionManager']['id'])); ?>
 		</td>
 		<td><?php 
 			if($upcomingProject['UpcomingProject']['complete']==1){
-				echo "Yes";
+				echo "<strong>Yes<strong>";
 			}else{
-				echo "No";
+				echo "<span class='grn'><strong>No<strong></span>";
 			}
 		?>&nbsp;</td>
-		<td><?php echo $upcomingProject['UpcomingProject']['notes']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['created']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['modified']; ?>&nbsp;</td>
-		<td><?php echo $upcomingProject['UpcomingProject']['type']; ?>&nbsp;</td>
+        <td><?php echo $upcomingProject['UpcomingProject']['notes']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php
 			 	/*	$this->params['named']['ProjectType'] = "";
@@ -106,7 +106,8 @@
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
 </div>
-<div id>
+</div>
+
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
@@ -115,6 +116,8 @@
 		<li><?php echo $this->Html->link(__('New Production Manager', true), array('controller' => 'production_managers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
+
+
 <?php
 function deepEncode($myurlstr) {
 	$myurlstr = urlencode($myurlstr);
@@ -140,3 +143,4 @@ function deepEncode($myurlstr) {
 	return $myurlstr;
 }
 ?>
+

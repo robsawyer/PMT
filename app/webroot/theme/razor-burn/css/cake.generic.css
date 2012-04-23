@@ -120,7 +120,7 @@ table .altrow td {
 	background: #fff;
 }
 td.actions {
-	text-align: center;
+	text-align: right;
 	white-space: nowrap;
 	clear: both;
 	width: 100%;
