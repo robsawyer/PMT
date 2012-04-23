@@ -184,9 +184,13 @@ class ProductionManagersController extends AppController {
 	function edit($id = null) {
 		//User permission check
 		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
+		
+		//Only do the test if the user is trying to update another user's profile
+		if($id != $this->Auth->user('id')){
+			if($userRole != "admin" || $userRole != "manager"){
+				$this->Session->setFlash(__('You do not have permission to do this.', true));
+				$this->redirect(array('controller'=>'users','action' => 'login'));
+			}
 		}
 		
 		// Set User's ID in model which is needed for validation
