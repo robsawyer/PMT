@@ -119,7 +119,7 @@ class ProductionManagersController extends AppController {
 		//$this->set('production_manager', $this->ProductionManager->read(null, $id));
 	}
 	
-	function exportcsv($id = null) { 
+	function exportcsv($id = null) {
 		//$this->layout = 'ajax'; 
 		//$this->autoLayout = false; 
 		$this->ProductionManager->recursive = 2;
@@ -155,6 +155,13 @@ class ProductionManagersController extends AppController {
 	}
 	
 	function add() {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!empty($this->data)) {
 			$this->ProductionManager->create();
 			$this->data['ProductionManager']['slug'] = $this->toSlug($this->data['ProductionManager']['fullname']);
@@ -175,6 +182,12 @@ class ProductionManagersController extends AppController {
 	}
 
 	function edit($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
 		
 		// Set User's ID in model which is needed for validation
 		$this->ProductionManager->id = $this->Auth->user('id');
@@ -227,6 +240,13 @@ class ProductionManagersController extends AppController {
 	}
 
 	function delete($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for production manager', true));
 			$this->redirect(array('action'=>'index'));

@@ -56,8 +56,7 @@ class AppController extends Controller {
 		//$this->Auth->allow('*');
 		$user = $this->Auth->user();
 		if(!empty($user)){
-			$userRole = $this->Auth->user('role');
-			if($userRole == "admin"){
+			if($this->Auth->user('role') == "admin"){
 				$admin = true;
 			}else{
 				$admin = false;

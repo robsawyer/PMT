@@ -18,6 +18,13 @@ class QaResourcesController extends AppController {
 	}
 
 	function add() {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!empty($this->data)) {
 			$this->QaResource->create();
 			if ($this->QaResource->save($this->data)) {
@@ -37,6 +44,13 @@ class QaResourcesController extends AppController {
 	}
 
 	function edit($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid qa resource', true));
 			$this->redirect(array('action' => 'index'));
@@ -62,6 +76,13 @@ class QaResourcesController extends AppController {
 	}
 
 	function delete($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for qa resource', true));
 			$this->redirect(array('action'=>'index'));

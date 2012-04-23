@@ -884,6 +884,12 @@ class ProjectsController extends AppController {
 	}
 
 	function add() {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
 		
 		if (!empty($this->data)) {
 			//debug($this->data);
@@ -941,6 +947,13 @@ class ProjectsController extends AppController {
 	}
 
 	function edit($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid project', true));
 			$this->redirect(array('action' => 'index'));
@@ -1000,6 +1013,13 @@ class ProjectsController extends AppController {
 	}
 
 	function delete($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for project', true));
 			$this->redirect(array('action'=>'index'));
@@ -1015,6 +1035,13 @@ class ProjectsController extends AppController {
 	}
 	
 	function full_report(){
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		$this->Project->recursive = 1;
 		$offshoreProjects = $this->Project->find('all',array(
 			'conditions'=>array('Project.offshore'=>1)
@@ -1060,6 +1087,13 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_report(){
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		$this->Project->recursive = 1;
 		$offshoreProjects = $this->Project->find('all',array(
 			'conditions'=>array('Project.offshore'=>1)
@@ -1157,6 +1191,13 @@ class ProjectsController extends AppController {
 	}*/
 	
 	function exportxls(){ 
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		$this->layout = 'ajax';
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1313,6 +1354,13 @@ class ProjectsController extends AppController {
 	}*/
 	
 	function exportPdf(){
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		$this->layout = 'pdf'; //this will use the pdf.ctp layout 
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1431,6 +1479,13 @@ class ProjectsController extends AppController {
 	}*/
 	
 	function offshore_exportxls(){
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		$this->layout = 'ajax';
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1461,6 +1516,13 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_exportcsv(){ 
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		$this->layout = 'ajax';
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1512,6 +1574,13 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_exportPdf(){
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		$this->layout = 'pdf'; //this will use the pdf.ctp layout 
 		$this->autoLayout = false;
 		//$this->autoRender = false;
