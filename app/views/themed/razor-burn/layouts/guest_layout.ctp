@@ -62,7 +62,6 @@
 				    'url' => array('controller' => '/')
 				));
 				?>
-				<div class="app-name">Upcoming Project Submission</div>
 				</div>
 				<div class="clear"></div>
 			<div id='navbar'>

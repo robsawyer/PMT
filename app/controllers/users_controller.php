@@ -19,7 +19,7 @@ class UsersController extends AppController {
 	 * Handles user account creation.
 	 */
 	function create() {
-		$this->layout="simple_layout";
+		$this->layout="guest_layout";
 		
 		if (!empty($this->data)) {
 			$this->User->create();
@@ -79,7 +79,7 @@ class UsersController extends AppController {
      *  for login, so you can leave this function blank.
      */
 	function login() { 
-		$this->layout="simple_layout";
+		$this->layout="guest_layout";
 		
 		// Check for a successful login
 		if (!empty($this->data) && $id = $this->Auth->user('id')) {
