@@ -99,7 +99,9 @@ $('#accordion ul:eq(0)').show();
 			<th valign="bottom"><?php __('Production Manager(s)');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
-			<th valign="bottom" class="actions"><?php // __('Actions');?></th>
+			<?php if($userRole == "admin" || $userRole == "manager"): ?>
+				<th valign="bottom" class="actions"><?php // __('Actions');?></th>
+			<?php endif; ?>
 	</tr>
 	<?php
 	$i = 0;
@@ -256,12 +258,14 @@ $('#accordion ul:eq(0)').show();
 				}
 			}
 			?>&nbsp;</td>
+		<?php if($userRole == "admin" || $userRole == "manager"): ?>
 		<td class="actions" class="prod">
 			<?php //echo $this->Html->link(__('View', true), array('action' => 'view', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Duplicate', true), array('action' => 'duplicate', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete the project named %s?', true), $project['Project']['title'])); ?>
 		</td>
+		<?php endif; ?>
 	</tr>
 <?php endforeach; ?>
 	</table>
