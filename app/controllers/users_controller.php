@@ -19,6 +19,8 @@ class UsersController extends AppController {
 	 * Handles user account creation.
 	 */
 	function create() {
+		$this->layout="simple_layout";
+		
 		if (!empty($this->data)) {
 			$this->User->create();
 			//Check to see if the email address exist in the system. Be sure to check against lowercase version.
@@ -77,6 +79,8 @@ class UsersController extends AppController {
      *  for login, so you can leave this function blank.
      */
 	function login() { 
+		$this->layout="simple_layout";
+		
 		// Check for a successful login
 		if (!empty($this->data) && $id = $this->Auth->user('id')) {
 

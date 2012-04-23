@@ -386,3 +386,23 @@ div.chzn-container-active ul.chzn-choices input {
 	padding-left:0 !important;
 	padding-right:0 !important;
 }
+
+/** V2.0 **/
+div.user-info{
+	position: relative;
+	float: right;
+	font-size: 12px;
+	margin: 50px 25px 0 0;
+	padding: 12px;
+	background: black;
+}
+div.user-info a:link,
+div.user-info a:visited,
+div.user-info a:active{
+	color: #ffffff;
+	text-decoration: underline !important;
+}
+div.user-info a:hover{
+	color: #666666;
+}
+/** END V2.0 **/
