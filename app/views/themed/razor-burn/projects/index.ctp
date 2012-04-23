@@ -24,7 +24,7 @@
 </ul>
 </li>
 <li>
-<div>Project by Type</div>
+<div>Projects by Type</div>
 <ul>
 <li>Standard Media Projects:<span class="number-count"><?php echo count($standardMedia); ?></span></li>
 <li>Rich Media Projects:<span class="number-count"><?php echo count($richMedia); ?></span></li>

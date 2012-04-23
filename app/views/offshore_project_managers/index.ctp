@@ -3,13 +3,13 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th style="display:none;"><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('type');?></th>
-			<th><?php echo $this->Paginator->sort('name');?></th>
-			<th><?php echo $this->Paginator->sort('email');?></th>
-			<th><?php echo $this->Paginator->sort('location');?></th>
+			<th valign="top"><?php echo $this->Paginator->sort('name');?></th>
+			<th valign="top"><?php echo $this->Paginator->sort('email');?></th>
+			<th valign="top"><?php echo $this->Paginator->sort('location');?></th>
+            <th valign="top"><?php echo $this->Paginator->sort('type');?></th>
 			<th style="display:none;"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none;"><?php echo $this->Paginator->sort('modified');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th valign="top" class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -21,10 +21,10 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td style="display:none;"><?php echo $offshoreProjectManager['OffshoreProjectManager']['id']; ?>&nbsp;</td>
-		<td><?php echo $offshoreProjectManager['OffshoreProjectManager']['type']; ?>&nbsp;</td>
-		<td><?php echo $this->Html->link(__($offshoreProjectManager['OffshoreProjectManager']['name'], true), array('action' => 'view', $offshoreProjectManager['OffshoreProjectManager']['id'])); ?>&nbsp;</td>
+		<td class="cli" nowrap><?php echo $this->Html->link(__($offshoreProjectManager['OffshoreProjectManager']['name'], true), array('action' => 'view', $offshoreProjectManager['OffshoreProjectManager']['id'])); ?>&nbsp;</td>
 		<td><?php echo $offshoreProjectManager['OffshoreProjectManager']['email']; ?>&nbsp;</td>
-		<td><?php echo $offshoreProjectManager['OffshoreProjectManager']['location']; ?>&nbsp;</td>
+		<td nowrap><?php echo $offshoreProjectManager['OffshoreProjectManager']['location']; ?>&nbsp;</td>
+        <td><?php echo $offshoreProjectManager['OffshoreProjectManager']['type']; ?>&nbsp;</td>
 		<td style="display:none;"><?php echo $offshoreProjectManager['OffshoreProjectManager']['created']; ?>&nbsp;</td>
 		<td style="display:none;"><?php echo $offshoreProjectManager['OffshoreProjectManager']['modified']; ?>&nbsp;</td>
 		<td class="actions">
@@ -49,6 +49,9 @@
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
 </div>
+</div>
+
+
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

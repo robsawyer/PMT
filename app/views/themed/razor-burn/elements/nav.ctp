@@ -25,7 +25,7 @@
 <li><?php echo $html->link('project managers',array('controller'=>'project_managers','action'=>'index'), array('class'=>'nav-browsedrop-indy'));?></li>
 <li><?php echo $html->link('offshore project managers',array('controller'=>'offshore_project_managers','action'=>'index'), array('class'=>'nav-browsedrop-indy'));?></li>
 <li><?php echo $html->link('developers',array('controller'=>'developers','action'=>'index'), array('class'=>'nav-browsedrop-indy'));?></li>
-<li><?php echo $html->link('qa resources',array('controller'=>'qa_resources','action'=>'index'), array('class'=>'nav-browsedrop-indy'));?></li>
+<li><?php echo $html->link('QA resources',array('controller'=>'qa_resources','action'=>'index'), array('class'=>'nav-browsedrop-indy'));?></li>
 </ul>
 </li>
 

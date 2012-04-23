@@ -386,3 +386,9 @@ div.chzn-container-active ul.chzn-choices input {
 	padding-left:0 !important;
 	padding-right:0 !important;
 }
+div.reports{
+	position:relative;
+}
+td.notes{
+	width:100%;
+}

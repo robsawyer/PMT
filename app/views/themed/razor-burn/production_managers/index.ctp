@@ -5,16 +5,16 @@
 	</ul>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th style="display:none"><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('type');?></th>
-			<th><?php echo $this->Paginator->sort('fullname');?></th>
-			<th><?php echo $this->Paginator->sort('email');?></th>
-			<th><?php echo $this->Paginator->sort('location');?></th>
-			<th><?php echo $this->Paginator->sort('offshore');?></th>
-			<th><?php echo $this->Paginator->sort('total_working_projects'); ?></th>
+			<th valign="bottom" style="display:none"><?php echo $this->Paginator->sort('id');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('name');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('email');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('location');?></th>
+            <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('offshore');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('total_working_projects'); ?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th valign="bottom" class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -26,8 +26,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td style="display:none"><?php echo $production_manager['ProductionManager']['id']; ?>&nbsp;</td>
-		<td><?php echo $production_manager['ProductionManager']['type']; ?>&nbsp;</td>
-		<td width="10%">
+		<td width="10%" class="cli">
 		<?php 
 			if($production_manager['ProductionManager']['slug']){
 				echo $this->Html->link(__($production_manager['ProductionManager']['fullname'],true),array('action'=>'view',$production_manager['ProductionManager']['slug'])); 
@@ -38,6 +37,7 @@
 			?>&nbsp;</td>
 		<td><?php echo $production_manager['ProductionManager']['email']; ?>&nbsp;</td>
 		<td width="20%"><?php echo $production_manager['ProductionManager']['location']; ?>&nbsp;</td>
+        <td><?php echo $production_manager['ProductionManager']['type']; ?>&nbsp;</td>
 		<td><?php 
 			if($production_manager['ProductionManager']['offshore'] == 1){
 				echo "Yes";
@@ -72,6 +72,8 @@
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
 </div>
+</div>
+
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

@@ -1,9 +1,9 @@
 <div class="upcomingProjects index">
 	<h2><?php __('Upcoming Projects');?></h2>
-	<p><strong>Note:</strong> The ones in <span class="grn">green</span> have been added to the PMT already.</p>
+	<p><strong>Note:</strong> Projects in <span class="grn"><strong>green</strong></span> need to be added to the PMT.</p>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th valign="bottom"><?php echo $this->Paginator->sort('ID');?></th>
+			<th valign="bottom" style="display:none"><?php echo $this->Paginator->sort('ID');?></th>
 			<th valign="bottom"><?php echo $this->Paginator->sort('PM');?></th>
 			<th valign="bottom"><?php echo $this->Paginator->sort('email');?></th>
             <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
@@ -41,8 +41,8 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td class="cli"><?php echo $upcomingProject['UpcomingProject']['id']; ?>&nbsp;</td>
-		<td><?php echo $upcomingProject['UpcomingProject']['project_manager']; ?>&nbsp;</td>
+		<td style="display:none"><?php echo $upcomingProject['UpcomingProject']['id']; ?>&nbsp;</td>
+		<td class="cli"><?php echo $upcomingProject['UpcomingProject']['project_manager']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['contact_email']; ?>&nbsp;</td>
         <td><?php echo $upcomingProject['UpcomingProject']['type']; ?>&nbsp;</td>
         <td><?php echo $upcomingProject['UpcomingProject']['name']; ?>&nbsp;</td>
@@ -63,7 +63,7 @@
 		?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['created']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['modified']; ?>&nbsp;</td>
-        <td><?php echo $upcomingProject['UpcomingProject']['notes']; ?>&nbsp;</td>
+        <td class="notes"><?php echo $upcomingProject['UpcomingProject']['notes']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php
 			 	/*	$this->params['named']['ProjectType'] = "";
@@ -78,6 +78,7 @@
 				$this->params['named']['ProjectNotes'] = "";
 				*/
 				if($upcomingProject['UpcomingProject']['complete'] < 1){
+					 
 					echo $this->Html->link(__('Add to PMT', true), array(
 																		'controller'=>'projects',
 																		'action' => 'add',

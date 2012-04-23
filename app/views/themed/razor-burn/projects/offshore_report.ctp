@@ -17,7 +17,7 @@
 		?>
 </div>
 
-<h2><?php __('Ad Creative Development Offshore Report');?> -<?php echo date('M d, Y'); ?></h2>
+<h2><?php __('Ad Creative Development Offshore Report');?>: <?php echo date('M d, Y'); ?></h2>
 
 <ul id="accordion" style="margin:20px 0 0 0;">
 <li>
@@ -30,7 +30,7 @@
 </li>
 
 <li>
-<div>Project by Type</div>
+<div>Projects by Type</div>
 <ul>
 <li>Standard media projects:<span class="number-count"><?php echo count($standardMedia); ?></span></li>
 <li>Rich media projects:<span class="number-count"><?php echo count($richMedia); ?></span></li>
@@ -49,7 +49,7 @@ $("#accordion > li > div").click(function(){
 	$(this).next().slideToggle(180);
 });
 $('#accordion ul:eq(0)').show();
-$('#accordion ul:eq(1)').show();
+//$('#accordion ul:eq(1)').show();
 </SCRIPT>
 
 <div class="clear" style="padding-bottom:10px;"></div>
