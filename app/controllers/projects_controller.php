@@ -23,10 +23,6 @@ class ProjectsController extends AppController {
 		array('field' => 'priority', 'type' => 'checkbox'),
 		array('field' => 'offshore', 'type' => 'checkbox'),
 	);
-	
-	//Alow everything and in each controller set specific permissions
-	function beforeFilter() {
-	}
 
 	/************** AJAX CALLS *******************/
 	function ajax_toggle_hold($id=null){

@@ -1,26 +1,27 @@
 <h3><?php echo $table_name; ?></h3>
+
 <table cellpadding="0" cellspacing="0">
 <?php 
 	$projects = $this->requestAction('projects/full_report/'.$type); 
 	//debug($projects);
 ?>
 <tr>
-		<th><?php echo $this->Paginator->sort('number');?></th>
-		<th><?php echo $this->Paginator->sort('client');?></th>
-		<th><?php echo $this->Paginator->sort('name');?></th>
-		<th><?php echo $this->Paginator->sort('type');?></th>
-		<th><?php echo $this->Paginator->sort('offshore');?></th>
-		<th><?php echo $this->Paginator->sort('in_qa');?></th>
-		<th><?php echo $this->Paginator->sort('on_hold');?></th>
-		<th><?php echo $this->Paginator->sort('total_units');?></th>
-		<th><?php echo $this->Paginator->sort('progress');?></th>
-		<th><?php echo $this->Paginator->sort('due');?></th>
-		<th><?php echo $this->Paginator->sort('PMs');?></th>
-		<th><?php echo $this->Paginator->sort('Offshore PMs');?></th>
-		<th><?php echo $this->Paginator->sort('production_managers');?></th>
-		<th><?php echo $this->Paginator->sort('QA Resources');?></th>
-		<th><?php echo $this->Paginator->sort('developers');?></th>
-		<th><?php echo $this->Paginator->sort('notes');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('client');?></th>
+        <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('name');?></th>
+        <th valign="bottom"><?php echo $this->Paginator->sort('number');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('offshore');?></th>
+		<th valign="bottom" nowrap><?php echo $this->Paginator->sort('in_QA');?></th>
+		<th valign="bottom" nowrap><?php echo $this->Paginator->sort('on_hold');?></th>
+		<th valign="bottom" nowrap><?php echo $this->Paginator->sort('total_units');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('progress');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('due');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('PMs');?></th>
+		<th valign="bottom" nowrap><?php echo $this->Paginator->sort('OS PMs');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('production_managers');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('QAs');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('developers');?></th>
+		<th valign="bottom"><?php echo $this->Paginator->sort('notes');?></th>
 </tr>
 <?php
 $i = 0;
@@ -37,12 +38,12 @@ foreach ($projects as $project):
 	}
 ?>
 <tr<?php echo $class;?>>
-	<td><?php if($project['Project']['number']) echo $this->Html->link(__($project['Project']['number'], true), array('action' => 'view', $project['Project']['id'])); ?>&nbsp;</td>
-	<td>
+	<td class="cli">
 		<?php echo $this->Html->link($project['Client']['name'], array('controller' => 'clients', 'action' => 'view', $project['Client']['id'])); ?>
 	</td>
+    <td><?php echo $project['Project']['type']; ?>&nbsp;</td>
 	<td><?php echo $this->Html->link(__($project['Project']['title'], true), array('action' => 'view', $project['Project']['id'])); ?>&nbsp;</td>
-	<td><?php echo $project['Project']['type']; ?>&nbsp;</td>
+    <td><?php if($project['Project']['number']) echo $this->Html->link(__($project['Project']['number'], true), array('action' => 'view', $project['Project']['id'])); ?>&nbsp;</td>
 	<td><?php 
 		if($project['Project']['offshore'] == 1){
 			echo "Yes"; 
@@ -50,6 +51,7 @@ foreach ($projects as $project):
 			echo "No"; 
 		}
 	?>&nbsp;</td>
+    
 	<td><?php 
 		if($project['Project']['in_qa'] == 1){
 			echo "Yes"; 
@@ -156,7 +158,7 @@ foreach ($projects as $project):
 				endforeach;
 			?>
 		&nbsp;</td>
-		<td><?php echo $project['Project']['notes']; ?></td>
+		<td class="act"><?php echo $project['Project']['notes']; ?></td>
 </tr>
 <?php endforeach; ?>
 </table>

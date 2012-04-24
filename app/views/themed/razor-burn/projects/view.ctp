@@ -118,7 +118,10 @@
 		</dd>
 	</dl>
 </div>
+<<<<<<< HEAD
 <?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
@@ -129,7 +132,10 @@
 
 	</ul>
 </div>
+<<<<<<< HEAD
 <?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <div class="related">
 	<h3><?php __('Developers');?></h3>
 	<?php if (!empty($project['Developer'])):?>
@@ -174,14 +180,22 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
+<<<<<<< HEAD
 	<?php endif; ?>
 	<?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+<?php endif; ?>
+
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Developer', true), array('controller' => 'developers', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
+<<<<<<< HEAD
 	<?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 </div>
 <div class="related">
 	<h3><?php __('Production Managers');?></h3>
@@ -219,13 +233,19 @@
 			?></td>
 			<td style="display:none"><?php echo $producer['created'];?></td>
 			<td style="display:none"><?php echo $producer['modified'];?></td>
+<<<<<<< HEAD
 			<?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 			<td class="actions" style="display:none">
 				<?php //echo $this->Html->link(__('View', true), array('controller' => 'producers', 'action' => 'view', $producer['id'])); ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'producers', 'action' => 'edit', $producer['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'producers', 'action' => 'delete', $producer['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $producer['id'])); ?>
 			</td>
+<<<<<<< HEAD
 			<?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 		</tr>
 	<?php endforeach; ?>
 	</table>
@@ -267,13 +287,19 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
+<<<<<<< HEAD
 <?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <div class="actions">
 	<ul>
 		<li><?php echo $this->Html->link(__('New Project Manager', true), array('controller' => 'project_managers', 'action' => 'add'));?> </li>
 	</ul>
 </div>
+<<<<<<< HEAD
 <?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <div class="related">
 	<h3><?php __('Offshore Project Managers');?></h3>
 	<?php if (!empty($project['OffshoreProjectManager'])):?>
@@ -311,13 +337,19 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
+<<<<<<< HEAD
 <?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Offshore Project Manager', true), array('controller' => 'offshore_project_managers', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
+<<<<<<< HEAD
 <?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 </div>
 
 <div class="related">
@@ -357,11 +389,17 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
+<<<<<<< HEAD
 <?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New QA Resource', true), array('controller' => 'qa_resources', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
+<<<<<<< HEAD
 <?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 </div>

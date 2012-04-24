@@ -31,7 +31,10 @@
 	<?php 
 	echo $this->Html->css('cake.generic');
 	echo $this->Html->css('basic');
+<<<<<<< HEAD
 	echo $this->Html->css('razor-burn') . "\n";
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	echo $this->Html->css('chosen/chosen');
 	echo $this->Html->css('jquery.autocomplete');
 	

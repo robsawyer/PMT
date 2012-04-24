@@ -1,7 +1,11 @@
 <div class="projectManagers form">
 <?php echo $this->Form->create('ProjectManager');?>
 	<fieldset>
+<<<<<<< HEAD
 		<legend><?php __('Editing '.$this->data['ProjectManager']['name'].'\'s Profile'); ?></legend>
+=======
+ 		<legend><?php __('Edit Project Manager'); ?></legend>
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	<?php
 		echo $this->Form->input('id');
 		$options = array(
@@ -22,6 +26,7 @@
 		echo $this->Form->input('location',array('after'=>'<div class="subtext">Example: Portland, OR.</div>'));
 		//echo $this->Form->input('Project',array('type'=>'hidden'));
 	?>
+<<<<<<< HEAD
 	<?php
 	if($admin && $this->data['ProjectManager']['id'] != $userAccount['User']['project_manager_id']):
 		if(!empty($userAccount)):
@@ -39,6 +44,8 @@
 	<?php
 	endif;
 	?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>

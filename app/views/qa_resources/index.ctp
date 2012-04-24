@@ -1,16 +1,16 @@
 <div class="qaResources index">
-	<h2><?php __('Qa Resources');?></h2>
+	<h2><?php __('QA Resources');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th class="display:none"><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('type');?></th>
-			<th><?php echo $this->Paginator->sort('fullname');?></th>
-			<th><?php echo $this->Paginator->sort('email');?></th>
-			<th><?php echo $this->Paginator->sort('location');?></th>
-			<th><?php echo $this->Paginator->sort('offshore');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('modified');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th style="display:none"><?php echo $this->Paginator->sort('id');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('name');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('email');?></th>
+            <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('location');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('offshore');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('created');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('modified');?></th>
+			<th valign="bottom" class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -21,11 +21,11 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td class="display:none"><?php echo $qaResource['QaResource']['id']; ?>&nbsp;</td>
-		<td><?php echo $qaResource['QaResource']['type']; ?>&nbsp;</td>
-		<td><?php echo $this->Html->link(__($qaResource['QaResource']['fullname'],true),array('action'=>'view',$qaResource['QaResource']['id'])); ?>&nbsp;</td>
+		<td style="display:none"><?php echo $qaResource['QaResource']['id']; ?>&nbsp;</td>
+		<td class="cli" nowrap><?php echo $this->Html->link(__($qaResource['QaResource']['fullname'],true),array('action'=>'view',$qaResource['QaResource']['id'])); ?>&nbsp;</td>
 		<td><?php echo $qaResource['QaResource']['email']; ?>&nbsp;</td>
-		<td><?php echo $qaResource['QaResource']['location']; ?>&nbsp;</td>
+        <td><?php echo $qaResource['QaResource']['type']; ?>&nbsp;</td>
+		<td nowrap><?php echo $qaResource['QaResource']['location']; ?>&nbsp;</td>
 		<td><?php 
 			if($qaResource['QaResource']['offshore']==1){
 				echo "Yes";
@@ -57,9 +57,12 @@
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
 </div>
+</div>
+
+
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Qa Resource', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New QA Resource', true), array('action' => 'add')); ?></li>
 	</ul>
 </div>

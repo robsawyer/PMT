@@ -61,6 +61,7 @@
 				    'url' => array('controller' => '/')
 				));
 				?>
+<<<<<<< HEAD
 				<div class="app-name">Production Manager Tool</div>
 				<?php
 					$current_user = $this->Session->read('Auth.User');
@@ -87,6 +88,9 @@
 				<?php
 					endif;
 				?>
+=======
+				<div class="app-name">Production Manager Tool YYY</div>
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 				</div>
 				<div class="clear"></div>
 				<?php

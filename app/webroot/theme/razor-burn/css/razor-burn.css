@@ -352,7 +352,11 @@ div.chzn-container-active ul.chzn-choices input {
 	font-weight:700;
 	padding: 5px 9px 5px 30px !important;
 	/*width:100%;*/	
+<<<<<<< HEAD
 	color:#000;
+=======
+	color:#3d3d3d;
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	list-style: circle;
 	text-decoration:none;
 	font-family:Arial, Helvetica, sans-serif !important;
@@ -386,6 +390,7 @@ div.chzn-container-active ul.chzn-choices input {
 	padding-left:0 !important;
 	padding-right:0 !important;
 }
+<<<<<<< HEAD
 
 /** V2.0 **/
 div.user-info{
@@ -406,3 +411,11 @@ div.user-info a:hover{
 	color: #666666;
 }
 /** END V2.0 **/
+=======
+div.reports{
+	position:relative;
+}
+td.notes{
+	width:100%;
+}
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935

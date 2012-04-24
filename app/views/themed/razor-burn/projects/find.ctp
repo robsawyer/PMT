@@ -168,9 +168,15 @@
 			<?php
 			if(empty($this->data['Project'])){
 			?>
+<<<<<<< HEAD
 			<th style="font-size: 16px; color: red;padding: 25px 0 20px 0;">Enter criteria above and click search.</th>
 			<?php }else{ ?>
 			<th style="font-size: 16px; color: red;padding: 25px 0 20px 0;">No results found.</th>
+=======
+			<th style="font-size: 15px; padding: 20px 0 15px 0; border:0;">Enter criteria above and click <span class="grn">search</span>.</th>
+			<?php }else{ ?>
+			<th style="font-size: 15px; padding: 20px 0 15px 0; border:0;"><span class="grn">No results found.</span></th>
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 			<?php } ?>
 		</tr>
 	</table>

@@ -52,6 +52,7 @@
 
 <body>
 <!-- This is for the popup plugin -->
+<<<<<<< HEAD
 <div id="popups" style="z-index: 1000;"></div>
 <div id="container">
 	<div id="header">
@@ -105,6 +106,42 @@
 			echo $this->element('sql_dump'); 
 	?>
 	</div>    
+=======
+<div id="popups" style="z-index: 1000;">
+</div>
+<div id="container">
+<div id="header">
+<div id="logo-container">
+<?php 
+				echo $this->Html->image("sa/razorfish.png", array(
+					"alt" => "Razorfish",
+					'class'=>"logo",
+				    'url' => array('controller' => '/')
+				));
+				?>
+</div>
+<h1>Production Manager Tool</h1>
+
+<div id='navbar'>
+<?php echo $this->element('nav',array('cache'=>false)); ?>
+</div><!-- end of navbar -->
+</div><!-- end of header -->
+
+<div id="content">
+<?php echo $this->Session->flash(); ?>
+<?php echo $content_for_layout; ?>
+</div>
+
+
+
+<div id="footer">
+			&copy; 2010 Production Manager Tool All Rights Reserved. PMT is a <?php echo $this->Html->link('Rob Sawyer','#',array('title'=>'Rob Sawyer')); ?> Production.
+<?php 
+		echo $this->Js->writeBuffer(); // Write cached scripts
+		echo $this->element('sql_dump'); 
+?>
+</div>    
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 </div>
 
 </body></html>

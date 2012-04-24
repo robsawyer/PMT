@@ -5,6 +5,7 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 }
 ?>
 <div class="productionManagers view">
+<<<<<<< HEAD
 	<h2>
 	<?php 
 		__($production_manager['ProductionManager']['fullname']); 
@@ -20,6 +21,12 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 	endif;
 	?>
 	</h2>
+=======
+<h2><?php 
+		__($production_manager['ProductionManager']['fullname']); 
+		if(isset($production_manager['ProductionManager']['location'])) echo " - ".$production_manager['ProductionManager']['location'];
+	?>- <span><?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $production_manager['ProductionManager']['id'])); ?> </span></h2> 
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <ul class="details">
 	<li>Total projects: <span class="number-count"><?php echo count($incompleteProjects) + count($completeProjects) ; ?></span></li>
 	<li class="complete-project-row"><?php echo __("Complete projects",true); ?>: <span class="number-count"><?php echo count($completeProjects); ?></span></li>
@@ -87,7 +94,10 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 		</dd>
 	</dl>
 </div>
+<<<<<<< HEAD
 <?php //if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <div class="download-actions">
 	Export options:
 	<?php
@@ -105,7 +115,10 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 																	));*/
 	?>
 </div>
+<<<<<<< HEAD
 <?php //endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <div class="related">
 	<h3><?php echo $this->Html->link('Working Projects'." (".count($incompleteProjects).")",array('controller'=>'projects','action'=>'bypm',$production_manager['ProductionManager']['slug']),array('title'=>'Click to see your working projects'));?></h3>
 	<?php 
@@ -131,9 +144,13 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 		<th><?php echo $this->Paginator->sort('notes'); ?></th>
 		<th style="display:none"><?php __('Created'); ?></th>
 		<th style="display:none"><?php __('Modified'); ?></th>
+<<<<<<< HEAD
 		<?php if($userRole == "admin" || $userRole == "manager"): ?>
 		<th class="actions" style="display:none"><?php __('Actions');?></th>
 		<?php endif; ?>
+=======
+		<th class="actions" style="display:none"><?php __('Actions');?></th>
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	</tr>
 	<?php
 		$i = 0;
@@ -258,13 +275,19 @@ if(!empty($this->Paginator->params['paging']['Projects'])){
 			<td><?php echo $this->Time->format($format='m/d/Y',$project['Project']['start']);?></td>
 			<td><?php echo $this->Time->format($format='m/d/Y',$project['Project']['due']);?></td>
 			<td width="25%"><?php echo $project['Project']['notes'];?></td>
+<<<<<<< HEAD
 			<?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 			<td class="actions" style="display:none">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'projects', 'action' => 'view', $project['Project']['id'])); ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'projects', 'action' => 'edit', $project['Project']['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'projects', 'action' => 'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['id'])); ?>
 			</td>
+<<<<<<< HEAD
 			<?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 		</tr>
 		<?php 
 			endif;

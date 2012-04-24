@@ -24,7 +24,11 @@
 </ul>
 </li>
 <li>
+<<<<<<< HEAD
 <div>Project by Type</div>
+=======
+<div>Projects by Type</div>
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <ul>
 <li>Standard Media Projects:<span class="number-count"><?php echo count($standardMedia); ?></span></li>
 <li>Rich Media Projects:<span class="number-count"><?php echo count($richMedia); ?></span></li>
@@ -55,6 +59,10 @@
 </ul>
 </li>
 </ul>
+<<<<<<< HEAD
+=======
+
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <SCRIPT>
 $("#accordion > li > div").click(function(){
 	if(false == $(this).next().is(':visible')) {
@@ -69,12 +77,15 @@ $('#accordion ul:eq(0)').show();
 </SCRIPT>
 
 
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 <div class="clear"></div>
 	
     <table cellpadding="0" cellspacing="0">
@@ -99,9 +110,13 @@ $('#accordion ul:eq(0)').show();
 			<th valign="bottom"><?php __('Production Manager(s)');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
+<<<<<<< HEAD
 			<?php if($userRole == "admin" || $userRole == "manager"): ?>
 				<th valign="bottom" class="actions"><?php // __('Actions');?></th>
 			<?php endif; ?>
+=======
+			<th valign="bottom" class="actions"><?php // __('Actions');?></th>
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	</tr>
 	<?php
 	$i = 0;
@@ -258,14 +273,20 @@ $('#accordion ul:eq(0)').show();
 				}
 			}
 			?>&nbsp;</td>
+<<<<<<< HEAD
 		<?php if($userRole == "admin" || $userRole == "manager"): ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 		<td class="actions" class="prod">
 			<?php //echo $this->Html->link(__('View', true), array('action' => 'view', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Duplicate', true), array('action' => 'duplicate', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete the project named %s?', true), $project['Project']['title'])); ?>
 		</td>
+<<<<<<< HEAD
 		<?php endif; ?>
+=======
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	</tr>
 <?php endforeach; ?>
 	</table>
