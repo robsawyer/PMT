@@ -390,7 +390,6 @@ div.chzn-container-active ul.chzn-choices input {
 	padding-left:0 !important;
 	padding-right:0 !important;
 }
-<<<<<<< HEAD
 
 /** V2.0 **/
 div.user-info{
@@ -411,11 +410,10 @@ div.user-info a:hover{
 	color: #666666;
 }
 /** END V2.0 **/
-=======
+
 div.reports{
 	position:relative;
 }
 td.notes{
 	width:100%;
 }
->>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
