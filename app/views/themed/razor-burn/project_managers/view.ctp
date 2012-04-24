@@ -66,13 +66,9 @@
 		<th><?php __('Due'); ?></th>
 		<th style="display:none"><?php __('Created'); ?></th>
 		<th style="display:none"><?php __('Modified'); ?></th>
-<<<<<<< HEAD
 		<?php if($userRole == "admin" || $userRole == "manager"): ?>
 		<th class="actions" style="display:none"><?php __('Actions');?></th>
 		<?php endif; ?>
-=======
-		<th class="actions" style="display:none"><?php __('Actions');?></th>
->>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 	</tr>
 	<?php
 		$i = 0;
@@ -112,19 +108,13 @@
 			}?></td>
 			<td><?php echo $this->Time->format($format='m/d/Y',$project['start']);?></td>
 			<td><?php echo $this->Time->format($format='m/d/Y',$project['due']);?></td>
-<<<<<<< HEAD
 			<?php if($userRole == "admin" || $userRole == "manager"): ?>
-=======
->>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 			<td class="actions" style="display:none">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'projects', 'action' => 'view', $project['id'])); ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'projects', 'action' => 'edit', $project['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'projects', 'action' => 'delete', $project['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['id'])); ?>
 			</td>
-<<<<<<< HEAD
 			<?php endif; ?>
-=======
->>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 		</tr>
 	<?php endforeach; ?>
 	</table>
