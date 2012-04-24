@@ -3667,3 +3667,6 @@
 2012-04-23 12:38:13 Notice: Notice (8): Undefined variable: userRole in [/Users/robsa/Sites/PMT/app/controllers/projects_controller.php, line 950]
 2012-04-23 12:47:22 Notice: Notice (8): Undefined variable: producer in [/Users/robsa/Sites/PMT/app/views/themed/razor-burn/projects/view.ctp, line 220]
 2012-04-23 12:47:22 Notice: Notice (8): Undefined variable: producer in [/Users/robsa/Sites/PMT/app/views/themed/razor-burn/projects/view.ctp, line 221]
+2012-04-24 11:03:19 Notice: Notice (8): Undefined property: CakeErrorController::$Auth in [/Users/robsa/Sites/PMT/app/controllers/app_controller.php, line 50]
+2012-04-24 11:03:42 Notice: Notice (8): Undefined property: CakeErrorController::$Auth in [/Users/robsa/Sites/PMT/app/controllers/app_controller.php, line 50]
+2012-04-24 11:03:48 Notice: Notice (8): Undefined property: CakeErrorController::$Auth in [/Users/robsa/Sites/PMT/app/controllers/app_controller.php, line 50]
