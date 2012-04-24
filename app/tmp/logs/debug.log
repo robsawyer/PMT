@@ -3670,3 +3670,4 @@
 2012-04-24 11:03:19 Notice: Notice (8): Undefined property: CakeErrorController::$Auth in [/Users/robsa/Sites/PMT/app/controllers/app_controller.php, line 50]
 2012-04-24 11:03:42 Notice: Notice (8): Undefined property: CakeErrorController::$Auth in [/Users/robsa/Sites/PMT/app/controllers/app_controller.php, line 50]
 2012-04-24 11:03:48 Notice: Notice (8): Undefined property: CakeErrorController::$Auth in [/Users/robsa/Sites/PMT/app/controllers/app_controller.php, line 50]
+2012-04-24 11:05:58 Notice: Notice (8): Undefined property: CakeErrorController::$Auth in [/Users/robsa/Sites/PMT/app/controllers/app_controller.php, line 50]
