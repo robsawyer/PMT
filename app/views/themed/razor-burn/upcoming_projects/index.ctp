@@ -78,7 +78,6 @@
 				$this->params['named']['ProjectNotes'] = "";
 				*/
 				if($upcomingProject['UpcomingProject']['complete'] < 1){
-					 
 					echo $this->Html->link(__('Add to PMT', true), array(
 																		'controller'=>'projects',
 																		'action' => 'add',
@@ -108,7 +107,6 @@
 	</div>
 </div>
 </div>
-
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
@@ -117,8 +115,6 @@
 		<li><?php echo $this->Html->link(__('New Production Manager', true), array('controller' => 'production_managers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
-
-
 <?php
 function deepEncode($myurlstr) {
 	$myurlstr = urlencode($myurlstr);
@@ -144,4 +140,3 @@ function deepEncode($myurlstr) {
 	return $myurlstr;
 }
 ?>
-

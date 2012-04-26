@@ -60,7 +60,9 @@
 			<th><?php __('Production Manager(s)');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
+			<?php if($userRole == "admin" || $userRole == "manager"): ?>
 			<th class="actions"><?php __('Actions');?></th>
+			<?php endif; ?>
 	</tr>
 	<?php
 	$i = 0;
@@ -214,12 +216,14 @@
 				}
 			}
 			?>&nbsp;</td>
+		<?php if($userRole == "admin" || $userRole == "manager"): ?>
 		<td class="actions">
 			<?php //echo $this->Html->link(__('View', true), array('action' => 'view', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Duplicate', true), array('action' => 'duplicate', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $project['Project']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['Project']['id'])); ?>
 		</td>
+		<?php endif; ?>
 	</tr>
 <?php endforeach; ?>
 	</table>

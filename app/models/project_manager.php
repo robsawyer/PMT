@@ -10,6 +10,14 @@ class ProjectManager extends AppModel {
 							) 
 	);
 	
+	var $hasOne = array(
+						'User'=>array(
+							'className' => 'User',
+							'foreignKey' => 'project_manager_id',
+							'dependent'    => false
+						)
+					); 
+	
 	var $hasAndBelongsToMany = array(
 		'Project' => array(
 			'className' => 'Project',

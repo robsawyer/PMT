@@ -245,6 +245,7 @@ input, textarea {
 	padding: 1%;
 	width:98%;
 }
+
 input[type=text], textarea {
 	border:1px solid #3d3d3d;
 }

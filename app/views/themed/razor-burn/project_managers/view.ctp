@@ -66,7 +66,9 @@
 		<th><?php __('Due'); ?></th>
 		<th style="display:none"><?php __('Created'); ?></th>
 		<th style="display:none"><?php __('Modified'); ?></th>
+		<?php if($userRole == "admin" || $userRole == "manager"): ?>
 		<th class="actions" style="display:none"><?php __('Actions');?></th>
+		<?php endif; ?>
 	</tr>
 	<?php
 		$i = 0;
@@ -106,11 +108,13 @@
 			}?></td>
 			<td><?php echo $this->Time->format($format='m/d/Y',$project['start']);?></td>
 			<td><?php echo $this->Time->format($format='m/d/Y',$project['due']);?></td>
+			<?php if($userRole == "admin" || $userRole == "manager"): ?>
 			<td class="actions" style="display:none">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'projects', 'action' => 'view', $project['id'])); ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'projects', 'action' => 'edit', $project['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'projects', 'action' => 'delete', $project['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['id'])); ?>
 			</td>
+			<?php endif; ?>
 		</tr>
 	<?php endforeach; ?>
 	</table>

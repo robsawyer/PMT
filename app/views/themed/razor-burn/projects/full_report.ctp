@@ -1,5 +1,4 @@
 <div class="projects reports">
-
 <div class="download-actions">
 		<strong>Export:</strong> <?php
 			echo $this->Html->image('excel_icon.gif',array('title'=>'Download xls version',

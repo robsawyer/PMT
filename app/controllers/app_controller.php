@@ -34,11 +34,36 @@
  */
 class AppController extends Controller {
 	
-	var $components = array('RequestHandler','Session','Email');
+	var $components = array('Auth','RequestHandler','Session','Email');
 	var $helpers = array('Js' => array('Jquery'),'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text');
 	
 	public $view = 'Theme';
 	public $theme = 'razor-burn';	
+	
+	/**
+	* Before Render
+	*/
+	function beforeRender(){
+		unset($this->data['User']['password']);
+		unset($this->data['User']['password_confirm']);
+		//Gives $userRole to all views
+		$userRole = $this->Auth->user('role');
+		$this->set(compact('userRole'));
+	}
+	
+	//Alow everything and in each controller set specific permissions
+	function beforeFilter() {
+		//$this->Auth->allow('*');
+		$user = $this->Auth->user();
+		if(!empty($user)){
+			if($this->Auth->user('role') == "admin"){
+				$admin = true;
+			}else{
+				$admin = false;
+			}
+			$this->set(compact('admin'));
+		}
+	}
 	
 	function toSlug($string) {
 		return Inflector::slug(utf8_encode(strtolower($string)), '-');

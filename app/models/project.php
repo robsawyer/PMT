@@ -25,9 +25,16 @@ class Project extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
-
+	
 	var $hasAndBelongsToMany = array(
 		'Developer' => array(
 			'className' => 'Developer',

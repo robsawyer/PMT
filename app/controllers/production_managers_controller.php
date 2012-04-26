@@ -48,6 +48,21 @@ class ProductionManagersController extends AppController {
 
 	function view($id = null) {
 		$this->ProductionManager->recursive = 2;
+		
+		// Set User's ID in model which is needed for validation
+		$this->ProductionManager->id = $this->Auth->user('id');
+		$this->ProductionManager->role = $this->Auth->user('role');
+		
+		$admin = false;
+		if(!empty($this->ProductionManager->role)){
+			//Only allow the user to update his own profile unless the person has the admin role
+			if($this->ProductionManager->role != "admin"){
+				$id = $this->ProductionManager->id;
+			}else{
+				$admin = true;
+			}
+		}
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid production manager', true));
 			$this->redirect(array('action' => 'index'));
@@ -58,6 +73,11 @@ class ProductionManagersController extends AppController {
 			$production_manager = $this->ProductionManager->findBySlug($id);
 		}
 		
+		//Find the user's account id
+		$userAccount = $this->ProductionManager->User->find('first',array('conditions'=>array(
+																				'User.production_manager_id'=>$production_manager['ProductionManager']['id']
+																				)));
+																				
 		foreach($production_manager['Project'] as $item => $value){
 			//debug($production_manager['Project'][$item]['complete']);
 			if($production_manager['Project'][$item]['complete'] == 1){
@@ -94,12 +114,12 @@ class ProductionManagersController extends AppController {
 		//debug($projects);
 		$projects = array_values($projects);
 		//debug($projects);
-		$this->set(compact('production_manager','projects','completeProjects','incompleteProjects'));
+		$this->set(compact('production_manager','projects','completeProjects','incompleteProjects','userAccount'));
 		
 		//$this->set('production_manager', $this->ProductionManager->read(null, $id));
 	}
 	
-	function exportcsv($id = null) { 
+	function exportcsv($id = null) {
 		//$this->layout = 'ajax'; 
 		//$this->autoLayout = false; 
 		$this->ProductionManager->recursive = 2;
@@ -135,6 +155,13 @@ class ProductionManagersController extends AppController {
 	}
 	
 	function add() {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!empty($this->data)) {
 			$this->ProductionManager->create();
 			$this->data['ProductionManager']['slug'] = $this->toSlug($this->data['ProductionManager']['fullname']);
@@ -155,6 +182,34 @@ class ProductionManagersController extends AppController {
 	}
 
 	function edit($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		
+		//Only do the test if the user is trying to update another user's profile
+		if($id != $this->Auth->user('id')){
+			if($userRole != "admin" || $userRole != "manager"){
+				$this->Session->setFlash(__('You do not have permission to do this.', true));
+				$this->redirect(array('controller'=>'users','action' => 'login'));
+			}
+		}
+		
+		// Set User's ID in model which is needed for validation
+		$this->ProductionManager->id = $this->Auth->user('id');
+		$this->ProductionManager->role = $this->Auth->user('role');
+		
+		$admin = false;
+		if(!empty($this->ProductionManager->role)){
+			//Only allow the user to update his own profile unless the person has the admin role
+			if($this->ProductionManager->role != "admin"){
+				$id = $this->ProductionManager->id;
+			}else{
+				$admin = true;
+			}
+		}else{
+			$this->Session->setFlash(__('There was an error with your role. Please contact the administrator.', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid production manager', true));
 			$this->redirect(array('action' => 'index'));
@@ -168,9 +223,18 @@ class ProductionManagersController extends AppController {
 				$this->Session->setFlash(__('The production manager could not be saved. Please, try again.', true));
 			}
 		}
+		
+		//Set the default user data
 		if (empty($this->data)) {
+			//Find the user's account id
+			$userAccount = $this->ProductionManager->User->find('first',array('conditions'=>array(
+																					'User.production_manager_id'=>$id
+																					)));
 			$this->data = $this->ProductionManager->read(null, $id);
+			$this->set(compact('userAccount'));
 		}
+		
+		//Find associated projects
 		$all_projects = $this->ProductionManager->Project->find('all');
 		$projects = array();
 		foreach($all_projects as $project){
@@ -180,6 +244,13 @@ class ProductionManagersController extends AppController {
 	}
 
 	function delete($id = null) {
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		if($userRole != "admin" || $userRole != "manager"){
+			$this->Session->setFlash(__('You do not have permission to do this.', true));
+			$this->redirect(array('controller'=>'users','action' => 'login'));
+		}
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for production manager', true));
 			$this->redirect(array('action'=>'index'));

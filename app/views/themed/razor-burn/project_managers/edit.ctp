@@ -1,7 +1,7 @@
 <div class="projectManagers form">
 <?php echo $this->Form->create('ProjectManager');?>
 	<fieldset>
- 		<legend><?php __('Edit Project Manager'); ?></legend>
+		<legend><?php __('Editing '.$this->data['ProjectManager']['name'].'\'s Profile'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		$options = array(
@@ -21,6 +21,23 @@
 		echo $this->Form->input('email');
 		echo $this->Form->input('location',array('after'=>'<div class="subtext">Example: Portland, OR.</div>'));
 		//echo $this->Form->input('Project',array('type'=>'hidden'));
+	?>
+	<?php
+	if($admin && $this->data['ProjectManager']['id'] != $userAccount['User']['project_manager_id']):
+		if(!empty($userAccount)):
+	?>
+		<p>If you'd like to update the account password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account',$userAccount['User']['id'])); ?>.</p>
+	<?php
+		else:
+	?>
+		<p style="color:red">This user does not have a user account setup.</p>
+	<?php
+		endif;
+	else:
+	?>
+		<p>If you'd like to update your password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account')); ?>.</p>
+	<?php
+	endif;
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

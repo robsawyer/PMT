@@ -25,6 +25,7 @@
 		<td><?php echo $projectManager['ProjectManager']['email']; ?>&nbsp;</td>
 		<td nowrap><?php echo $projectManager['ProjectManager']['location']; ?>&nbsp;</td>
         <td><?php echo $projectManager['ProjectManager']['type']; ?>&nbsp;</td>
+
 		<td style="display:none;"><?php echo $projectManager['ProjectManager']['created']; ?>&nbsp;</td>
 		<td style="display:none;"><?php echo $projectManager['ProjectManager']['modified']; ?>&nbsp;</td>
 		<td class="actions">
@@ -50,8 +51,6 @@
 	</div>
 </div>
 </div>
-
-
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

@@ -1,5 +1,4 @@
 <div class="projects reports">
-
 <div class="download-actions">
 		<strong>Export:</strong> <?php
 			echo $this->Html->image('excel_icon.gif',array('title'=>'Download xls version',
@@ -16,7 +15,6 @@
 																		));*/
 		?>
 </div>
-
 <h2><?php __('Ad Creative Development Offshore Report');?>: <?php echo date('M d, Y'); ?></h2>
 
 <ul id="accordion" style="margin:20px 0 0 0;">
