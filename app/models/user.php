@@ -133,6 +133,13 @@ class User extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+		'OffshoreProjectManager' => array(
+			'className' => 'OffshoreProjectManager',
+			'foreignKey' => 'offshore_project_manager_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'ProductionManager' => array(
 			'className' => 'ProductionManager',
 			'foreignKey' => 'production_manager_id',
