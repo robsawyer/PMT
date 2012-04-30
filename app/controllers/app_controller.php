@@ -75,6 +75,24 @@ class AppController extends Controller {
 		$this->Session->write('Temp.total_working_projects_set',null);
 	}
 	
+	/**
+	 * Handles checking the user role
+	 * $rolesToAllow : Roles that should be allowed to access a certain section
+	 */
+	function checkUserRoles($rolesToAllow = array('admin')){
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		$totalRoles = count($rolesToAllow) - 1;
+		for($i = 0; $i<$totalRoles; $i++){
+			
+			if($userRole != "admin" || $userRole != "manager"){
+				$this->Session->setFlash(__('You do not have permission to do this.', true));
+				$this->redirect(array('controller'=>'users','action' => 'login'));
+			}
+		}
+		
+	}
+	
 	function cleanupProjectsArray($projects,$item,$val){
 		$updatedProjects = array();
 		foreach($projects as $project){

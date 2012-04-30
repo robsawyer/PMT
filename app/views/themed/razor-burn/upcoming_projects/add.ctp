@@ -36,7 +36,6 @@
 														'maxYear' => 2020,
 														# default order m/d/y,
 														));
-		//echo $this->Form->input('due');
 		echo $this->Form->input('due', array('type'  => 'date',
 														'label' => 'Due Date',
 														'minYear' => 2011,
@@ -60,25 +59,8 @@
 																	);
 				?>
 			</fieldset>
-			<!--><fieldset class="checkboxes">
-				<legend>Developers</legend>
-				<?php
-					/*echo $this->Form->input('developer_id',array(
-																		'label'=>'',
-																		'type' => 'select',
-																		'selected' => 0,
-																		'empty' => 'Please Select',
-																		'style'=>'width: 250px',
-																		'class' => 'chzn-select'
-																		)
-																	);*/
-				?>
-				<p><b>Note:</b> If you don't see a dev that you need in the list, add him/her to the notes section.</p>
-			</fieldset>-->
 		</div></div>
-		<?php
-		echo $this->Form->input('notes');
-	?>
+		<?php echo $this->Form->input('notes'); ?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
@@ -91,4 +73,4 @@
 		<li><?php echo $this->Html->link(__('New Production Manager', true), array('controller' => 'production_managers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
-<script type="text/javascript"> $(".chzn-select").chosen(); </script>
+<script type="text/javascript"> $(".chzn-select").chosen();</script>

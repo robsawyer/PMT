@@ -385,3 +385,4 @@
 2012-04-26 11:40:40 Warning: Warning (512): /Users/garrettgi/Sites/PMT/app/tmp/cache/persistent/ is not writable in [/Users/garrettgi/Sites/PMT/cake/libs/cache/file.php, line 267]
 2012-04-26 11:40:40 Warning: Warning (512): /Users/garrettgi/Sites/PMT/app/tmp/cache/models/ is not writable in [/Users/garrettgi/Sites/PMT/cake/libs/cache/file.php, line 267]
 2012-04-26 11:40:41 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /Users/garrettgi/Sites/PMT/cake/libs/debugger.php:673) in [/Users/garrettgi/Sites/PMT/cake/libs/controller/controller.php, line 742]
+2012-04-26 11:57:16 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /Users/robsa/Sites/PMT/cake/basics.php:110) in [/Users/robsa/Sites/PMT/cake/libs/controller/controller.php, line 742]

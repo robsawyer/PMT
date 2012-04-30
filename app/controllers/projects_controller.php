@@ -1083,12 +1083,9 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_report(){
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
+		
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
 		
 		$this->Project->recursive = 1;
 		$offshoreProjects = $this->Project->find('all',array(
@@ -1187,12 +1184,6 @@ class ProjectsController extends AppController {
 	}*/
 	
 	function exportxls(){ 
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
 		
 		$this->layout = 'ajax';
 		$this->autoLayout = false;
@@ -1350,13 +1341,6 @@ class ProjectsController extends AppController {
 	}*/
 	
 	function exportPdf(){
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
-		
 		$this->layout = 'pdf'; //this will use the pdf.ctp layout 
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1475,13 +1459,6 @@ class ProjectsController extends AppController {
 	}*/
 	
 	function offshore_exportxls(){
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
-		
 		$this->layout = 'ajax';
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1512,13 +1489,6 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_exportcsv(){ 
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
-		
 		$this->layout = 'ajax';
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1570,12 +1540,6 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_exportPdf(){
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
 		
 		$this->layout = 'pdf'; //this will use the pdf.ctp layout 
 		$this->autoLayout = false;
