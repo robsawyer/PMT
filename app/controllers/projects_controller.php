@@ -4,7 +4,8 @@ class ProjectsController extends AppController {
 	var $name = 'Projects';
 	
 	// Include the RequestHandler, it makes sure the proper layout and views files are used 
-	var $components = array('Search.Prg','AjaxHandler');
+	//var $components = array('Search.Prg','AjaxHandler');
+	
 	//var $helpers = array('Number');
 	var $paginate = array(
 								'limit' => 100,
@@ -23,6 +24,12 @@ class ProjectsController extends AppController {
 		array('field' => 'priority', 'type' => 'checkbox'),
 		array('field' => 'offshore', 'type' => 'checkbox'),
 	);
+	
+	function beforeFilter(){
+		parent::beforeFilter();
+		/*$this->Auth->allow('full_report','offshore_report','bypm','find',
+							'duplicate','exportxls','exportcsv','rss','calendar');*/
+	}
 
 	/************** AJAX CALLS *******************/
 	function ajax_toggle_hold($id=null){
@@ -1033,7 +1040,7 @@ class ProjectsController extends AppController {
 	function full_report(){
 		//User permission check
 		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
+		if($userRole != "user" || $userRole != "manager"){
 			$this->Session->setFlash(__('You do not have permission to do this.', true));
 			$this->redirect(array('controller'=>'users','action' => 'login'));
 		}

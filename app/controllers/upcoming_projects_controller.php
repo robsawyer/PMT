@@ -7,6 +7,12 @@ class UpcomingProjectsController extends AppController {
 	var $emailTo = 'Rob Sawyer <rob.sawyer@razorfish.com>';
 	var $emailSubject = 'PMT: New Project Submitted';
 	
+	function beforeFilter(){
+		parent::beforeFilter();
+		
+	}
+	
+	
 	function index() {
 		$this->UpcomingProject->recursive = 0;
 		$this->set('upcomingProjects', $this->paginate());
