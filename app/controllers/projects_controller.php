@@ -1038,12 +1038,8 @@ class ProjectsController extends AppController {
 	}
 	
 	function full_report(){
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "user" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
 		
 		$this->Project->recursive = 1;
 		$offshoreProjects = $this->Project->find('all',array(
