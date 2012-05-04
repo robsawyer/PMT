@@ -18,12 +18,8 @@ class OffshoreProjectManagersController extends AppController {
 	}
 
 	function add() {
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
 		
 		if (!empty($this->data)) {
 			$this->OffshoreProjectManager->create();
@@ -43,12 +39,8 @@ class OffshoreProjectManagersController extends AppController {
 	}
 
 	function edit($id = null) {
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
 		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid offshore project manager', true));
@@ -74,12 +66,8 @@ class OffshoreProjectManagersController extends AppController {
 	}
 
 	function delete($id = null) {
-		//User permission check
-		$userRole = $this->Auth->user('role');
-		if($userRole != "admin" || $userRole != "manager"){
-			$this->Session->setFlash(__('You do not have permission to do this.', true));
-			$this->redirect(array('controller'=>'users','action' => 'login'));
-		}
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
 		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for offshore project manager', true));
