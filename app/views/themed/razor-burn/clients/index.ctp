@@ -1,5 +1,5 @@
 <div class="clients index">
-	<h2><?php __('Clients');?></h2>
+	<h2><?php __('Client List');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th style="display:none"><?php //echo $this->Paginator->sort('id');?></th>
@@ -18,7 +18,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td style="display:none"><?php //echo $client['Client']['id']; ?>&nbsp;</td>
-		<td width="75%"><?php echo $this->Html->link(__($client['Client']['name'], true), array('action' => 'view', $client['Client']['id'])); ?>&nbsp;</td>
+		<td width="75%" class="lef"><?php echo $this->Html->link(__($client['Client']['name'], true), array('action' => 'view', $client['Client']['id'])); ?>&nbsp;</td>
 		<td style="display:none"><?php //echo $client['Client']['created']; ?>&nbsp;</td>
 		<td style="display:none"><?php //echo $client['Client']['modified']; ?>&nbsp;</td>
 		<td class="actions">

@@ -228,7 +228,7 @@ div.nippleBox div.bar h4{
 	float: left;
 	clear: none;
 	font-style:normal;
-	margin:0px 5px 0 5px;
+	margin:0px 10px 0 0px;
 	padding:0;
 }
 
@@ -469,11 +469,11 @@ div.nippleBox div.bar h4{
 }
 
 
-table td.cli, table td.actions, table td.act{
+table td.cli, table td.actions, table td.act, table td.rig{
 	border-right:1px solid #ddd;
 	height:24px;
 }
-table td.cli{
+table td.cli, table td.lef{
 	border-left:1px solid #ddd;
 	height:24px;
 }

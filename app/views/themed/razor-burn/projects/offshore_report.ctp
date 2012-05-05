@@ -47,7 +47,7 @@ $("#accordion > li > div").click(function(){
 	$(this).next().slideToggle(180);
 });
 $('#accordion ul:eq(0)').show();
-//$('#accordion ul:eq(1)').show();
+$('#accordion ul:eq(1)').show();
 </SCRIPT>
 
 <div class="clear" style="padding-bottom:10px;"></div>

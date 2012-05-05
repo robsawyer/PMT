@@ -46,30 +46,50 @@
 	echo $scripts_for_layout;
 	
 	?>
-    
 </head>
 
 
 <body>
 <!-- This is for the popup plugin -->
 <div id="popups" style="z-index: 1000;"></div>
+
 <div id="container">
-	<div id="header">
-		<div id="logo-container">
-			<?php echo $this->Html->image("sa/razorfish.png", array(
+<div id="header">
+<div id="logo-container">
+<?php echo $this->Html->image("sa/razorfish.png", array(
 					"alt" => "Razorfish",
 					'class'=>"logo",
 				    'url' => array('controller' => '/')
 				)); ?>
-		</div>
-		<h1>Production Manager Tool</h1>
-		<?php
+</div>
+<h1>Production Manager Tool</h1>
+<?php
 			$current_user = $this->Session->read('Auth.User');
 			$username = $this->Session->read('Auth.User.username');
 			if(!empty($username)):
 		?>
-		<div class="user-info">
-		<?php 
+
+<?php endif; ?>
+<div class="clear"></div>
+
+<?php if(!empty($username)): ?>
+<div id='navbar'>
+<?php echo $this->element('nav',array('cache'=>false)); ?>
+</div><!-- end of navbar -->
+<?php endif; ?>
+</div><!-- end of header -->
+
+<div id="content">
+<?php echo $this->Session->flash(); ?>
+<?php echo $content_for_layout; ?>
+</div><!-- end of content -->
+
+
+<div id="footer">
+<!--<p>&copy; <script type="text/javascript">var theDate=new Date(); document.write(theDate.getFullYear())</script> Production Manager Tool All Rights Reserved. PMT is a <?php echo $this->Html->link('Rob Sawyer','#',array('title'=>'Rob Sawyer')); ?> Production.</p>-->
+
+<div class="user-info">
+<p><?php 
 			if(!empty($current_user['project_manager_id'])){
 				$controller = "project_managers";
 				$id = $current_user['project_manager_id'];
@@ -79,32 +99,21 @@
 				$id = $current_user['production_manager_id'];
 			}
 			if($current_user['role'] == "admin"){
-				echo "You are logged in as". $this->Html->link($username." (Admin)",array('controller'=>$controller,'action'=>'view',$id)).". | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+				echo "Logged in as ". $this->Html->link($username,array('controller'=>$controller,'action'=>'view',$id))." (Admin) &nbsp;|&nbsp; ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 			}else{
 				echo "Welcome". $this->Html->link($username,array('controller'=>$controller,'action'=>'edit',$id))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 			}
-		?>
-		</div>
-		<?php endif; ?>
-		<div class="clear"></div>
-		<?php if(!empty($username)): ?>
-			<div id='navbar'>
-					<?php echo $this->element('nav',array('cache'=>false)); ?>
-			</div><!-- end of navbar -->
-		<?php endif; ?>
-	</div><!-- end of header -->
-
-	<div id="content">
-		<?php echo $this->Session->flash(); ?>
-		<?php echo $content_for_layout; ?>
-	</div>
-	<div id="footer">
-				&copy; 2010 Production Manager Tool All Rights Reserved. PMT is a <?php echo $this->Html->link('Rob Sawyer','#',array('title'=>'Rob Sawyer')); ?> Production.
-	<?php 
-			echo $this->Js->writeBuffer(); // Write cached scripts
-			echo $this->element('sql_dump'); 
-	?>
-	</div>
+		?><p>
 </div>
+
+
+
+
+<?php 
+	echo $this->Js->writeBuffer(); // Write cached scripts
+	echo $this->element('sql_dump'); 
+?>
+</div><!-- end of footer -->
+</div><!-- end of container -->
 
 </body></html>

@@ -1,16 +1,16 @@
 <div class="qaResources index">
-	<h2><?php __('Qa Resources');?></h2>
+	<h2><?php __('QA Resources');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th class="display:none"><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('type');?></th>
-			<th><?php echo $this->Paginator->sort('fullname');?></th>
+			<th style="display:none"><?php echo $this->Paginator->sort('id');?></th>
+			<th><?php echo $this->Paginator->sort('Name');?></th>
 			<th><?php echo $this->Paginator->sort('email');?></th>
 			<th><?php echo $this->Paginator->sort('location');?></th>
+            <th><?php echo $this->Paginator->sort('type');?></th>
 			<th><?php echo $this->Paginator->sort('offshore');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('modified');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<!--<th><?php echo $this->Paginator->sort('created');?></th>
+			<th><?php echo $this->Paginator->sort('modified');?></th>-->
+			<th class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -21,11 +21,11 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td class="display:none"><?php echo $qaResource['QaResource']['id']; ?>&nbsp;</td>
-		<td><?php echo $qaResource['QaResource']['type']; ?>&nbsp;</td>
-		<td><?php echo $this->Html->link(__($qaResource['QaResource']['fullname'],true),array('action'=>'view',$qaResource['QaResource']['id'])); ?>&nbsp;</td>
+		<td style="display:none"><?php echo $qaResource['QaResource']['id']; ?>&nbsp;</td>
+		<td class="cli"><?php echo $this->Html->link(__($qaResource['QaResource']['fullname'],true),array('action'=>'view',$qaResource['QaResource']['id'])); ?>&nbsp;</td>
 		<td><?php echo $qaResource['QaResource']['email']; ?>&nbsp;</td>
 		<td><?php echo $qaResource['QaResource']['location']; ?>&nbsp;</td>
+        <td><?php echo $qaResource['QaResource']['type']; ?>&nbsp;</td>
 		<td><?php 
 			if($qaResource['QaResource']['offshore']==1){
 				echo "Yes";
@@ -33,8 +33,8 @@
 				echo "No";
 			}
 		?>&nbsp;</td>
-		<td><?php echo $this->Time->relativeTime($qaResource['QaResource']['created']); ?>&nbsp;</td>
-		<td><?php echo $this->Time->relativeTime($qaResource['QaResource']['modified']); ?>&nbsp;</td>
+		<!--<td><?php echo $this->Time->relativeTime($qaResource['QaResource']['created']); ?>&nbsp;</td>
+		<td><?php echo $this->Time->relativeTime($qaResource['QaResource']['modified']); ?>&nbsp;</td>-->
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $qaResource['QaResource']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $qaResource['QaResource']['id'])); ?>
@@ -60,6 +60,6 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Qa Resource', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New QA Resource', true), array('action' => 'add')); ?></li>
 	</ul>
 </div>

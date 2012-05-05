@@ -17,8 +17,8 @@
 */
 *{margin:0;padding:0;}
 /** General Style Info **/
-html,body{margin:0 !important; padding:0 !important; min-height:100%;}
-body{/*background:#003d4c;*/color:#fff;font-family:helvetica,arial,sans-serif;font-size:12px; }
+html,body{margin:0 !important; padding:0 !important; height:100%;}
+body{background-color:#fff;color:#fff;font-family:helvetica,arial,sans-serif;font-size:12px; }
 a{color:#003d4c;text-decoration:underline;}
 a:hover{color:#367889;text-decoration:none;}
 a img{border:none;}
@@ -39,11 +39,11 @@ p{margin-bottom: 0.75em;}
 	background:#fff;
 	clear:both;
 	color:#333;
-	padding:20px 20px 40px 20px;
-	overflow:auto;
+	padding:20px 20px 54px 20px;
+	/*overflow:auto;*/
 }
 
-#footer{color:#fff;font-weight:normal;text-decoration:none;clear:both;font-size:12px; line-height:12px; height:18px; padding:8px 0 0 0; margin:0; text-align:center; border-top:2px solid #3d3d3d; background:url(/img/sa/fdots.png) no-repeat bottom left #000; position:relative;}
+#footer{color:#fff;font-weight:normal;text-decoration:none;clear:both;font-size:12px; line-height:12px; height:18px; padding:6px 0 2px 0; border-top:30px #FFF solid; text-align:center; background:url(/img/sa/fdots.png) no-repeat bottom left #000; width:100%; position:relative;}
 #footer a:link,
 #footer a:active,
 #footer a:visited{text-decoration:none;color:#bed300;}
@@ -64,7 +64,7 @@ div.actions {
 	padding:16px 0;
 }
 div.actions h3 {
-	padding:5px 0 0 20px;
+	padding:5px 0 0 0px;
 	color:#000;
 	font-size:15px;
 	line-height:15px;
@@ -108,7 +108,7 @@ th a.desc:after {
 }
 table tr td {
 	background: #fff;
-	padding: 6px;
+	padding: 5px;
 	text-align: left;
 	vertical-align: top;
 	border-bottom:1px solid #ddd;
@@ -345,7 +345,7 @@ p.error em {
 
 /**  Actions  **/
 div.actions ul {
-	margin: 0 0 0 14px;
+	margin: 0 0 0 0px;
 	padding: 0;
 }
 div.actions li {

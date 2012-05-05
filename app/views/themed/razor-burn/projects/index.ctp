@@ -183,17 +183,9 @@ $('#accordion ul:eq(0)').show();
 			}
 			echo $this->Js->link($startedVal,'/projects/ajax_toggle_started/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_started','success'=>'toggleStarted(data);','escape'=>false,'title'=>"Started"));
 		?>&nbsp;</td>
-		<td><?php 
-			if($project['Project']['complete'] == 1){
-				$completeVal = "&#x2713;"; 
-			}else{
-				$completeVal = "X"; 
-			}
-			echo $this->Js->link($completeVal,'/projects/ajax_toggle_complete/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_complete','success'=>'toggleComplete(data);','escape'=>false,'title'=>"Complete"));
-		?>&nbsp;</td>
-		<?php 
+        <?php 
 			if($project['Project']['on_hold'] == 1){
-				$holdVal = "&#x2713;"; 
+				$holdVal = "<span style='color:#959595'>&#x2713;</span>"; 
 				$holdClass = ' class="on-hold"';
 			}else{
 				$holdVal = "X"; 
@@ -203,6 +195,15 @@ $('#accordion ul:eq(0)').show();
 		<td<?php echo $holdClass; ?>><?php 
 			echo $this->Js->link($holdVal,'/projects/ajax_toggle_hold/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_hold','success'=>'toggleHold(data);','escape'=>false,'title'=>"On hold"));
 		?>&nbsp;</td>
+		<td><?php 
+			if($project['Project']['complete'] == 1){
+				$completeVal = "&#x2713;"; 
+			}else{
+				$completeVal = "X"; 
+			}
+			echo $this->Js->link($completeVal,'/projects/ajax_toggle_complete/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_complete','success'=>'toggleComplete(data);','escape'=>false,'title'=>"Complete"));
+		?>&nbsp;</td>
+		
 		<?php
 		if($project['Project']['in_qa'] == 1){
 			$qaVal = "&#x2713;";
@@ -215,10 +216,10 @@ $('#accordion ul:eq(0)').show();
 		<td style="display:none" <?php echo $QAClass; ?>><?php 
 			echo $this->Js->link($qaVal,'/projects/ajax_toggle_qa/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_qa','success'=>'toggleQA(data);','escape'=>false,'title'=>"In QA"));
 		?>&nbsp;</td>
-		<td style="display:none" title="Progress"><?php 
+		<!--<td style="display:none" title="Progress"><?php 
 				echo $project['Project']['progress']."%";
-		?>&nbsp;</td>
-		<td style="display:none"><?php //echo $this->Time->relativeTime($project['Project']['start']); ?>&nbsp;</td>
+		?>&nbsp;</td>-->
+		<!--<td style="display:none"><?php //echo $this->Time->relativeTime($project['Project']['start']); ?>&nbsp;</td>-->
 		<td class="stat"><?php 
 				switch($project['Project']['priority']){
 					case 1:
@@ -237,8 +238,8 @@ $('#accordion ul:eq(0)').show();
 			?>&nbsp;</td>
 		
 		<td title="Due date"><?php echo $this->Time->relativeTime($project['Project']['due']); ?>&nbsp;</td>
-		<td style="display:none"><?php echo $this->Time->relativeTime($project['Project']['created']); ?>&nbsp;</td>
-		<td style="display:none"><?php echo $this->Time->relativeTime($project['Project']['modified']); ?>&nbsp;</td>
+		<!--<td style="display:none"><?php echo $this->Time->relativeTime($project['Project']['created']); ?>&nbsp;</td>
+		<td style="display:none"><?php echo $this->Time->relativeTime($project['Project']['modified']); ?>&nbsp;</td>-->
 		<td width="10%" class="prod">
 		<?php 
 			$counter = count($project['ProductionManager']);
@@ -261,116 +262,27 @@ $('#accordion ul:eq(0)').show();
 	</tr>
 <?php endforeach; ?>
 	</table>
-	<p>
-	<?php
+    
+<p><?php
 	echo $this->Paginator->counter(array(
 	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 	));
-	?>	</p>
+	?></p>
 
-	<div class="paging">
+<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
 	 | 	<?php echo $this->Paginator->numbers();?>
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
-	</div>
-</div>
+</div><!-- end of paging -->
+
 <div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link('RSS Feed', '/projects/rss'); ?></li>
-		<li><?php echo $this->Html->link(__('New Project', true), array('action' => 'add')); ?></li>
-	</ul>
-</div>
-<script type="text/javascript">
-function toggleHold(data){
-	console.log(data);
-	var val;
-	var targetClass = 'on-hold';
-	//var returnData = jQuery.parseJSON(data);
-	returnData = data.data;
-	console.log(returnData);
-	if(returnData.onHold){
-		val = "✓";
-		$("#"+returnData.id+"_hold").text(val);
-		$("#"+returnData.id+"_hold").addClass(targetClass);
-	}else{
-		val = "X";
-		$("#"+returnData.id+"_hold").text(val);
-		$("#"+returnData.id+"_hold").removeClass(targetClass);
-	}
-}
+<h3><?php __('Actions'); ?></h3>
+<ul>
+<li><?php echo $this->Html->link('RSS Feed', '/projects/rss'); ?></li>
+<li><?php echo $this->Html->link(__('New Project', true), array('action' => 'add')); ?></li>
+</ul>
+</div><!-- end of actions -->
 
-function toggleQA(data){
-	console.log(data);
-	var val;
-	var targetClass = 'in-qa';
-	//var returnData = jQuery.parseJSON(data);
-	returnData = data.data;
-	console.log(returnData);
-	if(returnData.inQA){
-		val = "✓";
-		$("#"+returnData.id+"_qa").text(val);
-		$("#"+returnData.id+"_qa").addClass(targetClass);
-	}else{
-		val = "X";
-		$("#"+returnData.id+"_qa").text(val);
-		$("#"+returnData.id+"_qa").removeClass(targetClass);
-	}
-}
+<?php echo $this->Html->script('data-toggle'); ?>
 
-function toggleComplete(data){
-	console.log(data);
-	var val;
-	var targetClass = 'completed';
-	//var returnData = jQuery.parseJSON(data);
-	returnData = data.data;
-	console.log(returnData);
-	if(returnData.completed){
-		val = "✓";
-		$("#"+returnData.id+"_complete").text(val);
-		$("#"+returnData.id+"_complete").addClass(targetClass);
-	}else{
-		val = "X";
-		$("#"+returnData.id+"_complete").text(val);
-		$("#"+returnData.id+"_complete").removeClass(targetClass);
-	}
-}
-
-function toggleStarted(data){
-	console.log(data);
-	var val;
-	var targetClass = 'started';
-	//var returnData = jQuery.parseJSON(data);
-	returnData = data.data;
-	console.log(returnData);
-	if(returnData.hasStarted){
-		val = "✓";
-		$("#"+returnData.id+"_started").text(val);
-		$("#"+returnData.id+"_started").addClass(targetClass);
-	}else{
-		val = "X";
-		$("#"+returnData.id+"_started").text(val);
-		$("#"+returnData.id+"_started").removeClass(targetClass);
-	}
-}
-
-function toggleOffshore(data){
-	console.log(data);
-	var val;
-	var targetClass = 'offshore';
-	//offshore-project-row
-	//var returnData = jQuery.parseJSON(data);
-	returnData = data.data;
-	console.log(returnData);
-	if(returnData.isOffshore){
-		val = "✓";
-		$("#"+returnData.id+"_offshore").text(val);
-		$("#"+returnData.id+"_offshore").addClass(targetClass);
-	}else{
-		val = "X";
-		$("#"+returnData.id+"_offshore").text(val);
-		$("#"+returnData.id+"_offshore").removeClass(targetClass);
-	}
-}
-</script>

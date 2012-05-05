@@ -50,7 +50,7 @@
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
 </div>
-</div>
+
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

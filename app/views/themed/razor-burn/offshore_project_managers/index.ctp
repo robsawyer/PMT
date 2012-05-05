@@ -3,13 +3,13 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th style="display:none;"><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('type');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
 			<th><?php echo $this->Paginator->sort('email');?></th>
 			<th><?php echo $this->Paginator->sort('location');?></th>
+            <th><?php echo $this->Paginator->sort('type');?></th>
 			<th style="display:none;"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none;"><?php echo $this->Paginator->sort('modified');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th class="actions"><?php #__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -21,10 +21,10 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td style="display:none;"><?php echo $offshoreProjectManager['OffshoreProjectManager']['id']; ?>&nbsp;</td>
-		<td><?php echo $offshoreProjectManager['OffshoreProjectManager']['type']; ?>&nbsp;</td>
-		<td><?php echo $this->Html->link(__($offshoreProjectManager['OffshoreProjectManager']['name'], true), array('action' => 'view', $offshoreProjectManager['OffshoreProjectManager']['id'])); ?>&nbsp;</td>
+		<td class="cli"><?php echo $this->Html->link(__($offshoreProjectManager['OffshoreProjectManager']['name'], true), array('action' => 'view', $offshoreProjectManager['OffshoreProjectManager']['id'])); ?>&nbsp;</td>
 		<td><?php echo $offshoreProjectManager['OffshoreProjectManager']['email']; ?>&nbsp;</td>
 		<td><?php echo $offshoreProjectManager['OffshoreProjectManager']['location']; ?>&nbsp;</td>
+        <td><?php echo $offshoreProjectManager['OffshoreProjectManager']['type']; ?>&nbsp;</td>
 		<td style="display:none;"><?php echo $offshoreProjectManager['OffshoreProjectManager']['created']; ?>&nbsp;</td>
 		<td style="display:none;"><?php echo $offshoreProjectManager['OffshoreProjectManager']['modified']; ?>&nbsp;</td>
 		<td class="actions">

@@ -396,18 +396,24 @@ div.user-info{
 	position: relative;
 	float: right;
 	font-size: 12px;
-	margin: 50px 25px 0 0;
-	padding: 12px;
-	background: black;
+	line-height:12px;
+	margin: 0 22px 0 0;
+	padding: 0px;
+}
+div.user-info p{
+	margin:0;
+	padding:0;
+	color:#ddd;
+	text-align:right;
 }
 div.user-info a:link,
 div.user-info a:visited,
 div.user-info a:active{
-	color: #ffffff;
+	color: #ddd !important;
 	text-decoration: underline !important;
 }
 div.user-info a:hover{
-	color: #666666;
+	color: #fff;
 }
 /** END V2.0 **/
 

@@ -182,7 +182,7 @@
 			<li><?php echo $this->Html->link(__('New Developer', true), array('controller' => 'developers', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
-	<?php endif; ?>
+	<?php #endif; ?>
 </div>
 <div class="related">
 	<h3><?php __('Production Managers');?></h3>

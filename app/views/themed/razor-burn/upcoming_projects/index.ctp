@@ -3,7 +3,7 @@
 	<p><strong>Note:</strong> Projects in <span class="grn"><strong>green</strong></span> need to be added to the PMT.</p>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th valign="bottom" style="display:none"><?php echo $this->Paginator->sort('ID');?></th>
+			<!--<th valign="bottom" style="display:none"><?php echo $this->Paginator->sort('ID');?></th>-->
 			<th valign="bottom"><?php echo $this->Paginator->sort('PM');?></th>
 			<th valign="bottom"><?php echo $this->Paginator->sort('email');?></th>
             <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
@@ -18,7 +18,7 @@
 			<th valign="bottom"><?php echo $this->Paginator->sort('created');?></th>
 			<th valign="bottom"><?php echo $this->Paginator->sort('modified');?></th>
             <th valign="bottom"><?php echo $this->Paginator->sort('notes');?></th>
-			<th valign="bottom" class="actions"><?php //__('Actions');?></th>
+			<th valign="bottom" class="act"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -106,7 +106,7 @@
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
 </div>
-</div>
+
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
