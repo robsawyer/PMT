@@ -50,7 +50,7 @@
 <li><?php echo $this->Html->link("Low Priority Projects",array('controller'=>'projects','action'=>'priority','low')); ?>:<span class="number-count"><?php echo count($lowPriorityProjects); ?></span></li>
 <li><?php echo $this->Html->link("Medium Priority Projects",array('controller'=>'projects','action'=>'priority','medium')); ?>:<span class="number-count"><?php echo count($mediumPriorityProjects); ?></span></li>
 <li><?php echo $this->Html->link("High Priority Projects",array('controller'=>'projects','action'=>'priority','high')); ?>:<span class="number-count"><?php echo count($highPriorityProjects); ?></span></li>
-<li><?php echo $this->Html->link("Critical Priority Projects",array('controller'=>'projects','action'=>'priority','critical')); ?>:<span class="number-count"><?php echo count($criticalPriorityProjects); ?></span></li>
+<li><?php echo $this->Html->link("Critical Priority Projects",array('controller'=>'projects','action'=>'priority','critical')); ?>:<span class="number-count grn"><strong><?php echo count($criticalPriorityProjects); ?></strong></span></li>
 <li>Projects On-Hold:<span class="number-count">0</span></li>
 </ul>
 </li>
@@ -127,25 +127,40 @@ $('#accordion ul:eq(0)').show();
 			}
 		}
 	?>
+      <?php 
+			if($project['Project']['on_hold'] == 1){
+				$holdVal = "&#x2713;"; 
+				$holdClass = ' class="on-hold"';
+				$holdClassCla = 'on-hold';
+			}else{
+				$holdVal = "X"; 
+				$holdClass = '';
+				$holdClassCla = '';
+			}
+		?>
     <?php
 		if($project['Project']['complete'] != 1){
 			switch($project['Project']['priority']){
 				case 1:
 					$class = ' class="low-priority-row"';
+					$classCla = 'low-priority-row';
 					break;
 				case 2:
 					$class = ' class="medium-priority-row"';
+					$classCla = 'medium-priority-row';
 					break;
 				case 3:
 					$class = ' class="high-priority-row"';
+					$classCla = 'high-priority-row';
 					break;
 				case 4:
 					$class = ' class="critical-priority-row"';
+					$classCla = 'critical-priority-row';
 					break;
 			}
 		}
 	?>
-	<tr<?php echo $class; ?>>
+	<tr class="<?php echo $classCla; ?> <?php echo $holdClassCla; ?>">
 		<td style="display:none"><?php echo $project['Project']['id']; ?>&nbsp;</td>
 		
 		<td width="15%" class="cli">
@@ -183,18 +198,11 @@ $('#accordion ul:eq(0)').show();
 			}
 			echo $this->Js->link($startedVal,'/projects/ajax_toggle_started/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_started','success'=>'toggleStarted(data);','escape'=>false,'title'=>"Started"));
 		?>&nbsp;</td>
-        <?php 
-			if($project['Project']['on_hold'] == 1){
-				$holdVal = "<span style='color:#959595'>&#x2713;</span>"; 
-				$holdClass = ' class="on-hold"';
-			}else{
-				$holdVal = "X"; 
-				$holdClass = '';
-			}
-		?>
+      
 		<td<?php echo $holdClass; ?>><?php 
 			echo $this->Js->link($holdVal,'/projects/ajax_toggle_hold/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_hold','success'=>'toggleHold(data);','escape'=>false,'title'=>"On hold"));
 		?>&nbsp;</td>
+        
 		<td><?php 
 			if($project['Project']['complete'] == 1){
 				$completeVal = "&#x2713;"; 
@@ -216,10 +224,8 @@ $('#accordion ul:eq(0)').show();
 		<td style="display:none" <?php echo $QAClass; ?>><?php 
 			echo $this->Js->link($qaVal,'/projects/ajax_toggle_qa/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_qa','success'=>'toggleQA(data);','escape'=>false,'title'=>"In QA"));
 		?>&nbsp;</td>
-		<!--<td style="display:none" title="Progress"><?php 
-				echo $project['Project']['progress']."%";
-		?>&nbsp;</td>-->
-		<!--<td style="display:none"><?php //echo $this->Time->relativeTime($project['Project']['start']); ?>&nbsp;</td>-->
+		<!--<td title="Progress"><?php //echo $project['Project']['progress']."%";?>&nbsp;</td>-->
+		<!--<td><?php //echo $this->Time->relativeTime($project['Project']['start']); ?>&nbsp;</td>-->
 		<td class="stat"><?php 
 				switch($project['Project']['priority']){
 					case 1:

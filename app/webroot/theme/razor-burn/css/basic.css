@@ -467,7 +467,16 @@ div.nippleBox div.bar h4{
 	color:#bed300;
 	font-weight:700;
 }
-
+table tr.on-hold td, table tr.on-hold td a{
+	/*opacity:0.5;
+	filter:alpha(opacity=50);*/
+	color:#ccc !important;
+}
+table tr.on-hold td.actions, table tr.on-hold td.actions a{
+	/*opacity:1 !important;
+	filter:alpha(opacity=100) !important;*/
+	color:inherit !important;
+}
 
 table td.cli, table td.actions, table td.act, table td.rig{
 	border-right:1px solid #ddd;

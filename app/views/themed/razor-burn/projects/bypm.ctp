@@ -70,15 +70,18 @@
 		$class = null;
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
+			$classCla = 'altrow';
 		}
 		if($project['Project']['complete']==1){ 
 			$class = ' class="complete-project-row"';
+			$classCla = 'complete-project-row';
 			if($project['Project']['offshore']==1){ 
 				//$class = ' class="offshore-project-complete-row"';
 			}
 		}else{
 			if($project['Project']['offshore']==1){ 
 				$class = ' class="offshore-project-row"';
+				$classCla = 'offshore-project-row';
 			}
 		}
 		
@@ -161,9 +164,11 @@
 			if($project['Project']['on_hold'] == 1){
 				$holdVal = "&#x2713;"; 
 				$holdClass = ' class="on-hold"';
+				$holdClassCla = 'on-hold';
 			}else{
 				$holdVal = "X"; 
 				$holdClass = '';
+				$holdClassCla = '';
 			}
 		?>
 		<td<?php echo $holdClass; ?>><?php 

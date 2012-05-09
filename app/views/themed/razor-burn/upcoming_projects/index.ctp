@@ -92,6 +92,7 @@
 	</tr>
 <?php endforeach; ?>
 	</table>
+    
 	<p>
 	<?php
 	echo $this->Paginator->counter(array(
