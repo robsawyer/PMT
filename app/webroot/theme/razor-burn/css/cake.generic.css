@@ -96,8 +96,11 @@ th.actions {
 }
 th a {
 	display: block;
-	padding: 2px 4px;
+	padding: 2px 4px 2px 0;
 	text-decoration: none;
+}
+.notesrow .truncate_more_link{
+	color:#959595;
 }
 th a:hover{
 	color: #343434 !important;

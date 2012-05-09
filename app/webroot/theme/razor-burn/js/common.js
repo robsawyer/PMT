@@ -85,5 +85,82 @@ $(document).ready(function(){
 	
 });
 
+/***************************************************************************************/
+/* Truncated text plugin for jQuery.                                                   */
+/***************************************************************************************/
+(function($){
+	$.fn.jTruncate = function(options) {
+	   
+		var defaults = {
+			length: 300,
+			minTrail: 0,
+			moreText: "more",
+			lessText: "less",
+			ellipsisText: "",
+			moreAni: "fast",
+			lessAni: "fast"
+		};
+		
+		var options = $.extend(defaults, options);
+	   
+		return this.each(function() {
+			obj = $(this);
+			var body = obj.html();
+			
+			if(body.length > options.length + options.minTrail) {
+				var splitLocation = body.indexOf(' ', options.length);
+				if(splitLocation != -1) {
+					// truncate tip
+					var splitLocation = body.indexOf(' ', options.length);
+					var str1 = body.substring(0, splitLocation);
+					var str2 = body.substring(splitLocation, body.length - 1);
+					obj.html(str1 + '<span class="truncate_ellipsis">' + options.ellipsisText + 
+						'</span>' + '<span class="truncate_more">' + str2 + '</span>');
+					obj.find('.truncate_more').css("display", "none");
+					
+					// insert more link
+					obj.append(
+						'<a href="#" class="truncate_more_link">' + options.moreText + '</a>' 
+					);
 
+					// set onclick event for more/less link
+					var moreLink = $('.truncate_more_link', obj);
+					var moreContent = $('.truncate_more', obj);
+					var ellipsis = $('.truncate_ellipsis', obj);
+					moreLink.click(function() {
+						if(moreLink.text() == options.moreText) {
+							moreContent.show(options.moreAni);
+							moreLink.text(options.lessText);
+							ellipsis.css("display", "none");
+						} else {
+							moreContent.hide(options.lessAni);
+							moreLink.text(options.moreText);
+							ellipsis.css("display", "inline");
+						}
+						return false;
+				  	});
+				}
+			} // end if
+			
+		});
+	};
+})(jQuery);
 
+//Truncated text declarations
+$().ready(function() {
+    $('.trunc').jTruncate({
+        length: 95,
+        minTrail: 0,
+        moreText: "...",
+        lessText: "",
+    });
+});
+
+$().ready(function() {
+    $('.trunc2').jTruncate({
+        length: 23,
+        minTrail: 0,
+        moreText: "...",
+        lessText: "",
+    });
+});

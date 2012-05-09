@@ -60,7 +60,7 @@ $('#accordion ul:eq(1)').show();
 			<th><?php echo $this->Paginator->sort('location');?></th>
             <th><?php echo $this->Paginator->sort('type');?></th>
 			<th><?php echo $this->Paginator->sort('offshore');?></th>
-			<th nowrap><?php echo $this->Paginator->sort('total_projects'); ?></th>
+			<th nowrap><?php echo $this->Paginator->sort('projects'); ?></th>
 			<th><?php echo $this->Paginator->sort('notes'); ?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
@@ -88,7 +88,7 @@ $('#accordion ul:eq(1)').show();
 		<td width="25%"><?php echo $developer['Developer']['email']; ?>&nbsp;</td>
 		<td width="10%"><?php echo $developer['Developer']['location']; ?>&nbsp;</td>
         <td width="3%"><?php echo $developer['Developer']['type']; ?>&nbsp;</td>
-		<td width="20%"><?php 
+		<td width="5%"><?php 
 			if($developer['Developer']['offshore'] == 1){
 				echo "Yes";
 			}else{
@@ -110,7 +110,7 @@ $('#accordion ul:eq(1)').show();
 			echo $developer['Developer']['total_working_projects']; 
 			//debug($developer['Developer']);
 			?>&nbsp;</td>
-		<td width="35%"><?php echo $developer['Developer']['notes']; ?>&nbsp;</td>
+		<td width="50%" class="trunc"><?php echo $developer['Developer']['notes']; ?>&nbsp;</td>
 		<td style="display:none"><?php echo $this->Time->relativeTime($developer['Developer']['created']); ?>&nbsp;</td>
 		<td style="display:none"><?php echo $this->Time->relativeTime($developer['Developer']['modified']); ?>&nbsp;</td>
 		<td class="actions">

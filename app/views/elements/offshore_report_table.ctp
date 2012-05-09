@@ -72,7 +72,7 @@ foreach ($projects as $project):
 		echo $project['Project']['progress']."%";
 	?>&nbsp;</td>
 	<td><?php echo $this->Time->relativeTime($project['Project']['due']); ?>&nbsp;</td>
-	<td class="row2" rowspan="2">
+	<td class="row2 trunc2" rowspan="2">
 		<?php
 			$i = 0;
 			foreach($project['ProjectManager'] as $pm):
@@ -89,7 +89,7 @@ foreach ($projects as $project):
 			endforeach;
 		?>
 		&nbsp;</td>
-	<td class="row2" rowspan="2">
+	<td class="row2 trunc2" rowspan="2">
 			<?php 
 				$i = 0;
 				foreach($project['OffshoreProjectManager'] as $opm):
@@ -106,7 +106,7 @@ foreach ($projects as $project):
 				endforeach;
 			?>
 		&nbsp;</td>
-		<td class="row2" rowspan="2">
+		<td class="row2 trunc2" rowspan="2">
 			<?php
 				$i = 0;
 				foreach($project['ProductionManager'] as $production_manager):
@@ -123,7 +123,7 @@ foreach ($projects as $project):
 				endforeach;
 			?>
 		&nbsp;</td>
-		<td class="row2" rowspan="2">
+		<td class="row2 trunc2" rowspan="2">
 			<?php
 				$i = 0;
 				foreach($project['QaResource'] as $qa):
@@ -140,7 +140,7 @@ foreach ($projects as $project):
 				endforeach;
 			?>
 		&nbsp;</td>
-			<td class="act row2" rowspan="2">
+			<td class="act row2 trunc2" rowspan="2">
 			<?php
 				$i = 0;
 				foreach($project['Developer'] as $dev):
@@ -161,7 +161,7 @@ foreach ($projects as $project):
 
 <tr class="notesrow">
 <td class="cli"></td>
-<td colspan="7"><?php echo $project['Project']['notes']; ?></td>
+<td colspan="7" class="trunc"><?php echo $project['Project']['notes']; ?></td>
 <td></td>
 </tr>
 <?php endforeach; ?>

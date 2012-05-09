@@ -10,7 +10,7 @@
 			<th valign="bottom"><?php echo $this->Paginator->sort('location');?></th>
             <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
 			<th valign="bottom"><?php echo $this->Paginator->sort('offshore');?></th>
-			<th valign="bottom" nowrap><?php echo $this->Paginator->sort('total_projects'); ?></th>
+			<th valign="bottom" nowrap><?php echo $this->Paginator->sort('projects'); ?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
 			<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
 			<th valign="bottom" class="actions"><?php //__('Actions');?></th>
