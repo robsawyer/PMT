@@ -587,7 +587,7 @@ ul.details-panel li.new-row{
 /* SEARCH FORM */
 #ProjectFindForm{
 	border: 1px solid #666666;
-	padding: 10px;
+	/*padding: 10px;*/
 	margin-top: 20px !important;
 }
 
