@@ -55,7 +55,8 @@ $('#accordion ul:eq(1)').show();
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th style="display:none"><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('Name');?></th>
+			<th><?php echo $this->Paginator->sort('title');?></th>
+			<th><?php echo $this->Paginator->sort('name');?></th>
 			<th><?php echo $this->Paginator->sort('email');?></th>
 			<th><?php echo $this->Paginator->sort('location');?></th>
             <th><?php echo $this->Paginator->sort('type');?></th>
@@ -76,6 +77,7 @@ $('#accordion ul:eq(1)').show();
 	?>
 	<tr<?php echo $class;?>>
 		<td style="display:none"><?php echo $developer['Developer']['id']; ?>&nbsp;</td>
+		<td width="10%"><?php echo $developer['Developer']['title']; ?>&nbsp;</td>
 		<td width="10%" class="cli">
 		<?php 
 			if($developer['Developer']['slug']){

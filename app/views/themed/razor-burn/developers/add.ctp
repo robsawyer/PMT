@@ -16,6 +16,31 @@
 													'style'=>'width:300px'
 													));
 		echo '</div></div>';
+		$title_options = array(
+			'Associate Developer' => 'Associate Developer',
+			'Developer' => 'Developer',
+			'Flash Developer' => 'Flash Developer',
+			'Senior Flash Developer' => 'Senior Flash Developer',
+			'Motion Designer' => 'Motion Designer',
+			'Senior Motion Designer' => 'Senior Motion Designer',
+			'Presentation Layer Developer' => 'Presentation Layer Developer (PLD)',
+			'Presentation Layer Architect' => 'Presentation Layer Architect',
+			'Senior Presentation Layer Developer' => 'Senior Presentation Layer Developer',
+			'Senior Presentation Layer Architect' => 'Senior Presentation Layer Architect',
+			'Principal Developer' => 'Principal Developer',
+			'Senior Developer' => 'Senior Developer',
+			'Technical Architect' => 'Technical Architect',
+			'Senior Technical Architect' => 'Senior Technical Architect'
+		);
+		echo '<div class="side-by-side clearfix"><div>';
+		echo $this->Form->input('title', array(
+													'type' =>'select', 
+													'options' => $title_options,
+													'empty' => 'Please Select',
+													'class'=>'chzn-select',
+													'style'=>'width:300px'
+													));
+		echo '</div></div>';
 		echo $this->Form->input('fullname',array('label'=>'Full Name'));
 		echo $this->Form->input('email');
 		echo $this->Form->input('phone_number');
