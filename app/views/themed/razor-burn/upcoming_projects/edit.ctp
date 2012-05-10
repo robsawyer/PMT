@@ -25,8 +25,12 @@
 		$options = array(
 			'Rich Media' => 'Rich Media', 
 			'Standard Media' => 'Standard Media',
-			'Both' => 'Both',
-			'Other' => 'Other'
+			'All Media Types' => 'All Media Types',
+			'Maintenance' => 'Maintenance',
+			'Facebook' => 'Facebook',
+			'Microsite' => 'Microsite',
+			'Mobile' => 'Mobile',
+			'Other' => 'Other (Please explain in notes.)'
 		);
 		echo '<div class="side-by-side clearfix"><div>';
 		echo $this->Form->input('type', array(

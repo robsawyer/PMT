@@ -9,6 +9,11 @@
 	<li><?php echo __("Incomplete projects",true);?>: <span class="number-count"><?php echo count($incompleteProjects); ?></span></li>
 </ul>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Employee Title'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $developer['Developer']['title']; ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Employee Type'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $developer['Developer']['type']; ?>
