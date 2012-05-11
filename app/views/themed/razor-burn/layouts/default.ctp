@@ -99,15 +99,12 @@
 				$id = $current_user['production_manager_id'];
 			}
 			if($current_user['role'] == "admin"){
-				echo "Logged in as ". $this->Html->link($username,array('controller'=>$controller,'action'=>'view',$id))." (Admin) &nbsp;|&nbsp; ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+				echo "Logged in as $username (Admin) - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 			}else{
-				echo "Welcome". $this->Html->link($username,array('controller'=>$controller,'action'=>'edit',$id))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+				echo "Welcome $username! - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 			}
 		?><p>
 </div>
-
-
-
 
 <?php 
 	echo $this->Js->writeBuffer(); // Write cached scripts

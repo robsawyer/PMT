@@ -47,8 +47,10 @@ class AppController extends Controller {
 		unset($this->data['User']['password']);
 		unset($this->data['User']['password_confirm']);
 		//Gives $userRole to all views
+		$current_user = $this->Auth->user();
+		$logged_in = !empty($current_user) ? true : false;
 		$userRole = $this->Auth->user('role');
-		$this->set(compact('userRole'));
+		$this->set(compact('userRole','current_user','logged_in'));
 	}
 	
 	//Alow everything and in each controller set specific permissions
