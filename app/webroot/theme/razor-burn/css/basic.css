@@ -39,10 +39,10 @@ a:visited{
 	text-decoration:none !important;
 	/*padding:0 3px 0 3px;*/
 }
-a:hover,a.hover,span.anchor-hover{
-	background-color:#000;
-	color:#fff;
+a:hover,a.hover,a:hover span,span.anchor-hover{
 	cursor:pointer;
+	background-color:#000 !important;
+	color:#ccc;
 	/*padding:3px 4px  !important;*/
 	}
 a img{

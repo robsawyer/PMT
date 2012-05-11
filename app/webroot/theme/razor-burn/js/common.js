@@ -164,3 +164,13 @@ $().ready(function() {
         lessText: "",
     });
 });
+
+$().ready(function() {
+    $('.trunc3').jTruncate({
+        length: 75,
+        minTrail: 0,
+        moreText: "...",
+        lessText: "",
+    });
+});
+
