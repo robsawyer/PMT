@@ -15,7 +15,7 @@
 			<th valign="bottom"><?php echo $this->Paginator->sort('due');?></th>
 			<th valign="bottom"><?php echo $this->Paginator->sort('production_manager_id');?></th>
 			<th valign="bottom" nowrap><?php echo $this->Paginator->sort('In PMT');?></th>
-			<th valign="bottom"><?php echo $this->Paginator->sort('created');?></th>
+			<!--<th valign="bottom"><?php echo $this->Paginator->sort('created');?></th>-->
 			<th valign="bottom"><?php echo $this->Paginator->sort('modified');?></th>
             <th valign="bottom"><?php echo $this->Paginator->sort('notes');?></th>
 			<th valign="bottom" class="act"><?php //__('Actions');?></th>
@@ -46,7 +46,7 @@
 		<td><?php echo $upcomingProject['UpcomingProject']['contact_email']; ?>&nbsp;</td>
         <td><?php echo $upcomingProject['UpcomingProject']['type']; ?>&nbsp;</td>
         <td><?php echo $upcomingProject['UpcomingProject']['name']; ?>&nbsp;</td>
-        <td><?php echo $upcomingProject['UpcomingProject']['url']; ?>&nbsp;</td>
+        <td class="trunc"><?php echo $upcomingProject['UpcomingProject']['url']; ?>&nbsp;</td>
 		<td><?php echo $upcomingProject['UpcomingProject']['project_number']; ?>&nbsp;</td>
 		<!--<td><?php echo $upcomingProject['UpcomingProject']['total_units']; ?>&nbsp;</td>-->
 		<td><?php echo $upcomingProject['UpcomingProject']['start']; ?>&nbsp;</td>
@@ -61,9 +61,9 @@
 				echo "<span class='grn'><strong>No<strong></span>";
 			}
 		?>&nbsp;</td>
-		<td><?php echo $upcomingProject['UpcomingProject']['created']; ?>&nbsp;</td>
+		<!--<td><?php echo $upcomingProject['UpcomingProject']['created']; ?>&nbsp;</td>-->
 		<td><?php echo $upcomingProject['UpcomingProject']['modified']; ?>&nbsp;</td>
-        <td class="notes"><?php echo $upcomingProject['UpcomingProject']['notes']; ?>&nbsp;</td>
+        <td class="notes trunc2"><?php echo $upcomingProject['UpcomingProject']['notes']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php
 			 	/*	$this->params['named']['ProjectType'] = "";
@@ -106,7 +106,7 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
+</div></div></div>
 
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>

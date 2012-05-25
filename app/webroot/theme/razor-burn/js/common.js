@@ -158,7 +158,7 @@ $().ready(function() {
 
 $().ready(function() {
     $('.trunc2').jTruncate({
-        length: 23,
+        length: 21,
         minTrail: 0,
         moreText: "...",
         lessText: "",
