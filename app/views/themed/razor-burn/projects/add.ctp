@@ -64,9 +64,10 @@
 		echo $this->Form->input('on_hold');
 		echo $this->Form->input('in_qa', array('label'=>'In QA'));
 		echo $this->Form->input('progress',array(
-															'label'=>'Total progress (%)',
-															'style'=>'width: 150px',
-															'after'=>'<span class="next-to" style="font-size: 18px; font-weight: bold;margin-left:10px;">%</span>'
+												'value'=>'0',
+												'label'=>'Total progress (%)',
+												'style'=>'width: 150px',
+												'after'=>'<span class="next-to" style="font-size: 18px; font-weight: bold;margin-left:10px;">%</span>'
 															));
 		echo $this->Form->input('start', array('type'  => 'date',
 														'label' => 'Start Date',
@@ -80,7 +81,7 @@
 														'minYear' => 2011,
 														'maxYear' => 2020,
 														# default order m/d/y,
-														'empty' => true
+														'empty' => false
 														));
 		?>
 		<div class="side-by-side clearfix"><div>
