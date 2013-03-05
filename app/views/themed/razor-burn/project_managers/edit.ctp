@@ -1,7 +1,11 @@
+<h2><?php __('Editing '.$this->data['ProjectManager']['name'].'\'s Profile'); ?></h2>
+
 <div class="projectManagers form">
 <?php echo $this->Form->create('ProjectManager');?>
 	<fieldset>
-		<legend><?php __('Editing '.$this->data['ProjectManager']['name'].'\'s Profile'); ?></legend>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>    
+<td width="33%"> 		
 	<?php
 		echo $this->Form->input('id');
 		$options = array(
@@ -12,7 +16,7 @@
 		echo $this->Form->input('type', array(
 													'type' =>'select', 
 													'options' => $options,
-													'style'=>'width:300px',
+													'style'=>'width:90%',
 													'empty' => 'Please Select',
 													'class'=>'chzn-select'
 													));
@@ -22,7 +26,16 @@
 		echo $this->Form->input('location',array('after'=>'<div class="subtext">Example: Portland, OR.</div>'));
 		//echo $this->Form->input('Project',array('type'=>'hidden'));
 	?>
-	<?php
+	
+</td>
+<td width="69%"></td>
+</tr>
+</table> 
+<?php echo $this->Form->end(__('Submit', true));?>    
+	</fieldset>
+
+
+<?php
 	if($admin && $this->data['ProjectManager']['id'] != $userAccount['User']['project_manager_id']):
 		if(!empty($userAccount)):
 	?>
@@ -30,7 +43,7 @@
 	<?php
 		else:
 	?>
-		<p style="color:red">This user does not have a user account setup.</p>
+		<p class="grn"><strong>This user does not have a user account setup.</strong></p>
 	<?php
 		endif;
 	else:
@@ -39,8 +52,6 @@
 	<?php
 	endif;
 	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
 </div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>

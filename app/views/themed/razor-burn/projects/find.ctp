@@ -171,7 +171,7 @@
 			<?php
 			if(empty($this->data['Project'])){
 			?>
-			<p><strong>Enter what you are looking for above and click <span class="grn">search</span>.</strong></p><!---->
+			<p class="srchprompt"><strong>Enter what you are looking for above and click <span class="grn">search</span>.</strong></p><!---->
 			<?php }else{ ?>
 			<p><span class="grn"><strong>No results were found.</strong></span></p>
 			<?php } ?>
