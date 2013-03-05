@@ -16,4 +16,6 @@
 	?>
 	<p class="alert">Don't have an account? You can create one <?php echo $this->Html->link('here',array('action'=>'create')); ?>.</p>
 </div>
-<script type="text/javascript"> $(".chzn-select").chosen(); </script>
+<script type="text/javascript"> 
+//$(".chzn-select").chosen(); 
+</script>
