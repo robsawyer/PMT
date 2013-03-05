@@ -11,48 +11,48 @@
 		<!-- Left Nav Section -->
 		<ul class="left">
 			<li class="divider"></li>
-			<li><?php echo $html->link('projects',array('controller'=>'projects','action'=>'index'), array('class'=>'closer grn'));?></li>
+			<li><?php echo $this->Html->link('Projects',array('controller'=>'projects','action'=>'index'), array('class'=>'closer grn'));?></li>
 			<?php if($userRole == "admin" || $userRole == "manager"): ?>
 			<li class='has-dropdown'>
-				<?php echo $html->link('add something','#');?>
+				<?php echo $this->Html->link('<i class="icon-plus"></i>Add','#',array('escape'=>false));?>
 				<ul id='nav-browsedrop-1' class="dropdown" index='100'>
-					<li><?php echo $html->link('project',array('controller'=>'projects','action'=>'add'));?></li>
-					<li><?php echo $html->link('developer',array('controller'=>'developers','action'=>'add'));?></li>
-					<li><?php echo $html->link('production manager',array('controller'=>'production_managers','action'=>'add'));?></li>
-					<li><?php echo $html->link('client',array('controller'=>'clients','action'=>'add'));?></li>
-					<li><?php echo $html->link('project manager',array('controller'=>'project_managers','action'=>'add'));?></li>
-					<li><?php echo $html->link('offshore project manager',array('controller'=>'offshore_project_managers','action'=>'add'));?></li>
-					<li><?php echo $html->link('qa resource',array('controller'=>'qa_resources','action'=>'add'));?></li>
+					<li><?php echo $this->Html->link('Project',array('controller'=>'projects','action'=>'add'));?></li>
+					<li><?php echo $this->Html->link('Developer',array('controller'=>'developers','action'=>'add'));?></li>
+					<li><?php echo $this->Html->link('Production Manager',array('controller'=>'production_managers','action'=>'add'));?></li>
+					<li><?php echo $this->Html->link('Client',array('controller'=>'clients','action'=>'add'));?></li>
+					<li><?php echo $this->Html->link('Project Manager',array('controller'=>'project_managers','action'=>'add'));?></li>
+					<li><?php echo $this->Html->link('Offshore Project Manager',array('controller'=>'offshore_project_managers','action'=>'add'));?></li>
+					<li><?php echo $this->Html->link('QA Resource',array('controller'=>'qa_resources','action'=>'add'));?></li>
 				</ul>
 			</li>
 			<?php endif; ?>
 
 			<li class='has-dropdown'>
-				<?php echo $html->link('list items','#');?>
+				<?php echo $this->Html->link('<i class="icon-group"></i>Browse','#',array('escape'=>false));?>
 				<ul id='nav-browsedrop-2' class="dropdown" index='100'>
-					<li><?php echo $html->link('clients',array('controller'=>'clients','action'=>'index'));?></li>
-					<li><?php echo $html->link('production managers',array('controller'=>'production_managers','action'=>'index'));?></li>
-					<li><?php echo $html->link('project managers',array('controller'=>'project_managers','action'=>'index'));?></li>
-					<li><?php echo $html->link('offshore project managers',array('controller'=>'offshore_project_managers','action'=>'index'));?></li>
-					<li><?php echo $html->link('developers',array('controller'=>'developers','action'=>'index'));?></li>
-					<li><?php echo $html->link('QA resources',array('controller'=>'qa_resources','action'=>'index'));?></li>
+					<li><?php echo $this->Html->link('Clients',array('controller'=>'clients','action'=>'index'));?></li>
+					<li><?php echo $this->Html->link('Production Managers',array('controller'=>'production_managers','action'=>'index'));?></li>
+					<li><?php echo $this->Html->link('Project Managers',array('controller'=>'project_managers','action'=>'index'));?></li>
+					<li><?php echo $this->Html->link('Offshore Project Managers',array('controller'=>'offshore_project_managers','action'=>'index'));?></li>
+					<li><?php echo $this->Html->link('Developers',array('controller'=>'developers','action'=>'index'));?></li>
+					<li><?php echo $this->Html->link('QA Resources',array('controller'=>'qa_resources','action'=>'index'));?></li>
 				</ul>
 			</li>
 
 			<?php if($userRole == "admin" || $userRole == "manager"): ?>
 			<li class='has-dropdown'>
-				<?php echo $html->link('reports','#');?>
+				<?php echo $this->Html->link('<i class="icon-file-alt"></i>Reports','#',array('escape'=>false));?>
 				<ul id='nav-browsedrop-3' class="dropdown" index='100'>
-				<li><?php echo $html->link('full report',array('controller'=>'projects','action'=>'full_report'));?></li>
-				<li><?php echo $html->link('offshore report',array('controller'=>'projects','action'=>'offshore_report'));?></li>
-				<li><?php echo $html->link('dev status',array('controller'=>'developers','action'=>'status'));?></li>
-				<li><?php echo $html->link('calendar',array('controller'=>'projects','action'=>'calendar'));?></li>
+				<li><?php echo $this->Html->link('Full Report',array('controller'=>'projects','action'=>'full_report'));?></li>
+				<li><?php echo $this->Html->link('Offshore Report',array('controller'=>'projects','action'=>'offshore_report'));?></li>
+				<li><?php echo $this->Html->link('Dev Status',array('controller'=>'developers','action'=>'status'));?></li>
+				<li><?php echo $this->Html->link('Calendar',array('controller'=>'projects','action'=>'calendar'));?></li>
 				</ul>
 			</li>
 			<?php endif; ?>
 			<li class="divider"></li>
-			<li><?php echo $html->link('upcoming',array('controller'=>'upcoming_projects','action'=>'index'));?></li>
-			<li><?php echo $html->link('search',array('controller'=>'projects','action'=>'find'), array('class'=>'closer'));?></li>
+			<li><?php echo $this->Html->link('Upcoming',array('controller'=>'upcoming_projects','action'=>'index'));?></li>
+			<li><?php echo $this->Html->link('Search',array('controller'=>'projects','action'=>'find'), array('class'=>'closer'));?></li>
 		</ul>
 	</section>
 </nav>

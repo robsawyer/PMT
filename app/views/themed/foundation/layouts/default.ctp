@@ -26,6 +26,7 @@
 	echo $this->Html->script('jquery.jeditable.mini') . "\n";
 	echo $this->Html->script('jquery.form') . "\n";
 	echo $this->Html->script('chosen/chosen.jquery.min') . "\n";
+	echo $this->Html->script('foundation.min') . "\n";
 	echo $this->Html->script('vendor/custom.modernizr.js') . "\n";
 	echo $this->Html->script('common');
 	
@@ -52,35 +53,38 @@
 		</div>
 	</div>--><!-- end of header -->
 	<div id="large-12 columns">
-		<?php echo $this->Session->flash(); ?>
+		<div class="alert"><?php echo $this->Session->flash(); ?></div>
 		<?php echo $content_for_layout; ?>
 	</div><!-- end of content -->
 
-	<div class="footer large-12 columns">
-		<div class="row user-info">
-			<p><?php 
-						if(!empty($current_user['project_manager_id'])){
-							$controller = "project_managers";
-							$id = $current_user['project_manager_id'];
-						}
-						if(!empty($current_user['production_manager_id'])){
-							$controller = "production_managers";
-							$id = $current_user['production_manager_id'];
-						}
-						if($current_user['role'] == "admin"){
-							echo "Logged in as $username (Admin) - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
-						}else{
-							echo "Welcome $username! - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
-						}
-					?><p>
-		</div>
-		<div class="row">
+	<div class="large-12 columns">
+		<div class="footer row">
 			<?php 
-				echo $this->Js->writeBuffer(); // Write cached scripts
-				echo $this->element('sql_dump'); 
+				if(!empty($current_user['project_manager_id'])){
+					$controller = "project_managers";
+					$id = $current_user['project_manager_id'];
+				}
+				if(!empty($current_user['production_manager_id'])){
+					$controller = "production_managers";
+					$id = $current_user['production_manager_id'];
+				}
+				if($current_user['role'] == "admin"){
+					echo "Logged in as $username (Admin) - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+				}else{
+					echo "Welcome $username! - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+				}
 			?>
 		</div>
 	</div><!-- end of footer -->
+	<div class="large-12 columns">
+		<?php 
+			echo $this->Js->writeBuffer(); // Write cached scripts
+			echo $this->element('sql_dump'); 
+		?>
+	</div>
 </div><!-- end of container -->
-
-</body></html>
+<script type="text/javascript">
+	$(document).foundation();
+</script>
+</body>
+</html>
