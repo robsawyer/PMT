@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>app/config/bootstrap.php</string>
+	<string>app/views/themed/razor-burn/projects/add.ctp</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -34,6 +34,20 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+		</dict>
+		<key>app/controllers/app_controller.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>36</integer>
+				<key>line</key>
+				<integer>50</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>32</integer>
 		</dict>
 		<key>app/controllers/offshore_project_managers_controller.php</key>
 		<dict>
@@ -76,20 +90,6 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>996</integer>
-		</dict>
-		<key>app/controllers/projects_controller.php.bak</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>872</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>869</integer>
 		</dict>
 		<key>app/models/developer.php</key>
 		<dict>
@@ -134,20 +134,6 @@
 			<integer>35</integer>
 		</dict>
 		<key>app/models/project_manager.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>app/views/project_managers/add.ctp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -435,6 +421,218 @@
 			<key>firstVisibleLine</key>
 			<integer>70</integer>
 		</dict>
+		<key>app/views/themed/razor-burn/developers/add.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>22</integer>
+				<key>line</key>
+				<integer>42</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>3</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>18</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>22</integer>
+				<key>line</key>
+				<integer>42</integer>
+			</dict>
+		</dict>
+		<key>app/views/themed/razor-burn/developers/edit.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>35</integer>
+				<key>line</key>
+				<integer>49</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>16</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/developers/exportxls.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/developers/index.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>15</integer>
+				<key>line</key>
+				<integer>79</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>49</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/developers/status.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/developers/view.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>44</integer>
+				<key>line</key>
+				<integer>13</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>3</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/layouts/default.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>30</integer>
+				<key>line</key>
+				<integer>103</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>65</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/projects/add.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>30</integer>
+				<key>line</key>
+				<integer>83</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/projects/edit.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>4</integer>
+				<key>line</key>
+				<integer>15</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/projects/find.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>1</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/upcoming_projects/add.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>4</integer>
+				<key>line</key>
+				<integer>16</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/upcoming_projects/edit.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>4</integer>
+				<key>line</key>
+				<integer>33</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/views/themed/razor-burn/upcoming_projects/index.ctp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/webroot/theme/razor-burn/css/razor-burn.css</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>14</integer>
+				<key>line</key>
+				<integer>400</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>376</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
@@ -443,10 +641,24 @@
 		<string>app/views/themed/default/projects/exportxls.ctp</string>
 		<string>app/views/themed/default/projects/full_report.ctp</string>
 		<string>app/views/themed/default/projects/offshore_exportcsv.ctp</string>
-		<string>app/controllers/projects_controller.php.bak</string>
 		<string>app/views/themed/default/projects/view.ctp</string>
 		<string>app/views/themed/default/projects/index.ctp</string>
 		<string>app/config/bootstrap.php</string>
+		<string>app/views/themed/razor-burn/developers/add.ctp</string>
+		<string>app/views/themed/razor-burn/developers/edit.ctp</string>
+		<string>app/views/themed/razor-burn/developers/index.ctp</string>
+		<string>app/views/themed/razor-burn/developers/exportxls.ctp</string>
+		<string>app/views/themed/razor-burn/projects/add.ctp</string>
+		<string>app/views/themed/razor-burn/projects/edit.ctp</string>
+		<string>app/views/themed/razor-burn/upcoming_projects/add.ctp</string>
+		<string>app/views/themed/razor-burn/upcoming_projects/edit.ctp</string>
+		<string>app/controllers/app_controller.php</string>
+		<string>app/views/themed/razor-burn/layouts/default.ctp</string>
+		<string>app/webroot/theme/razor-burn/css/razor-burn.css</string>
+		<string>app/views/themed/razor-burn/upcoming_projects/index.ctp</string>
+		<string>app/views/themed/razor-burn/projects/find.ctp</string>
+		<string>app/views/themed/razor-burn/developers/status.ctp</string>
+		<string>app/views/themed/razor-burn/developers/view.ctp</string>
 		<string>app/models/production_manager.php</string>
 		<string>app/models/project.php</string>
 		<string>app/models/developer.php</string>
@@ -456,7 +668,6 @@
 		<string>app/views/themed/default/production_managers/exportxls.ctp</string>
 		<string>app/views/themed/default/production_managers/index.ctp</string>
 		<string>app/views/themed/default/production_managers/view.ctp</string>
-		<string>app/views/project_managers/add.ctp</string>
 		<string>app/controllers/offshore_project_managers_controller.php</string>
 		<string>app/controllers/production_managers_controller.php</string>
 		<string>app/views/themed/default/projects/calendar.ctp</string>
@@ -467,6 +678,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{10, 27}, {1106, 918}}</string>
+	<string>{{19, 81}, {1106, 918}}</string>
 </dict>
 </plist>

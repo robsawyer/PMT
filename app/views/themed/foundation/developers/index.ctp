@@ -3,8 +3,8 @@
     
 <ul id="accordion" style="margin:20px 0 0 0;">
 <li>
-	<div><?php __('Details');?></div>
-	<ul>
+<div><?php __('Details');?></div>
+<ul>
 		<li>Total Developers: <span class="number-count"><?php echo count($developers); ?></span></li>
 		<li>Onshore: <span class="number-count"><?php echo count($onshore_developers); ?></span></li>
 		<li>Offshore: <span class="number-count"><?php echo count($offshore_developers); ?></span></li>
@@ -32,8 +32,8 @@
 <li>
 <div>Workload Distribution (Coming Soon)</div>
 <ul>
-	<li>Onshore Capacity: <span class="number-count"><?php echo "100%" ?></span>
-	<li>Offshore Capacity: <span class="number-count"><?php echo "100%" ?></span>
+		<li>Onshore Capacity: <span class="number-count"><?php echo "100%" ?></span>
+		<li>Offshore Capacity: <span class="number-count"><?php echo "100%" ?></span>
 </ul>
 </li>
 </ul>

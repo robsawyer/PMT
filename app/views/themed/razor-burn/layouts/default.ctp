@@ -64,19 +64,9 @@
 </div>
 <h1>Production Manager Tool</h1>
 <?php
-			$current_user = $this->Session->read('Auth.User');
-			$username = $this->Session->read('Auth.User.username');
-			if(!empty($username)):
-		?>
-
-<?php endif; ?>
-<div class="clear"></div>
-
-<?php if(!empty($username)): ?>
-<div id='navbar'>
-<?php echo $this->element('nav',array('cache'=>false)); ?>
-</div><!-- end of navbar -->
-<?php endif; ?>
+	$current_user = $this->Session->read('Auth.User');
+	$username = $this->Session->read('Auth.User.username');
+?>
 </div><!-- end of header -->
 
 <div id="content">
