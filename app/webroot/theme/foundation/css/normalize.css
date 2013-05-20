@@ -281,6 +281,12 @@ textarea {
     margin: 0; /* 3 */
 }
 
+input[type="submit"]{
+	background: none;
+	border: none;
+	color: inherit;
+}
+
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.

@@ -37,7 +37,7 @@ class AppController extends Controller {
 	var $components = array('Auth','RequestHandler','Session','Email','Search.Prg','AjaxHandler');
 	var $helpers = array('Js' => array('Jquery'),'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text');
 	
-	public $view = 'Theme';
+	public $view = 'theme';
 	public $theme = 'foundation';	
 	
 	/**
