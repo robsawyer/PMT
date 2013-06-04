@@ -1,67 +1,83 @@
 <?php echo $this->Html->meta('RSS Feed', '/projects/rss'); ?>
 <div class="large-12 columns">
-	<div class="section-container tabs" data-section>
-		
+	<div class="section-container accordion" data-section="accordion">
+
 		<section class="section">
 			<p class="title"><?php echo $this->Html->link('All Projects','#all'); ?></p>
-			<div class="content">
-				<ul class="side-nav">
-					<li>Total Projects: <span class="number-count"><?php echo count($projects) + count($completeProjects) ; ?></span></li>
-					<li><?php echo $this->Html->link(__("Incomplete Projects",true),array('action'=>'incomplete'));?>:<span class="number-count"><?php echo count($incompleteProjects); ?></span></li>
-					<li><?php echo $this->Html->link(__("Complete Projects",true),array('action'=>'complete'));?>:<span class="number-count"><?php echo count($completeProjects); ?></span></li>
-					<li><?php echo $this->Html->link(__("In-house Projects",true),array('action'=>'inhouse'));?>:<span class="number-count"><?php echo count($inhouseProjects); ?></span></li>
-					<li><?php echo $this->Html->link(__("Offshore Projects",true),array('action'=>'offshore'));?>:<span class="number-count"><?php echo count($offshoreProjects); ?></span></li>
-					<li><?php echo $this->Html->link(__("Total Progress",true),'#');?>:<span class="number-count"><?php echo $this->Number->toPercentage($percentageComplete); ?></span></li>
-					<li>Incomplete Units:<span class="number-count"><?php echo $incompleteUnits; ?></span></li>
-					<li><a href='/upcoming_projects'>
-					<?php 
+			<div class="content" data-slug="all">
+				<ul class="inline-list">
+					<li>
+						<span class="label">Total Projects:</span> <?php echo count($projects) + count($completeProjects); ?>
+					</li>
+					<li>
+						<span class="label">Incomplete Projects:</span> <?php echo $this->Html->link(count($incompleteProjects),array('action'=>'incomplete'));?>
+					</li>
+					<li>
+						<span class="label">Complete Projects:</span> <?php echo $this->Html->link(count($completeProjects),array('action'=>'complete'));?>
+					</li>
+					<li>
+						<span class="label">In-house Projects:</span> <?php echo $this->Html->link(count($inhouseProjects),array('action'=>'inhouse'));?>
+					</li>
+				</ul>
+				<ul class="inline-list">						
+					<li>
+						<span class="label">Offshore Projects:</span> <?php echo $this->Html->link(count($offshoreProjects),array('action'=>'offshore'));?>
+					</li>
+					<li>
+						<span class="label">Total Progress:</span> <?php echo $this->Html->link($this->Number->toPercentage($percentageComplete),'#');?>
+					</li>
+					<li>
+						<span class="label">Incomplete Units:</span> <?php echo $incompleteUnits; ?>
+					</li>
+					<li>
+						<?php 
 						$totalCount = $this->requestAction('/upcoming_projects/latest'); 
-						if($totalCount > 0){
-							echo "<span class='grn'>Upcoming Projects:</span>
-			<span class='grn' style='font-weight:400 !important;'>$totalCount</span>";
-						}else{
-							echo "Upcoming Projects: ".$totalCount;
-						}
-					?></a></li>
+						if($totalCount > 0):
+						?>
+							<span class="label">Upcoming Projects:</span> <a href='/upcoming_projects'>$totalCount</a>
+						<?php else: ?>
+							<span class="label">Upcoming Projects:</span> <a href='/upcoming_projects'><?php echo $totalCount; ?></a>
+						<?php endif; ?>
+					</li>
 				</ul>
 			</div>
 		</section>
 		
 		<section class="section">
 			<p class="title"><?php echo $this->Html->link('Projects by Type','#type'); ?></p>
-			<div class="content">
-				<ul>
-					<li>Standard Media Projects:<span class="number-count"><?php echo count($standardMedia); ?></span></li>
-					<li>Rich Media Projects:<span class="number-count"><?php echo count($richMedia); ?></span></li>
-					<li>Social Media Projects:<span class="number-count">0</span></li>
-					<li>Project Updates:<span class="number-count">0</span></li>
-					<li>Other Projects:<span class="number-count">0</span></li>
+			<div class="content" data-slug="type">
+				<ul class="inline-list">
+					<li><span class="label">Standard Media Projects:</span> <?php echo count($standardMedia); ?></li>
+					<li><span class="label">Rich Media Projects:</span> <?php echo count($richMedia); ?></li>
+					<li><span class="label">Social Media Projects:</span> 0</li>
+					<li><span class="label">Project Updates:</span> 0</li>
+					<li><span class="label">Other Projects:</span> 0</li>
 				</ul>
 			</div>
 		</section>
 		
 		<section class="section">
 			<p class="title"><?php echo $this->Html->link('In-House vs Offshore','#invout'); ?></p>
-			<div class="content">
-				<ul class="side-nav">
-					<li><?php echo $this->Html->link("In-house Incomplete Projects",array('controller'=>'projects','action'=>'inhouse','incomplete')); ?>:<span class="number-count"><?php echo count($incompleteInhouseProjects); ?></span></li>
-					<li><?php echo $this->Html->link("In-house Completed Projects",array('controller'=>'projects','action'=>'inhouse','complete')); ?>:<span class="number-count"><?php echo count($completeInhouseProjects); ?></span></li>
+			<div class="content" data-slug="invout">
+				<ul class="inline-list">
+					<li><span class="label">In-house Incomplete Projects:</span> <?php echo $this->Html->link(count($incompleteInhouseProjects), array('controller'=>'projects','action'=>'inhouse','incomplete')); ?></li>
+					<li><span class="label">In-house Completed Projects:</span> <?php echo $this->Html->link(count($completeInhouseProjects), array('controller'=>'projects','action'=>'inhouse','complete')); ?></li>
 					<li class="divider"></li>
-					<li><?php echo $this->Html->link("Offshore Incomplete Projects",array('controller'=>'projects','action'=>'offshore','incomplete')); ?>:<span class="number-count"><?php echo count($incompleteOffshoreProjects); ?></span></li>
-					<li><?php echo $this->Html->link("Offshore Completed Projects",array('controller'=>'projects','action'=>'offshore','complete')); ?>:<span class="number-count"><?php echo count($completeOffshoreProjects); ?></span></li>
+					<li><span class="label">Offshore Incomplete Projects:</span> <?php echo $this->Html->link(count($incompleteOffshoreProjects), array('controller'=>'projects','action'=>'offshore','incomplete')); ?></li>
+					<li><span class="label">Offshore Completed Projects:</span> <?php echo $this->Html->link(count($completeOffshoreProjects), array('controller'=>'projects','action'=>'offshore','complete')); ?></li>
 				</ul>
 			</div>
 		</section>
 		
 		<section class="section">
 			<p class="title"><?php echo $this->Html->link('Projects by Priority','#priority'); ?></p>
-			<div class="content">
-				<ul class="side-nav">
-					<li><?php echo $this->Html->link("Low Priority Projects",array('controller'=>'projects','action'=>'priority','low')); ?>:<span class="number-count"><?php echo count($lowPriorityProjects); ?></span></li>
-					<li><?php echo $this->Html->link("Medium Priority Projects",array('controller'=>'projects','action'=>'priority','medium')); ?>:<span class="number-count"><?php echo count($mediumPriorityProjects); ?></span></li>
-					<li><?php echo $this->Html->link("High Priority Projects",array('controller'=>'projects','action'=>'priority','high')); ?>:<span class="number-count"><?php echo count($highPriorityProjects); ?></span></li>
-					<li><?php echo $this->Html->link("Critical Priority Projects",array('controller'=>'projects','action'=>'priority','critical')); ?>:<span class="number-count grn"><strong><?php echo count($criticalPriorityProjects); ?></strong></span></li>
-					<li>Projects On-Hold:<span class="number-count">0</span></li>
+			<div class="content" data-slug="priority">
+				<ul class="inline-list">
+					<li><span class="label">Low Priority Projects:</span> <?php echo $this->Html->link(count($lowPriorityProjects),array('controller'=>'projects','action'=>'priority','low')); ?></li>
+					<li><span class="label">Medium Priority Projects:</span> <?php echo $this->Html->link(count($mediumPriorityProjects),array('controller'=>'projects','action'=>'priority','medium')); ?></li>
+					<li><span class="label">High Priority Projects:</span> <?php echo $this->Html->link(count($highPriorityProjects),array('controller'=>'projects','action'=>'priority','high')); ?></li>
+					<li><span class="label">Critical Priority Projects:</span> <?php echo $this->Html->link(count($criticalPriorityProjects),array('controller'=>'projects','action'=>'priority','critical')); ?></li>
+					<li><span class="label">Projects On-Hold:</span>0</li>
 				</ul>
 			</div>
 		</section>
