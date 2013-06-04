@@ -34,8 +34,14 @@
  */
 class AppController extends Controller {
 	
-	var $components = array('Auth','RequestHandler','Session','Email','Search.Prg','AjaxHandler');
-	var $helpers = array('Js' => array('Jquery'),'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text');
+	var $components = array(
+		'Auth',
+		'RequestHandler','Session','Email','Search.Prg','AjaxHandler'
+	);
+	var $helpers = array(
+		'Js' => array('Jquery'),
+		'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text'
+	);
 	
 	public $view = 'theme';
 	public $theme = 'foundation';	
@@ -44,8 +50,10 @@ class AppController extends Controller {
 	* Before Render
 	*/
 	function beforeRender(){
-		unset($this->data['User']['password']);
-		unset($this->data['User']['password_confirm']);
+		if(!empty($this->data['User'])){
+			unset($this->data['User']['password']);
+			unset($this->data['User']['password_confirm']);
+		}
 		//Gives $userRole to all views
 		$current_user = $this->Auth->user();
 		$logged_in = !empty($current_user) ? true : false;

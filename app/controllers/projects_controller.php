@@ -27,8 +27,7 @@ class ProjectsController extends AppController {
 	
 	function beforeFilter(){
 		parent::beforeFilter();
-		/*$this->Auth->allow('full_report','offshore_report','bypm','find',
-							'duplicate','exportxls','exportcsv','rss','calendar');*/
+		$this->Auth->allow(array('full_report','offshore_report','bypm','find','duplicate','exportxls','exportcsv','rss','calendar','ajax_*'));
 	}
 
 	/************** AJAX CALLS *******************/
@@ -146,6 +145,19 @@ class ProjectsController extends AppController {
 	
 	/************** END AJAX CALLS *******************/
 	
+	function yearly_data(){
+		$this->layout = false;
+		$this->autoRender = false;
+		$yearly = $this->Project->find('all',array(
+			'conditions' => array(
+				'recursive' => -1,
+				'fields' => array('id', 'MONTH(Project.due)'),
+				'group' => array('YEAR(Project.due)', 'MONTH(Project.due)')
+			)
+		));
+		return json_encode($yearly);
+	}
+
 	function rss() {
 		Configure::write ('debug', 0);
 		$this->viewPath .= '/rss';
