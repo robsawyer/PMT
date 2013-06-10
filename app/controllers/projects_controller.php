@@ -150,10 +150,10 @@ class ProjectsController extends AppController {
 		$this->autoRender = false;
 		$yearly = $this->Project->find('all',array(
 			'conditions' => array(
-				'recursive' => -1,
-				'fields' => array('id', 'MONTH(Project.due)'),
-				'group' => array('YEAR(Project.due)', 'MONTH(Project.due)')
-			)
+			),
+			'recursive' => -1,
+			'fields' => array('id', 'MONTH(Project.start)', 'MONTH(Project.due)'),
+			'group' => array('YEAR(Project.due)', 'MONTH(Project.due)')
 		));
 		return json_encode($yearly);
 	}

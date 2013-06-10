@@ -44,7 +44,7 @@ class AppController extends Controller {
 	);
 	
 	public $view = 'theme';
-	public $theme = 'foundation';	
+	public $theme = 'razor-burn';	
 	
 	/**
 	* Before Render

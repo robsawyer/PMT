@@ -8,7 +8,7 @@ class UsersController extends AppController {
 	*/
 	function beforeFilter(){
 		parent::beforeFilter();
-		$this->Auth->allow('create');
+		$this->Auth->allow(array('create'));
 		$this->Auth->fields = array('username' => 'username', 'password' => 'password');
 		$this->Auth->autoRedirect = false;
 		$this->Auth->loginRedirect = array('controller' => 'projects', 'action' => 'index');
