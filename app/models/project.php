@@ -3,6 +3,11 @@ class Project extends AppModel {
 	var $name = 'Project';
 	var $displayField = 'title';
 	var $actsAs = array('Containable','Search.Searchable');
+
+	var $virtualFields = array(
+		'project_count' => 'COUNT(Project.id)'
+	);
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	
 	var $filterArgs = array(

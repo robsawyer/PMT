@@ -145,17 +145,150 @@ class ProjectsController extends AppController {
 	
 	/************** END AJAX CALLS *******************/
 	
-	function yearly_data(){
-		$this->layout = false;
-		$this->autoRender = false;
+/**
+ * graph_yearly method
+ * Controls a chart that shows yearly project data
+ * @param void
+ * @return void
+ */
+	function graph_yearly(){
+		//$this->layout = false;
+		//$this->autoRender = false;
 		$yearly = $this->Project->find('all',array(
 			'conditions' => array(
+				'Project.due !=' => NULL
 			),
 			'recursive' => -1,
-			'fields' => array('id', 'MONTH(Project.start)', 'MONTH(Project.due)'),
+			'fields' => array('id', 'due', 'project_count'),
 			'group' => array('YEAR(Project.due)', 'MONTH(Project.due)')
 		));
-		return json_encode($yearly);
+		$due_dates = Set::classicExtract($yearly, '{n}.Project.due');
+		$project_counts = Set::classicExtract($yearly, '{n}.Project.project_count');
+		$total_steps = count($due_dates);
+		/*for($i=0;$i<count($due_dates);$i++){
+			$due_dates[$i] = date('M Y', strtotime($due_dates[$i]));
+		}*/
+		$graph_data = '[';
+		for($i=0;$i<$total_steps;$i++){
+			if($i < ($total_steps-1)){
+				$graph_data .= strval('[ new Date("' . $due_dates[$i] . '"),' . $project_counts[$i] . '],');
+			}else{
+				$graph_data .= strval('[ new Date("' . $due_dates[$i] . '"),' . $project_counts[$i] . ']');
+			}
+		}
+		$graph_data .= ']';
+		//debug($graph_data);
+		$this->set(compact('graph_data','total_steps'));
+	}
+
+/**
+ * graph_monthly method
+ * Controls a chart that shows monthly project data
+ * @param void
+ * @return void
+ */
+	function graph_monthly($years = 3){
+		//$this->layout = false;
+		//$this->autoRender = false;
+		$yearlyData = array();
+		$curYear = date('Y');
+		debug('Current year: ' . $curYear);
+		for($i=0;$i<$years;$i++){
+			$start_date = date('Y-m-d', strtotime('01/01/' . ($curYear - $i) ));
+			$end_date = date('Y-m-d', strtotime('12/31/' . ($curYear - $i) ));
+			//debug( $start_date );
+			//debug( $end_date );
+			$yearlyData[($curYear-$i)] = $this->Project->find('all',array(
+				'conditions' => array(
+					'Project.due !=' => null,
+					'Project.due BETWEEN ? AND ?' => array($start_date,$end_date)
+				),
+				'recursive' => -1,
+				'fields' => array('id', 'due', 'project_count'),
+				'group' => array('YEAR(Project.due)','MONTH(Project.due)')
+			));
+			$temp = $yearlyData[($curYear-$i)];
+			$yearlyData[($curYear-$i)] = array();
+			$yearlyData[($curYear-$i)]['due_dates'] = Set::classicExtract($temp, '{n}.Project.due');
+			$yearlyData[($curYear-$i)]['totals'] = Set::classicExtract($temp, '{n}.Project.project_count');
+			//debug($yearlyData[($curYear-$i)]);
+		}
+		$total_steps = count($yearlyData);
+		debug("Total Years:" . $total_steps);
+		
+		//Find the year that contains the most data, if the xAxis totals don't match an error will occur.
+		$chartXCount = 0;
+		foreach($yearlyData as $key => $year){
+			$tCount = count($yearlyData[$key]['due_dates']);
+			if($tCount > $chartXCount){
+				$chartXCount = $tCount;
+			}
+		}
+		debug("Highest data val:" . $chartXCount); //Should be 12 months
+
+		//The dataset should look like 
+		//XVALUE, 12 (year 1), 0 (year 2), 34 (year 3)
+
+	
+		//Build the legend
+		$graph_data = '"X,';
+		$count = 0;
+		foreach($yearlyData as $key => $year){
+			$graph_data .= strval($key);
+			if( ($count + 1) < count($yearlyData) ){
+				$graph_data .= ',';
+			}
+			$count++;
+		}
+		$graph_data .= '\n';
+		//Run through each month's (that is available) dataset	
+		for($k=0;$k<$chartXCount;$k++){
+		
+			if(($k+1)<10) {
+				$month = strval('0' . ($k+1));
+			}else{
+				$month = $k+1;
+			}
+			$graph_data .= date('Y') . '-' . $month . '-01,';
+
+			$counter = 0;
+			//Run through each year
+			foreach($yearlyData as $key => $year){
+
+				if(!empty($yearlyData[$key]['due_dates'][$k])){
+					$yearlyData[$key]['due_dates'][$k] = date('Y-m-d', strtotime($yearlyData[$key]['due_dates'][$k]));
+					//Add the month's total
+					$graph_data .= $yearlyData[$key]['totals'][$k];
+				}else{
+					$graph_data .= 0;
+				}
+				
+				if( ($counter+1) < count($yearlyData) ){
+					$graph_data .= ',';
+				}
+				if( ($counter+1) == count($yearlyData) ){
+					$graph_data .= '\n ';
+				}
+				$counter++;
+			}
+			
+			//$yearlyData[$key]['totals'][$k]);
+		}
+		$graph_data .= '"';
+	
+		debug('Graph data: ' . $graph_data);
+		$this->set(compact('graph_data','total_steps'));
+	}
+
+	/**
+	 * 
+	 */
+	function convertToJsArray($arr = array()){
+		return "[\"" . join("\", \"", $arr) . "\"]";
+	}
+
+	function convertToJsArrayOfInts($arr = array()){
+		return "[" . join(", ", $arr) . "]";
 	}
 
 	function rss() {

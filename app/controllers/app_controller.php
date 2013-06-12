@@ -35,7 +35,9 @@
 class AppController extends Controller {
 	
 	var $components = array(
-		'Auth',
+		'Auth' => array(
+			'loginAction' => '/users/login'
+		),
 		'RequestHandler','Session','Email','Search.Prg','AjaxHandler'
 	);
 	var $helpers = array(
@@ -96,7 +98,7 @@ class AppController extends Controller {
 		//for($i = 0; $i<$totalRoles; $i++){
 			if($userRole != "admin" && $userRole != "manager"){
 				$this->Session->setFlash(__('You do not have permission to do this.', true));
-				$this->redirect(array('controller'=>'users','action' => 'login'));
+				$this->redirect($this->Auth->loginAction);
 			}
 		//}
 	}

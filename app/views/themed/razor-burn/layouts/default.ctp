@@ -44,29 +44,29 @@
 	echo $this->Html->script('common');
 	
 	echo $scripts_for_layout;
-	
 	?>
 </head>
-
-
 <body>
 <!-- This is for the popup plugin -->
 <div id="popups" style="z-index: 1000;"></div>
 
 <div id="container">
 <div id="header">
-<div id="logo-container">
-<?php echo $this->Html->image("sa/razorfish.png", array(
-					"alt" => "Razorfish",
-					'class'=>"logo",
-				    'url' => array('controller' => '/')
-				)); ?>
-</div>
-<h1>Production Manager Tool</h1>
-<?php
-	$current_user = $this->Session->read('Auth.User');
-	$username = $this->Session->read('Auth.User.username');
-?>
+	<div id="logo-container">
+	<?php echo $this->Html->image("sa/razorfish.png", array(
+						"alt" => "Razorfish",
+						'class'=>"logo",
+					    'url' => array('controller' => '/')
+					)); ?>
+	</div>
+	<h1>Production Manager Tool</h1>
+	<?php
+		$current_user = $this->Session->read('Auth.User');
+		$username = $this->Session->read('Auth.User.username');
+	?>
+	<div id='navbar'>
+	<?php echo $this->element('nav',array('cache'=>false)); ?>
+	</div><!-- end of navbar -->
 </div><!-- end of header -->
 
 <div id="content">
@@ -74,12 +74,9 @@
 <?php echo $content_for_layout; ?>
 </div><!-- end of content -->
 
-
 <div id="footer">
-<!--<p>&copy; <script type="text/javascript">var theDate=new Date(); document.write(theDate.getFullYear())</script> Production Manager Tool All Rights Reserved. PMT is a <?php echo $this->Html->link('Rob Sawyer','#',array('title'=>'Rob Sawyer')); ?> Production.</p>-->
-
-<div class="user-info">
-<p><?php 
+	<div class="user-info">
+	<p><?php 
 			if(!empty($current_user['project_manager_id'])){
 				$controller = "project_managers";
 				$id = $current_user['project_manager_id'];
@@ -94,12 +91,12 @@
 				echo "Welcome $username! &nbsp;|&nbsp; ".$this->Html->link('Edit Your Profile',array('controller'=>$controller,'action'=>'edit',$id))." &nbsp;|&nbsp; ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 			}
 		?><p>
-</div>
+	</div>
 
-<?php 
-	echo $this->Js->writeBuffer(); // Write cached scripts
-	echo $this->element('sql_dump'); 
-?>
+	<?php 
+		echo $this->Js->writeBuffer(); // Write cached scripts
+		echo $this->element('sql_dump'); 
+	?>
 </div><!-- end of footer -->
 </div><!-- end of container -->
 

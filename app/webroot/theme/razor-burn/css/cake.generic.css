@@ -31,7 +31,7 @@ ul,li{margin:0 12px;list-style-type:none;}
 p{margin-bottom: 0.75em;}
 /** Layout **/
 #container{text-align:left; position:relative; min-height:100%;}
-#header{padding:0;background:url(/img/sa/hdots.png) no-repeat top right #000; height:110px; margin:0; border-bottom:2px solid #3d3d3d;}
+#header{padding:0;background:url(img/sa/hdots.png) no-repeat top right #000; height:110px; margin:0; border-bottom:2px solid #3d3d3d;}
 /*#header h1{color:#FFFFFF;height:70px;line-height:20px;margin:0;padding:0;}
 #header h1 a{color:#fff;background:#003d4c;font-weight:normal;text-decoration:none;}
 #header h1 a:hover{color:#fff;background:#003d4c;text-decoration:underline;}*/
@@ -44,7 +44,7 @@ p{margin-bottom: 0.75em;}
 	/*overflow:auto;*/
 }
 
-#footer{color:#fff;font-weight:normal;text-decoration:none;clear:both;font-size:12px; line-height:12px; height:18px; padding:6px 0 2px 0; border-top:30px #FFF solid; text-align:center; background:url(/img/sa/fdots.png) no-repeat bottom left #000; width:100%; position:relative;}
+#footer{color:#fff;font-weight:normal;text-decoration:none;clear:both;font-size:12px; line-height:12px; height:18px; padding:6px 0 2px 0; border-top:30px #FFF solid; text-align:center; background:url(img/sa/fdots.png) no-repeat bottom left #000; width:100%; position:relative;}
 #footer a:link,
 #footer a:active,
 #footer a:visited{text-decoration:none;color:#bed300;}
