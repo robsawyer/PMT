@@ -8,13 +8,13 @@ class ProjectsController extends AppController {
 	
 	//var $helpers = array('Number');
 	var $paginate = array(
-								'limit' => 100,
-								'order' => array(
-													'Project.priority' => 'desc',
-													'Client.name' => 'asc'
-													//'Project.type' => 'asc'
-													)
-								);
+						'limit' => 100,
+						'order' => array(
+										'Project.priority' => 'desc',
+										'Client.name' => 'asc'
+										//'Project.type' => 'asc'
+										)
+						);
 
 	var $presetVars = array(
 		array('field' => 'number', 'type' => 'value'),
@@ -193,14 +193,16 @@ class ProjectsController extends AppController {
 		$yearlyData = array();
 		$curYear = date('Y');
 		debug('Current year: ' . $curYear);
-		$yearlyData = $this->getYearlyData($years);
-		$total_steps = count($yearlyData);
-		debug("Total Years:" . $total_steps);
-	
-		$graph_data = $this->buildGraphData($yearlyData);
+		//Get the main data used for the chart
+		$monthlyProjectData = $this->getYearlyData($years, 'COUNT(Project.id)');
+		$monthlyUnitData = $this->getYearlyData($years, 'SUM(Project.total_units)');
+		
+		$monthly_project_graph_data = $this->buildGraphData($monthlyProjectData);
+		$monthly_unit_graph_data = $this->buildGraphData($monthlyUnitData);
 
-		debug('Graph data: ' . $graph_data);
-		$this->set(compact('graph_data','total_steps'));
+		debug('Graph data: ' . $monthly_project_graph_data);
+		debug('Graph data: ' . $monthly_unit_graph_data);
+		$this->set(compact('monthly_project_graph_data','monthly_unit_graph_data'));
 	}
 
 /**
@@ -283,12 +285,13 @@ class ProjectsController extends AppController {
  * getYearlyData method
  * Returns an array that contains yearly data for a certain # of years in the past 
  * @param int $years years to pull data from (starts from current year)
- * @param string $column The database column to search from
+ * @param string $routine A SQL routine to run on the data
  * @return array
  */
-	function getYearlyData($years = 3, $column = 'project_count', $date_column = 'due'){
+	function getYearlyData($years = 3, $routine = 'COUNT(Project.id)', $date_column = 'due'){
 		$yearlyData = array();
 		$curYear = date('Y');
+		$this->Project->virtualFields['temp_vf'] = $routine;
 		for($i=0;$i<$years;$i++){
 			$start_date = date('Y-m-d', strtotime('01/01/' . ($curYear - $i) ));
 			$end_date = date('Y-m-d', strtotime('12/31/' . ($curYear - $i) ));
@@ -300,13 +303,13 @@ class ProjectsController extends AppController {
 					'Project.'.$date_column.' BETWEEN ? AND ?' => array($start_date,$end_date)
 				),
 				'recursive' => -1,
-				'fields' => array('id', $date_column, $column),
+				'fields' => array('id', $date_column, 'temp_vf'),
 				'group' => array('YEAR(Project.'.$date_column.')','MONTH(Project.'.$date_column.')')
 			));
 			$temp = $yearlyData[($curYear-$i)];
 			$yearlyData[($curYear-$i)] = array();
 			$yearlyData[($curYear-$i)]['dates'] = Set::classicExtract($temp, '{n}.Project.due');
-			$yearlyData[($curYear-$i)]['totals'] = Set::classicExtract($temp, '{n}.Project.' . $column);
+			$yearlyData[($curYear-$i)]['totals'] = Set::classicExtract($temp, '{n}.Project.temp_vf');
 			//debug($yearlyData[($curYear-$i)]);
 		}
 		return $yearlyData;
@@ -377,7 +380,7 @@ class ProjectsController extends AppController {
 	function index() {
 		$this->resetTempSessionVariables();
 		
-		$this->Project->recursive = 0;
+		$this->Project->recursive = -1;
 		
 		$lowPriorityProjects = $this->Project->find('all',array(
 			'conditions'=>array('Project.priority'=>1,'Project.complete'=>0)
@@ -433,19 +436,42 @@ class ProjectsController extends AppController {
 				$totalProjectsIncompleteCounter++;
 			//}
 		}
-		$percentageComplete = $percentageComplete / $totalProjectsIncompleteCounter;	$this->set(compact('inhouseProjects','offshoreProjects','completeProjects','incompleteProjects','richMedia','standardMedia','incompleteOffshoreProjects','completeOffshoreProjects','completeInhouseProjects','incompleteInhouseProjects','lowPriorityProjects','mediumPriorityProjects','highPriorityProjects','criticalPriorityProjects','percentageComplete','incompleteUnits'));
+		$percentageComplete = $percentageComplete / $totalProjectsIncompleteCounter;	
+		$this->set(compact(
+			'inhouseProjects',
+			'offshoreProjects',
+			'completeProjects',
+			'incompleteProjects',
+			'richMedia',
+			'standardMedia',
+			'incompleteOffshoreProjects',
+			'completeOffshoreProjects',
+			'completeInhouseProjects',
+			'incompleteInhouseProjects',
+			'lowPriorityProjects',
+			'mediumPriorityProjects',
+			'highPriorityProjects',
+			'criticalPriorityProjects',
+			'percentageComplete',
+			'incompleteUnits'
+		));
 		
 		$this->paginate = array( 
-							'limit' => 100,
-							'conditions' => array('Project.complete' => 0),
+							'conditions' => array(
+								'Project.complete' => 0
+							),
 							'order' => array(
-												'Project.priority' => 'desc',
-												'Client.name' => 'asc'
-												//'Project.type' => 'asc'
-												),
-							'contain' => array('Client','ProductionManager')
-							);
-							
+											'Project.priority' => 'desc',
+											'Client.name' => 'asc'
+											//'Project.type' => 'asc'
+											),
+							'contain' => array(
+								'Client' => array('fields' => array('id','name')),
+								'ProductionManager' => array('fields' => array('id','title','fullname','slug'))
+							),
+							'limit' => 100,
+							'page' => 1
+						);
 		$this->set('projects', $this->paginate('Project'));
 	}
 	

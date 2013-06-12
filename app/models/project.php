@@ -4,9 +4,10 @@ class Project extends AppModel {
 	var $displayField = 'title';
 	var $actsAs = array('Containable','Search.Searchable');
 
-	var $virtualFields = array(
-		'project_count' => 'COUNT(Project.id)'
-	);
+	/*var $virtualFields = array(
+		'project_count' => 'COUNT(Project.id)', //This screws up the project list
+		'total_sum' => 'SUM(Project.total_units)'
+	);*/
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	

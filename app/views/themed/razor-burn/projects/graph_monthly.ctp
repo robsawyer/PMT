@@ -2,6 +2,9 @@
 <script type="text/javascript" src="/js/vendor/dygraph/excanvas.js"></script>
 <![endif]-->
 <style type="text/css">
+.chart-container{
+	min-height: 1300px;
+}
 div#projectChart {
 	position: absolute;
 	left: 10px;
@@ -23,15 +26,19 @@ div#adChart {
 	echo $this->Html->script('vendor/dygraph/dygraph-combined',array('inline' => false));
 	//echo $this->Html->script('vendor/dygraph/dygraph-dev',array('inline' => false));
 ?>
-<div class="chart" id="projectChart"></div>
-<div class="chart" id="adChart"></div>
-<input type="button" value="Unzoom" onclick="unzoomGraph()">&nbsp;
+<div class="chart-container">
+	<div class="chart" id="projectChart"></div>
+	<div class="chart" id="adChart"></div>
+	<input type="button" value="Unzoom Graph 1" onclick="unzoomGraph(g1)">&nbsp;
+	<input type="button" value="Unzoom Graph 2" onclick="unzoomGraph(g2)">&nbsp;
+</div>
 <script type="text/javascript">
-var dataset = <?php echo $graph_data; ?>;
+var dataset1 = <?php echo $monthly_project_graph_data; ?>;
+var dataset2 = <?php echo $monthly_unit_graph_data; ?>;
 //alert(dataset);
 g1 = new Dygraph(
 			document.getElementById("projectChart"), 
-			dataset,
+			dataset1,
 			{
 				includeZero: true,
 				legend: 'always',
@@ -42,7 +49,7 @@ g1 = new Dygraph(
 
 g2 = new Dygraph(
 			document.getElementById("adChart"), 
-			dataset,
+			dataset2,
 			{
 				includeZero: true,
 				legend: 'always',
@@ -138,8 +145,8 @@ function barChartPlotter(e) {
 	}
 }
 	
-function unzoomGraph() {
-	g.updateOptions({
+function unzoomGraph(graph) {
+	graph.updateOptions({
 		dateWindow: null,
 		valueRange: null
 	});
