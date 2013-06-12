@@ -437,7 +437,7 @@ class ProjectsController extends AppController {
 		
 		$this->paginate = array( 
 							'limit' => 100,
-							'conditions' => array('Project.complete' =>0),
+							'conditions' => array('Project.complete' => 0),
 							'order' => array(
 												'Project.priority' => 'desc',
 												'Client.name' => 'asc'

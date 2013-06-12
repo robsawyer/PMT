@@ -79,6 +79,7 @@
 		<div class="clear">&nbsp;</div>
 		<div id="footer">
 			<div class="user-info">
+			<?php if(!empty($current_user)): ?>
 			<p><?php 
 					if(!empty($current_user['project_manager_id'])){
 						$controller = "project_managers";
@@ -94,6 +95,11 @@
 						echo "Welcome $username! &nbsp;|&nbsp; ".$this->Html->link('Edit Your Profile',array('controller'=>$controller,'action'=>'edit',$id))." &nbsp;|&nbsp; ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
 					}
 				?><p>
+			<?php else: ?>
+			<p><?php 
+					echo "This is private, you are not allowed here.";
+				?><p>
+			<?php endif; ?>
 			</div>
 		</div><!-- end of footer -->
 		<?php 
