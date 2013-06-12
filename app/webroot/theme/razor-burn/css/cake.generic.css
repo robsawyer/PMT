@@ -34,6 +34,7 @@ p{margin-bottom: 0.75em;}
 	position: relative;
 	text-align:left;  
 	min-height:100%;
+	top: 0px;
 	bottom: 300px;
 }
 #header{padding:0;background:url(img/sa/hdots.png) no-repeat top right #000; height:110px; margin:0; border-bottom:2px solid #3d3d3d;}

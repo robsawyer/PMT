@@ -193,49 +193,35 @@ class ProjectsController extends AppController {
 		$yearlyData = array();
 		$curYear = date('Y');
 		debug('Current year: ' . $curYear);
-		for($i=0;$i<$years;$i++){
-			$start_date = date('Y-m-d', strtotime('01/01/' . ($curYear - $i) ));
-			$end_date = date('Y-m-d', strtotime('12/31/' . ($curYear - $i) ));
-			//debug( $start_date );
-			//debug( $end_date );
-			$yearlyData[($curYear-$i)] = $this->Project->find('all',array(
-				'conditions' => array(
-					'Project.due !=' => null,
-					'Project.due BETWEEN ? AND ?' => array($start_date,$end_date)
-				),
-				'recursive' => -1,
-				'fields' => array('id', 'due', 'project_count'),
-				'group' => array('YEAR(Project.due)','MONTH(Project.due)')
-			));
-			$temp = $yearlyData[($curYear-$i)];
-			$yearlyData[($curYear-$i)] = array();
-			$yearlyData[($curYear-$i)]['due_dates'] = Set::classicExtract($temp, '{n}.Project.due');
-			$yearlyData[($curYear-$i)]['totals'] = Set::classicExtract($temp, '{n}.Project.project_count');
-			//debug($yearlyData[($curYear-$i)]);
-		}
+		$yearlyData = $this->getYearlyData($years);
 		$total_steps = count($yearlyData);
 		debug("Total Years:" . $total_steps);
-		
-		//Find the year that contains the most data, if the xAxis totals don't match an error will occur.
-		$chartXCount = 0;
-		foreach($yearlyData as $key => $year){
-			$tCount = count($yearlyData[$key]['due_dates']);
-			if($tCount > $chartXCount){
-				$chartXCount = $tCount;
-			}
-		}
+	
+		$graph_data = $this->buildGraphData($yearlyData);
+
+		debug('Graph data: ' . $graph_data);
+		$this->set(compact('graph_data','total_steps'));
+	}
+
+/**
+ * buildGraphData method 
+ * @param array $data 
+ * @param string $date_key The date key to traverse array with 
+ * @param string $total_key The totals key to traverse array with 
+ * @return string
+ */
+	function buildGraphData($data = array(), $date_key = 'dates', $total_key = 'totals'){
+
+		//Find the month that contains the most data, if the xAxis totals don't match an error will occur.
+		$chartXCount = $this->findMaxXVal($data);
 		debug("Highest data val:" . $chartXCount); //Should be 12 months
 
-		//The dataset should look like 
-		//XVALUE, 12 (year 1), 0 (year 2), 34 (year 3)
-
-	
 		//Build the legend
 		$graph_data = '"X,';
 		$count = 0;
-		foreach($yearlyData as $key => $year){
+		foreach($data as $key => $year){
 			$graph_data .= strval($key);
-			if( ($count + 1) < count($yearlyData) ){
+			if( ($count + 1) < count($data) ){
 				$graph_data .= ',';
 			}
 			$count++;
@@ -253,36 +239,82 @@ class ProjectsController extends AppController {
 
 			$counter = 0;
 			//Run through each year
-			foreach($yearlyData as $key => $year){
+			foreach($data as $key => $year){
 
-				if(!empty($yearlyData[$key]['due_dates'][$k])){
-					$yearlyData[$key]['due_dates'][$k] = date('Y-m-d', strtotime($yearlyData[$key]['due_dates'][$k]));
+				if(!empty($data[$key][$date_key][$k])){
+					$data[$key][$date_key][$k] = date('Y-m-d', strtotime($data[$key][$date_key][$k]));
 					//Add the month's total
-					$graph_data .= $yearlyData[$key]['totals'][$k];
+					$graph_data .= $data[$key][$total_key][$k];
 				}else{
 					$graph_data .= 0;
 				}
 				
-				if( ($counter+1) < count($yearlyData) ){
+				if( ($counter+1) < count($data) ){
 					$graph_data .= ',';
 				}
-				if( ($counter+1) == count($yearlyData) ){
+				if( ($counter+1) == count($data) ){
 					$graph_data .= '\n ';
 				}
 				$counter++;
 			}
-			
-			//$yearlyData[$key]['totals'][$k]);
 		}
 		$graph_data .= '"';
-	
-		debug('Graph data: ' . $graph_data);
-		$this->set(compact('graph_data','total_steps'));
+		return $graph_data;
 	}
 
-	/**
-	 * 
-	 */
+/**
+ * findMaxXVal method
+ * Finds the maxium number of xvals in the array
+ * @param array
+ * @return int
+ */
+	function findMaxXVal($ar = array()){
+		$chartXCount = 0;
+		foreach($ar as $key => $year){
+			$tCount = count($ar[$key]['dates']);
+			if($tCount > $chartXCount){
+				$chartXCount = $tCount;
+			}
+		}
+		return $chartXCount;
+	}
+
+/**
+ * getYearlyData method
+ * Returns an array that contains yearly data for a certain # of years in the past 
+ * @param int $years years to pull data from (starts from current year)
+ * @param string $column The database column to search from
+ * @return array
+ */
+	function getYearlyData($years = 3, $column = 'project_count', $date_column = 'due'){
+		$yearlyData = array();
+		$curYear = date('Y');
+		for($i=0;$i<$years;$i++){
+			$start_date = date('Y-m-d', strtotime('01/01/' . ($curYear - $i) ));
+			$end_date = date('Y-m-d', strtotime('12/31/' . ($curYear - $i) ));
+			//debug( $start_date );
+			//debug( $end_date );
+			$yearlyData[($curYear-$i)] = $this->Project->find('all',array(
+				'conditions' => array(
+					'Project.'.$date_column.' !=' => null,
+					'Project.'.$date_column.' BETWEEN ? AND ?' => array($start_date,$end_date)
+				),
+				'recursive' => -1,
+				'fields' => array('id', $date_column, $column),
+				'group' => array('YEAR(Project.'.$date_column.')','MONTH(Project.'.$date_column.')')
+			));
+			$temp = $yearlyData[($curYear-$i)];
+			$yearlyData[($curYear-$i)] = array();
+			$yearlyData[($curYear-$i)]['dates'] = Set::classicExtract($temp, '{n}.Project.due');
+			$yearlyData[($curYear-$i)]['totals'] = Set::classicExtract($temp, '{n}.Project.' . $column);
+			//debug($yearlyData[($curYear-$i)]);
+		}
+		return $yearlyData;
+	}
+
+/**
+ * 
+ */
 	function convertToJsArray($arr = array()){
 		return "[\"" . join("\", \"", $arr) . "\"]";
 	}
