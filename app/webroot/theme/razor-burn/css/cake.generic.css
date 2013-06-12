@@ -30,7 +30,12 @@ h4{color:#993;font-weight:normal;}
 ul,li{margin:0 12px;list-style-type:none;}
 p{margin-bottom: 0.75em;}
 /** Layout **/
-#container{text-align:left; position:relative; min-height:100%;}
+#container{
+	position: relative;
+	text-align:left;  
+	min-height:100%;
+	bottom: 300px;
+}
 #header{padding:0;background:url(img/sa/hdots.png) no-repeat top right #000; height:110px; margin:0; border-bottom:2px solid #3d3d3d;}
 /*#header h1{color:#FFFFFF;height:70px;line-height:20px;margin:0;padding:0;}
 #header h1 a{color:#fff;background:#003d4c;font-weight:normal;text-decoration:none;}
@@ -39,12 +44,33 @@ p{margin-bottom: 0.75em;}
 	background:#fff;
 	clear:both;
 	color:#333;
-	padding:20px 20px 54px 20px;
-	min-height:550px;
+	padding: 20px 20px 54px 20px;
+	min-height: 550px;
+	height: 100%;
 	/*overflow:auto;*/
 }
-
-#footer{color:#fff;font-weight:normal;text-decoration:none;clear:both;font-size:12px; line-height:12px; height:18px; padding:6px 0 2px 0; border-top:30px #FFF solid; text-align:center; background:url(img/sa/fdots.png) no-repeat bottom left #000; width:100%; position:relative;}
+#footer{
+	position:fixed;
+	z-index: 2000;
+	bottom: 0;
+	left: 0;
+	color:#fff;
+	font-weight:normal;
+	text-decoration:none;
+	font-size:12px; 
+	line-height:12px; 
+	height:18px; 
+	padding:6px 0 2px 0; 
+	border-top: 30px #FFF solid; 
+	text-align:center; 
+	background:url(img/sa/fdots.png) no-repeat bottom left #000; 
+	width:100%;
+}
+/* IE 6 */
+* html #footer {
+   position:absolute;
+   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}
 #footer a:link,
 #footer a:active,
 #footer a:visited{text-decoration:none;color:#bed300;}

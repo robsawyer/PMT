@@ -2,33 +2,53 @@
 <script type="text/javascript" src="/js/vendor/dygraph/excanvas.js"></script>
 <![endif]-->
 <style type="text/css">
-div.chart {
-		/*width: 800px;
-		height: 600px;*/
-        position: absolute;
-		left: 10px;
-		right: 10px;
-		top: 150px;
-		bottom: 200px;
-      }
+div#projectChart {
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	top: 180px;
+	bottom: 50px;
+	height: 480px;
+}
+div#adChart {
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	top: 725px;
+	bottom: 50px;
+	height: 480px;
+}
 </style>
 <?php 
 	echo $this->Html->script('vendor/dygraph/dygraph-combined',array('inline' => false));
 	//echo $this->Html->script('vendor/dygraph/dygraph-dev',array('inline' => false));
 ?>
-<div class="chart" id="theChart"></div>
+<div class="chart" id="projectChart"></div>
+<div class="chart" id="adChart"></div>
 <input type="button" value="Unzoom" onclick="unzoomGraph()">&nbsp;
 <script type="text/javascript">
 var dataset = <?php echo $graph_data; ?>;
 //alert(dataset);
-g = new Dygraph(
-			document.getElementById("theChart"), 
+g1 = new Dygraph(
+			document.getElementById("projectChart"), 
 			dataset,
 			{
 				includeZero: true,
 				legend: 'always',
 				panEdgeFraction: 0.1,
-				plotter: multiColumnBarPlotter
+				plotter: multiColumnBarPlotter,
+				ylabel: 'Total Projects'
+			});
+
+g2 = new Dygraph(
+			document.getElementById("adChart"), 
+			dataset,
+			{
+				includeZero: true,
+				legend: 'always',
+				panEdgeFraction: 0.1,
+				plotter: multiColumnBarPlotter,
+				ylabel: 'Total Units'
 			});
 
 // Multiple column bar chart
