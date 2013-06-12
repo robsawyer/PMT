@@ -3,8 +3,13 @@
 <![endif]-->
 <style type="text/css">
 div.chart {
-        width: 640px;
-        height: 320px;
+		/*width: 800px;
+		height: 600px;*/
+        position: absolute;
+		left: 10px;
+		right: 10px;
+		top: 150px;
+		bottom: 200px;
       }
 </style>
 <?php 
@@ -12,7 +17,6 @@ div.chart {
 	//echo $this->Html->script('vendor/dygraph/dygraph-dev',array('inline' => false));
 ?>
 <div class="chart" id="theChart"></div>
-<br> <br>
 <input type="button" value="Unzoom" onclick="unzoomGraph()">&nbsp;
 <script type="text/javascript">
 var dataset = <?php echo $graph_data; ?>;
