@@ -237,7 +237,7 @@ class ProjectsController extends AppController {
 			}else{
 				$month = $k+1;
 			}
-			$graph_data .= date('Y') . '-' . $month . '-01,';
+			$graph_data .= $month . '-01,';
 
 			$counter = 0;
 			//Run through each year

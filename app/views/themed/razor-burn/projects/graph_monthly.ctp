@@ -44,7 +44,14 @@ g1 = new Dygraph(
 				legend: 'always',
 				panEdgeFraction: 0.1,
 				plotter: multiColumnBarPlotter,
-				ylabel: 'Total Projects'
+				ylabel: 'Total Projects',
+				xAxisLabelFormatter: function(d, granularity) {
+					if (granularity == Dygraph.MONTHLY) {
+						return d.strftime('%b'); //http://php.net/manual/en/function.strftime.php
+					} else {
+						return Dygraph.dateAxisFormatter(d, granularity);
+					}
+				}
 			});
 
 g2 = new Dygraph(
@@ -55,7 +62,14 @@ g2 = new Dygraph(
 				legend: 'always',
 				panEdgeFraction: 0.1,
 				plotter: multiColumnBarPlotter,
-				ylabel: 'Total Units'
+				ylabel: 'Total Units',
+				xAxisLabelFormatter: function(d, granularity) {
+					if (granularity == Dygraph.MONTHLY) {
+						return d.strftime('%b'); //http://php.net/manual/en/function.strftime.php
+					} else {
+						return Dygraph.dateAxisFormatter(d, granularity);
+					}
+				}
 			});
 
 // Multiple column bar chart
