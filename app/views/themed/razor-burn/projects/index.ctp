@@ -199,6 +199,7 @@ $('#accordion ul:eq(0)').show();
 			//Clean up the Jira link
 			//Remove the 'https://razorfish.jira.com/browse/' and replace with just the task URL
 			$cleanURL = str_replace("https://razorfish.jira.com/browse/","",$project['Project']['url']);
+			$cleanURL = str_replace("https://razorfish-nw.atlassian.net/browse/","",$project['Project']['url']);
 			
 			if($project['Project']['url']){
 				echo $this->Html->link($cleanURL,$project['Project']['url'],array('target'=>'_blank'));

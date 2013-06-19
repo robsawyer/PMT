@@ -1,0 +1,1 @@
+<div class="label round"><?php echo $message; ?></div>

@@ -28,26 +28,34 @@
 
 	<link rel="icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
-	<?php 
-	echo $this->Html->css('cake.generic');
-	echo $this->Html->css('basic');
-	echo $this->Html->css('razor-burn') . "\n";
-	echo $this->Html->css('chosen/chosen');
-	echo $this->Html->css('jquery.autocomplete');
-	
-	echo "<!-- Include jquery 1.4.2 via google apis -->";
-	echo $this->Html->script('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
-	//echo $javascript->link('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js');
-	echo $this->Html->script('jquery-ui-1.7.2.custom.min');
-	echo $this->Html->script('jquery.autocomplete.min');
-	echo $this->Html->script('jquery.jeditable.mini');
-	echo $this->Html->script('jquery.form');
-	echo $this->Html->script('chosen/chosen.jquery.min');
-	echo $this->Html->script('common');
-	
+<?php 
+	echo $this->Html->css('normalize');
+	echo $this->Html->css('foundation.min');
+	echo $this->Html->css('font-awesome.min');
+	echo $this->Html->css('globals');
+	echo $this->Html->css('typography');
+	echo $this->Html->css('grid');
+	echo $this->Html->css('ui');
+	echo $this->Html->css('orbit');
+	echo $this->Html->css('reveal');
+	echo $this->Html->css('mobile');
+	echo $this->Html->css('responsive-tables');
+
+	echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js');
+
+	echo $this->Html->script('vendor/modernizr.foundation.js');
+	echo $this->Html->script('foundation.min');
+	echo $this->Html->script('responsive-tables');
+
 	echo $scripts_for_layout;
 	
-	?>
+	$current_user = $this->Session->read('Auth.User');
+	$username = $this->Session->read('Auth.User.username');
+?>
+<!-- IE Fix for HTML5 Tags -->
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
 	<!-- This is for the popup plugin -->

@@ -3,6 +3,13 @@
 		<!-- Title Area -->
 		<li class="name">
 			<h1><?php echo $this->Html->link('Production Manager Tool',array('controller'=>'projects','action'=>'index')); ?></h1>
+			<!--<div id="small-6 columns">
+			<?php /*echo $this->Html->image("sa/razorfish.png", array(
+								"alt" => "Razorfish",
+								'class'=>"logo",
+							    'url' => array('controller' => '/')
+							));*/ ?>
+			</div>-->
 		</li>
 		<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 		<li class="toggle-topbar menu-icon"><span><?php echo $this->Html->link('Menu',array('controller'=>'projects','action'=>'index')); ?></span></li>
