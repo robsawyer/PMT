@@ -12,6 +12,14 @@ class ProductionManager extends AppModel {
 							) 
 	);
 	
+	var $hasOne = array(
+						'User'=>array(
+							'className' => 'User',
+							'foreignKey' => 'production_manager_id',
+							'dependent'    => false
+						)
+					);
+	
 	var $hasAndBelongsToMany = array(
 		'Project' => array(
 			'className' => 'Project',

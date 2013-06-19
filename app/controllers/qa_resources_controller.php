@@ -18,6 +18,9 @@ class QaResourcesController extends AppController {
 	}
 
 	function add() {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!empty($this->data)) {
 			$this->QaResource->create();
 			if ($this->QaResource->save($this->data)) {
@@ -37,6 +40,9 @@ class QaResourcesController extends AppController {
 	}
 
 	function edit($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid qa resource', true));
 			$this->redirect(array('action' => 'index'));
@@ -62,6 +68,9 @@ class QaResourcesController extends AppController {
 	}
 
 	function delete($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for qa resource', true));
 			$this->redirect(array('action'=>'index'));

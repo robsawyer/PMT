@@ -18,7 +18,10 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Description'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['description']; ?>
+			<?php
+			 	$linked_desc_text = $this->Text->autoLinkEmails($project['Project']['description']);
+				echo $linked_desc_text; 
+			?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Url'); ?></dt>
@@ -113,7 +116,11 @@
 		</dd>
 		<dt style="background-color:#ffffe5;"<?php if ($i % 2 == 0) echo $class;?>><?php __('Notes'); ?></dt>
 		<dd style="background-color:#ffffe5;"<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['notes']; ?>
+			<?php 
+				//echo $project['Project']['notes']; 
+				$linked_note_text = $this->Text->autoLinkEmails($project['Project']['notes']);
+				echo $linked_note_text;
+			?>
 			&nbsp;
 		</dd>
 	</dl>

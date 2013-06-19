@@ -44,8 +44,5 @@
 			'ProjectType' => '[A-Za-z]+',
 			'ProjectNumber' => '[0-9]+'
 		));*/
-	
 	// Make sure CakePHP parses CSV file requests correctly 
-	Router::parseExtensions('csv');
-	Router::parseExtensions('xls');
-	Router::parseExtensions('rss');
+	Router::parseExtensions(array('csv','xls','rss','json'));

@@ -18,6 +18,9 @@ class OffshoreProjectManagersController extends AppController {
 	}
 
 	function add() {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!empty($this->data)) {
 			$this->OffshoreProjectManager->create();
 			if ($this->OffshoreProjectManager->save($this->data)) {
@@ -36,6 +39,9 @@ class OffshoreProjectManagersController extends AppController {
 	}
 
 	function edit($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid offshore project manager', true));
 			$this->redirect(array('action' => 'index'));
@@ -60,6 +66,9 @@ class OffshoreProjectManagersController extends AppController {
 	}
 
 	function delete($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for offshore project manager', true));
 			$this->redirect(array('action'=>'index'));

@@ -2,11 +2,11 @@
 	<h2><?php __('Clients');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th style="display:none"><?php //echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('name');?></th>
-			<th style="display:none"><?php //echo $this->Paginator->sort('created');?></th>
-			<th style="display:none"><?php //echo $this->Paginator->sort('modified');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th valign="bottom" style="display:none"><?php //echo $this->Paginator->sort('id');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('name');?></th>
+			<th valign="bottom" style="display:none"><?php //echo $this->Paginator->sort('created');?></th>
+			<th valign="bottom" style="display:none"><?php //echo $this->Paginator->sort('modified');?></th>
+			<th valign="bottom" class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -18,7 +18,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td style="display:none"><?php //echo $client['Client']['id']; ?>&nbsp;</td>
-		<td width="75%"><?php echo $this->Html->link(__($client['Client']['name'], true), array('action' => 'view', $client['Client']['id'])); ?>&nbsp;</td>
+		<td width="75%" class="cli"><?php echo $this->Html->link(__($client['Client']['name'], true), array('action' => 'view', $client['Client']['id'])); ?>&nbsp;</td>
 		<td style="display:none"><?php //echo $client['Client']['created']; ?>&nbsp;</td>
 		<td style="display:none"><?php //echo $client['Client']['modified']; ?>&nbsp;</td>
 		<td class="actions">
@@ -43,6 +43,8 @@
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
 </div>
+</div>
+
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

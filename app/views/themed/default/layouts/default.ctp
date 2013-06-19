@@ -61,19 +61,53 @@
 				    'url' => array('controller' => '/')
 				));
 				?>
+<<<<<<< HEAD
+				<div class="app-name">Production Manager Tool</div>
+				<?php
+					$current_user = $this->Session->read('Auth.User');
+					$username = $this->Session->read('Auth.User.username');
+					if(!empty($username)):
+				?>
+				<div class="user-info">
+				<?php 
+					if(!empty($current_user['project_manager_id'])){
+						$controller = "project_managers";
+						$id = $current_user['project_manager_id'];
+					}
+					if(!empty($current_user['production_manager_id'])){
+						$controller = "production_managers";
+						$id = $current_user['production_manager_id'];
+					}
+					if($current_user['role'] == "admin"){
+						echo "You are logged in as". $this->Html->link($username." (Admin)",array('controller'=>$controller,'action'=>'edit',$id)).". | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+					}else{
+						echo "Welcome". $this->Html->link($username,array('controller'=>$controller,'action'=>'edit',$id))."! | ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+					}
+				?>
+				</div>
+				<?php
+					endif;
+				?>
+=======
 				<div class="app-name">Production Manager Tool YYY</div>
+>>>>>>> c568480e3497dffdc91a3a55e4719ca190238935
 				</div>
 				<div class="clear"></div>
+				<?php
+					if(!empty($username)):
+				?>
 			<div id='navbar'>
 					<?php echo $this->element('nav',array('cache'=>false)); ?>
 			</div><!-- end of navbar -->
-	
+				<?php
+					endif;
+				?>
 		</div><!-- end of header? -->
 		
 		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
 			
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->Session->flash('auth'); ?>
 			<?php echo $content_for_layout; ?>
 		</div>
 		<div id="footer">

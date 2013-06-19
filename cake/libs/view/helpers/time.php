@@ -600,7 +600,7 @@ class TimeHelper extends AppHelper {
 			} elseif (abs($hours) > 0) {
 				// hours and minutes
 				$relativeDate .= ($relativeDate ? ', ' : '') . $hours . ' ' . __n('hour', 'hours', $hours, true);
-				$relativeDate .= $minutes > 0 ? ($relativeDate ? ', ' : '') . $minutes . ' ' . __n('minute', 'minutes', $minutes, true) : '';
+				$relativeDate .= $minutes > 0 ? ($relativeDate ? ', ' : '') . $minutes . ' ' . __n('min', 'mins', $minutes, true) : '';
 			} elseif (abs($minutes) > 0) {
 				// minutes only
 				$relativeDate .= ($relativeDate ? ', ' : '') . $minutes . ' ' . __n('minute', 'minutes', $minutes, true);

@@ -30,16 +30,16 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th style="display:none"><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('type');?></th>
-			<th><?php echo $this->Paginator->sort('fullname');?></th>
-			<th><?php echo $this->Paginator->sort('email');?></th>
-			<th><?php echo $this->Paginator->sort('location');?></th>
-			<th><?php echo $this->Paginator->sort('offshore');?></th>
-			<th><?php echo $this->Paginator->sort('total_working_projects'); ?></th>
-			<th><?php echo $this->Paginator->sort('notes'); ?></th>
-			<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
-			<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('name');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('email');?></th>
+            <th valign="bottom"><?php echo $this->Paginator->sort('type');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('location');?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('offshore');?></th>
+			<th valign="bottom" nowrap><?php echo $this->Paginator->sort('total_Projects'); ?></th>
+			<th valign="bottom"><?php echo $this->Paginator->sort('notes'); ?></th>
+			<th valign="bottom" style="display:none"><?php echo $this->Paginator->sort('created');?></th>
+			<th valign="bottom" style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
+			<th valign="bottom" class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -51,8 +51,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td style="display:none"><?php echo $developer['Developer']['id']; ?>&nbsp;</td>
-		<td width="3%"><?php echo $developer['Developer']['type']; ?>&nbsp;</td>
-		<td width="10%">
+		<td width="10%" class="cli">
 		<?php 
 			if($developer['Developer']['slug']){
 				echo $this->Html->link(__($developer['Developer']['fullname'],true),array('action'=>'view',$developer['Developer']['slug'])); 
@@ -62,6 +61,7 @@
 			
 			?>&nbsp;</td>
 		<td width="25%"><?php echo $developer['Developer']['email']; ?>&nbsp;</td>
+        <td width="3%"><?php echo $developer['Developer']['type']; ?>&nbsp;</td>
 		<td width="10%"><?php echo $developer['Developer']['location']; ?>&nbsp;</td>
 		<td width="20%"><?php 
 			if($developer['Developer']['offshore'] == 1){

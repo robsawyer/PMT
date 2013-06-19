@@ -34,11 +34,48 @@
  */
 class AppController extends Controller {
 	
-	var $components = array('RequestHandler','Session','Email');
-	var $helpers = array('Js' => array('Jquery'),'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text');
+	var $components = array(
+		'Auth' => array(
+			'loginAction' => '/users/login'
+		),
+		'RequestHandler','Session','Email','Search.Prg','AjaxHandler'
+	);
+	var $helpers = array(
+		'Js' => array('Jquery'),
+		'Form', 'Html','Number','Time','Session','Csv','Excel','Xls','Rss','Text'
+	);
 	
-	public $view = 'Theme';
+	public $view = 'theme';
 	public $theme = 'razor-burn';	
+	
+	/**
+	* Before Render
+	*/
+	function beforeRender(){
+		if(!empty($this->data['User'])){
+			unset($this->data['User']['password']);
+			unset($this->data['User']['password_confirm']);
+		}
+		//Gives $userRole to all views
+		$current_user = $this->Auth->user();
+		$logged_in = !empty($current_user) ? true : false;
+		$userRole = $this->Auth->user('role');
+		$this->set(compact('userRole','current_user','logged_in'));
+	}
+	
+	//Alow everything and in each controller set specific permissions
+	function beforeFilter() {
+		//$this->Auth->allow();
+		$user = $this->Auth->user();
+		if(!empty($user)){
+			if($this->Auth->user('role') == "admin"){
+				$admin = true;
+			}else{
+				$admin = false;
+			}
+			$this->set(compact('admin'));
+		}
+	}
 	
 	function toSlug($string) {
 		return Inflector::slug(utf8_encode(strtolower($string)), '-');
@@ -48,6 +85,22 @@ class AppController extends Controller {
 	function resetTempSessionVariables(){
 		//Reset the session variables
 		$this->Session->write('Temp.total_working_projects_set',null);
+	}
+	
+	/**
+	 * Handles checking the user role
+	 * $rolesToAllow : Roles that should be allowed to access a certain section
+	 */
+	function checkUserRoles($rolesToAllow = array('admin')){
+		//User permission check
+		$userRole = $this->Auth->user('role');
+		$totalRoles = count($rolesToAllow) - 1;
+		//for($i = 0; $i<$totalRoles; $i++){
+			if($userRole != "admin" && $userRole != "manager"){
+				$this->Session->setFlash(__('You do not have permission to do this.', true));
+				$this->redirect($this->Auth->loginAction);
+			}
+		//}
 	}
 	
 	function cleanupProjectsArray($projects,$item,$val){

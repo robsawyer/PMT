@@ -1,7 +1,11 @@
+<h2><?php __('Editing '.$this->data['ProjectManager']['name'].'\'s Profile'); ?></h2>
+
 <div class="projectManagers form">
 <?php echo $this->Form->create('ProjectManager');?>
 	<fieldset>
- 		<legend><?php __('Edit Project Manager'); ?></legend>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>    
+<td width="33%"> 		
 	<?php
 		echo $this->Form->input('id');
 		$options = array(
@@ -12,7 +16,7 @@
 		echo $this->Form->input('type', array(
 													'type' =>'select', 
 													'options' => $options,
-													'style'=>'width:300px',
+													'style'=>'width:90%',
 													'empty' => 'Please Select',
 													'class'=>'chzn-select'
 													));
@@ -22,8 +26,32 @@
 		echo $this->Form->input('location',array('after'=>'<div class="subtext">Example: Portland, OR.</div>'));
 		//echo $this->Form->input('Project',array('type'=>'hidden'));
 	?>
+	
+</td>
+<td width="69%"></td>
+</tr>
+</table> 
+<?php echo $this->Form->end(__('Submit', true));?>    
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+
+
+<?php
+	if($admin && $this->data['ProjectManager']['id'] != $userAccount['User']['project_manager_id']):
+		if(!empty($userAccount)):
+	?>
+		<p>If you'd like to update the account password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account',$userAccount['User']['id'])); ?>.</p>
+	<?php
+		else:
+	?>
+		<p class="grn"><strong>This user does not have a user account setup.</strong></p>
+	<?php
+		endif;
+	else:
+	?>
+		<p>If you'd like to update your password, click <?php echo $this->Html->link('here',array('controller'=>'users','action'=>'account')); ?>.</p>
+	<?php
+	endif;
+	?>
 </div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>

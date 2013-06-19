@@ -34,6 +34,9 @@ class ClientsController extends AppController {
 	}
 
 	function add() {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!empty($this->data)) {
 			$this->Client->create();
 			if ($this->Client->save($this->data)) {
@@ -46,6 +49,9 @@ class ClientsController extends AppController {
 	}
 
 	function edit($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid client', true));
 			$this->redirect(array('action' => 'index'));
@@ -64,6 +70,9 @@ class ClientsController extends AppController {
 	}
 
 	function delete($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for client', true));
 			$this->redirect(array('action'=>'index'));

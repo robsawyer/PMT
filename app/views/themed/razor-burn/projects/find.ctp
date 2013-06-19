@@ -1,24 +1,27 @@
 <h2>Project Search</h2>
 <div id="search-form">
 <?php
-	if(!empty($this->data['Project'])) echo "<b>".count($projects)." items were found, see below.</b>";
-	echo $form->create('Project', array(
-		'url' => array_merge(array('action' => 'find'), $this->params['pass'])
-		));
-	echo $form->input('number', array(
-												'label'=>'Project #',
-												'style'=>'width: 150px'
-												));
-	echo $form->input('title', array('div' => true));
-	echo $form->input('description', array('div' => true));
-	//echo $form->input('clients', array('div' => true));
-	echo $form->input('priority', array('div' => true, 'multiple' => 'checkbox', 'options' => array('unknown','low', 'medium','high','critical')));
-	echo $form->input('offshore', array('div' => true, 'multiple' => 'checkbox', 'options' => array('no', 'yes')));
-	echo $form->input('complete', array('div' => true, 'multiple' => 'checkbox', 'options' => array('incomplete', 'complete')));
-	echo $form->submit(__('Search', true), array('div' => true));
-	echo $form->end();
-	
-?>
+	if(!empty($this->data['Project'])) echo "<strong>".count($projects)." items were found, see below.</strong>";
+	echo $form->create('Project', array('url' => array_merge(array('action' => 'find'), $this->params['pass']))); ?>
+
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>    
+<td width="34%">
+<?php echo $form->input('title', array('div' => false)); ?>
+<?php echo $form->input('number', array('div' => false)); ?>
+<?php echo $form->input('offshore', array('div' => false, 'multiple' => 'checkbox', 'options' => array('no', 'yes'))); ?>
+<?php echo $form->input('complete', array('div' => false, 'multiple' => 'checkbox', 'options' => array('incomplete', 'complete'))); ?>
+</td>
+<td width="66%" class="rform">
+<?php echo $form->input('description', array('div' => false)); ?>
+<?php //echo $form->input('clients', array('div' => false)); ?>
+<?php echo $form->input('priority', array('div' => false, 'multiple' => 'checkbox', 'options' => array('low', 'medium','high','critical'))); ?>
+</td>
+</table>     
+ 
+<?php echo $form->submit(__('Search', true), array('div' => false));
+	  echo $form->end(); ?>
+            
 </div>
 
 <?php
@@ -27,17 +30,17 @@
 		<table cellpadding="0" cellspacing="0">
 		<tr>
 				<th style="display:none"><?php echo $this->Paginator->sort('id');?></th>
-				<th><?php echo $this->Paginator->sort('number');?></th>
 				<th><?php echo $this->Paginator->sort('client_id');?></th>
 				<th><?php echo $this->Paginator->sort('type');?></th>
 				<th><?php echo $this->Paginator->sort('name');?></th>
 				<th style="display:none"><?php echo $this->Paginator->sort('description');?></th>
-				<th><?php echo $this->Paginator->sort('url');?></th>
+				<th><?php echo $this->Paginator->sort('URL');?></th>
+                <th><?php echo $this->Paginator->sort('number');?></th>
 				<th><?php echo $this->Paginator->sort('offshore');?></th>
 				<th><?php echo $this->Paginator->sort('started');?></th>
 				<th><?php echo $this->Paginator->sort('complete');?></th>
 				<th style="display:none"><?php echo $this->Paginator->sort('start');?></th>
-				<th><?php echo $this->Paginator->sort('priority');?></th>
+				<th nowrap><?php echo $this->Paginator->sort('priority');?></th>
 				<th><?php echo $this->Paginator->sort('due');?></th>
 				<th style="display:none"><?php echo $this->Paginator->sort('created');?></th>
 				<th style="display:none"><?php echo $this->Paginator->sort('modified');?></th>
@@ -81,8 +84,8 @@
 		?>
 		<tr<?php echo $class; ?>>
 			<td style="display:none"><?php echo $project['Project']['id']; ?>&nbsp;</td>
-			<td><?php if($project['Project']['number']) echo $this->Html->link(__($project['Project']['number'], true), array('action' => 'view', $project['Project']['id'])); ?>&nbsp;</td>
-			<td width="15%">
+	
+			<td width="15%" class="cli">
 				<?php echo $this->Html->link($project['Client']['name'], array('controller' => 'clients', 'action' => 'view', $project['Client']['id'])); ?>
 			</td>
 			<td><?php echo $project['Project']['type']; ?>&nbsp;</td>
@@ -97,6 +100,7 @@
 					echo $this->Html->link($cleanURL,$project['Project']['url'],array('target'=>'_blank'));
 				} 
 				?>&nbsp;</td>
+            <td><?php if($project['Project']['number']) echo $this->Html->link(__($project['Project']['number'], true), array('action' => 'view', $project['Project']['id'])); ?>&nbsp;</td>    
 			<td><?php 
 				if($project['Project']['offshore'] == 1){
 					echo "Yes"; 
@@ -163,16 +167,14 @@
 		</div>
 <?php }else{
 	?>
-	<table cellpadding="0" cellspacing="0" style="border-top: 2px solid #000; width: 96%;">
-		<tr>
+	
 			<?php
 			if(empty($this->data['Project'])){
 			?>
-			<th style="font-size: 16px; color: red;padding: 25px 0 20px 0;">Enter criteria above and click search.</th>
+			<p class="srchprompt"><strong>Enter what you are looking for above and click <span class="grn">search</span>.</strong></p><!---->
 			<?php }else{ ?>
-			<th style="font-size: 16px; color: red;padding: 25px 0 20px 0;">No results found.</th>
+			<p><span class="grn"><strong>No results were found.</strong></span></p>
 			<?php } ?>
-		</tr>
-	</table>
+	
 	<?php
 } ?>	

@@ -105,6 +105,9 @@ class DevelopersController extends AppController {
 	}
 
 	function add() {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!empty($this->data)) {
 			$this->Developer->create();
 			$this->data['Developer']['slug'] = $this->toSlug($this->data['Developer']['fullname']);
@@ -124,6 +127,9 @@ class DevelopersController extends AppController {
 	}
 
 	function edit($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid developer', true));
 			$this->redirect(array('action' => 'index'));
@@ -191,6 +197,9 @@ class DevelopersController extends AppController {
 	
 	
 	function delete($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for developer', true));
 			$this->redirect(array('action'=>'index'));

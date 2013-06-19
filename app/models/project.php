@@ -3,6 +3,12 @@ class Project extends AppModel {
 	var $name = 'Project';
 	var $displayField = 'title';
 	var $actsAs = array('Containable','Search.Searchable');
+
+	/*var $virtualFields = array(
+		'project_count' => 'COUNT(Project.id)', //This screws up the project list
+		'total_sum' => 'SUM(Project.total_units)'
+	);*/
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	
 	var $filterArgs = array(
@@ -25,9 +31,16 @@ class Project extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
-
+	
 	var $hasAndBelongsToMany = array(
 		'Developer' => array(
 			'className' => 'Developer',

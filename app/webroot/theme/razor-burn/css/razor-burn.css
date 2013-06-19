@@ -352,7 +352,7 @@ div.chzn-container-active ul.chzn-choices input {
 	font-weight:700;
 	padding: 5px 9px 5px 30px !important;
 	/*width:100%;*/	
-	color:#000;
+	color:#3d3d3d;
 	list-style: circle;
 	text-decoration:none;
 	font-family:Arial, Helvetica, sans-serif !important;
@@ -385,4 +385,37 @@ div.chzn-container-active ul.chzn-choices input {
 #accordion ul li a{
 	padding-left:0 !important;
 	padding-right:0 !important;
+}
+
+/** V2.0 **/
+div.user-info{
+	position: relative;
+	float: right;
+	font-size: 12px;
+	line-height:12px;
+	margin: 0 22px 0 0;
+	padding: 0px;
+}
+div.user-info p{
+	margin:0;
+	padding:0;
+	color:#ddd;
+	text-align:right;
+}
+div.user-info a:link,
+div.user-info a:visited,
+div.user-info a:active{
+	color: #ddd !important;
+	text-decoration: underline !important;
+}
+div.user-info a:hover{
+	color: #fff;
+}
+/** END V2.0 **/
+
+div.reports{
+	position:relative;
+}
+td.notes{
+	width:100%;
 }

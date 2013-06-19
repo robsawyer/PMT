@@ -4,16 +4,17 @@ class ProjectsController extends AppController {
 	var $name = 'Projects';
 	
 	// Include the RequestHandler, it makes sure the proper layout and views files are used 
-	var $components = array('Search.Prg','AjaxHandler');
+	//var $components = array('Search.Prg','AjaxHandler');
+	
 	//var $helpers = array('Number');
 	var $paginate = array(
-								'limit' => 100,
-								'order' => array(
-													'Project.priority' => 'desc',
-													'Client.name' => 'asc'
-													//'Project.type' => 'asc'
-													)
-								);
+						'limit' => 100,
+						'order' => array(
+										'Project.priority' => 'desc',
+										'Client.name' => 'asc'
+										//'Project.type' => 'asc'
+										)
+						);
 
 	var $presetVars = array(
 		array('field' => 'number', 'type' => 'value'),
@@ -23,6 +24,11 @@ class ProjectsController extends AppController {
 		array('field' => 'priority', 'type' => 'checkbox'),
 		array('field' => 'offshore', 'type' => 'checkbox'),
 	);
+	
+	function beforeFilter(){
+		parent::beforeFilter();
+		$this->Auth->allow(array('full_report','offshore_report','bypm','find','duplicate','exportxls','exportcsv','rss','calendar','ajax_*'));
+	}
 
 	/************** AJAX CALLS *******************/
 	function ajax_toggle_hold($id=null){
@@ -139,6 +145,187 @@ class ProjectsController extends AppController {
 	
 	/************** END AJAX CALLS *******************/
 	
+/**
+ * graph_yearly method
+ * Controls a chart that shows yearly project data
+ * @param void
+ * @return void
+ */
+	function graph_yearly(){
+		//$this->layout = false;
+		//$this->autoRender = false;
+		$yearly = $this->Project->find('all',array(
+			'conditions' => array(
+				'Project.due !=' => NULL
+			),
+			'recursive' => -1,
+			'fields' => array('id', 'due', 'project_count'),
+			'group' => array('YEAR(Project.due)', 'MONTH(Project.due)')
+		));
+		$due_dates = Set::classicExtract($yearly, '{n}.Project.due');
+		$project_counts = Set::classicExtract($yearly, '{n}.Project.project_count');
+		$total_steps = count($due_dates);
+		/*for($i=0;$i<count($due_dates);$i++){
+			$due_dates[$i] = date('M Y', strtotime($due_dates[$i]));
+		}*/
+		$graph_data = '[';
+		for($i=0;$i<$total_steps;$i++){
+			if($i < ($total_steps-1)){
+				$graph_data .= strval('[ new Date("' . $due_dates[$i] . '"),' . $project_counts[$i] . '],');
+			}else{
+				$graph_data .= strval('[ new Date("' . $due_dates[$i] . '"),' . $project_counts[$i] . ']');
+			}
+		}
+		$graph_data .= ']';
+		//debug($graph_data);
+		$this->set(compact('graph_data','total_steps'));
+	}
+
+/**
+ * graph_monthly method
+ * Controls a chart that shows monthly project data
+ * @param void
+ * @return void
+ */
+	function graph_monthly($years = 3){
+		//$this->layout = false;
+		//$this->autoRender = false;
+		$yearlyData = array();
+		$curYear = date('Y');
+		debug('Current year: ' . $curYear);
+		//Get the main data used for the chart
+		$monthlyProjectData = $this->getYearlyData($years, 'COUNT(Project.id)');
+		$monthlyUnitData = $this->getYearlyData($years, 'SUM(Project.total_units)');
+		
+		$monthly_project_graph_data = $this->buildGraphData($monthlyProjectData);
+		$monthly_unit_graph_data = $this->buildGraphData($monthlyUnitData);
+
+		debug('Graph data: ' . $monthly_project_graph_data);
+		debug('Graph data: ' . $monthly_unit_graph_data);
+		$this->set(compact('monthly_project_graph_data','monthly_unit_graph_data'));
+	}
+
+/**
+ * buildGraphData method 
+ * @param array $data 
+ * @param string $date_key The date key to traverse array with 
+ * @param string $total_key The totals key to traverse array with 
+ * @return string
+ */
+	function buildGraphData($data = array(), $date_key = 'dates', $total_key = 'totals'){
+
+		//Find the month that contains the most data, if the xAxis totals don't match an error will occur.
+		$chartXCount = $this->findMaxXVal($data);
+		debug("Highest data val:" . $chartXCount); //Should be 12 months
+
+		//Build the legend
+		$graph_data = '"X,';
+		$count = 0;
+		foreach($data as $key => $year){
+			$graph_data .= strval($key);
+			if( ($count + 1) < count($data) ){
+				$graph_data .= ',';
+			}
+			$count++;
+		}
+		$graph_data .= '\n';
+		//Run through each month's (that is available) dataset	
+		for($k=0;$k<$chartXCount;$k++){
+		
+			if(($k+1)<10) {
+				$month = strval('0' . ($k+1));
+			}else{
+				$month = $k+1;
+			}
+			$graph_data .= date('Y') . '-' . $month . '-01,';
+
+			$counter = 0;
+			//Run through each year
+			foreach($data as $key => $year){
+
+				if(!empty($data[$key][$date_key][$k])){
+					$data[$key][$date_key][$k] = date('Y-m-d', strtotime($data[$key][$date_key][$k]));
+					//Add the month's total
+					$graph_data .= $data[$key][$total_key][$k];
+				}else{
+					$graph_data .= 0;
+				}
+				
+				if( ($counter+1) < count($data) ){
+					$graph_data .= ',';
+				}
+				if( ($counter+1) == count($data) ){
+					$graph_data .= '\n ';
+				}
+				$counter++;
+			}
+		}
+		$graph_data .= '"';
+		return $graph_data;
+	}
+
+/**
+ * findMaxXVal method
+ * Finds the maxium number of xvals in the array
+ * @param array
+ * @return int
+ */
+	function findMaxXVal($ar = array()){
+		$chartXCount = 0;
+		foreach($ar as $key => $year){
+			$tCount = count($ar[$key]['dates']);
+			if($tCount > $chartXCount){
+				$chartXCount = $tCount;
+			}
+		}
+		return $chartXCount;
+	}
+
+/**
+ * getYearlyData method
+ * Returns an array that contains yearly data for a certain # of years in the past 
+ * @param int $years years to pull data from (starts from current year)
+ * @param string $routine A SQL routine to run on the data
+ * @return array
+ */
+	function getYearlyData($years = 3, $routine = 'COUNT(Project.id)', $date_column = 'due'){
+		$yearlyData = array();
+		$curYear = date('Y');
+		$this->Project->virtualFields['temp_vf'] = $routine;
+		for($i=0;$i<$years;$i++){
+			$start_date = date('Y-m-d', strtotime('01/01/' . ($curYear - $i) ));
+			$end_date = date('Y-m-d', strtotime('12/31/' . ($curYear - $i) ));
+			//debug( $start_date );
+			//debug( $end_date );
+			$yearlyData[($curYear-$i)] = $this->Project->find('all',array(
+				'conditions' => array(
+					'Project.'.$date_column.' !=' => null,
+					'Project.'.$date_column.' BETWEEN ? AND ?' => array($start_date,$end_date)
+				),
+				'recursive' => -1,
+				'fields' => array('id', $date_column, 'temp_vf'),
+				'group' => array('YEAR(Project.'.$date_column.')','MONTH(Project.'.$date_column.')')
+			));
+			$temp = $yearlyData[($curYear-$i)];
+			$yearlyData[($curYear-$i)] = array();
+			$yearlyData[($curYear-$i)]['dates'] = Set::classicExtract($temp, '{n}.Project.due');
+			$yearlyData[($curYear-$i)]['totals'] = Set::classicExtract($temp, '{n}.Project.temp_vf');
+			//debug($yearlyData[($curYear-$i)]);
+		}
+		return $yearlyData;
+	}
+
+/**
+ * 
+ */
+	function convertToJsArray($arr = array()){
+		return "[\"" . join("\", \"", $arr) . "\"]";
+	}
+
+	function convertToJsArrayOfInts($arr = array()){
+		return "[" . join(", ", $arr) . "]";
+	}
+
 	function rss() {
 		Configure::write ('debug', 0);
 		$this->viewPath .= '/rss';
@@ -150,6 +337,25 @@ class ProjectsController extends AppController {
 				'description' => '',
 				'link' => '/projects/rss',
 				'url' => '/projects/rss',
+				'language' => 'en',
+				'image' => "<url>http://pmt.razorfishcreative.com/img/sa/razorfish.png</url><title>PMT | Production Manager Tool</title><link>http://pmt.razorfishcreative.com/</link><width>203</width><height>56</height>"
+		);
+		$this->set('channel', $channel_data);
+		$this->set(compact('projects'));
+		$this->RequestHandler->respondAs('rss');
+	}
+	
+	function offshore_rss() {
+		Configure::write ('debug', 0);
+		$this->viewPath .= '/rss';
+		$this->layoutPath = 'rss';
+		
+		$projects = $this->Project->find('all',array('conditions'=>array('Project.complete'=>0,'Project.offshore'=>1)));
+		$channel_data = array(
+				'title' => "PMT | Production Manager Tool",
+				'description' => '',
+				//'link' => '/projects/offshore/rss',
+				//'url' => '/projects/offshore/rss',
 				'language' => 'en',
 				'image' => "<url>http://pmt.razorfishcreative.com/img/sa/razorfish.png</url><title>PMT | Production Manager Tool</title><link>http://pmt.razorfishcreative.com/</link><width>203</width><height>56</height>"
 		);
@@ -174,7 +380,7 @@ class ProjectsController extends AppController {
 	function index() {
 		$this->resetTempSessionVariables();
 		
-		$this->Project->recursive = 0;
+		$this->Project->recursive = -1;
 		
 		$lowPriorityProjects = $this->Project->find('all',array(
 			'conditions'=>array('Project.priority'=>1,'Project.complete'=>0)
@@ -230,19 +436,42 @@ class ProjectsController extends AppController {
 				$totalProjectsIncompleteCounter++;
 			//}
 		}
-		$percentageComplete = $percentageComplete / $totalProjectsIncompleteCounter;	$this->set(compact('inhouseProjects','offshoreProjects','completeProjects','incompleteProjects','richMedia','standardMedia','incompleteOffshoreProjects','completeOffshoreProjects','completeInhouseProjects','incompleteInhouseProjects','lowPriorityProjects','mediumPriorityProjects','highPriorityProjects','criticalPriorityProjects','percentageComplete','incompleteUnits'));
+		$percentageComplete = $percentageComplete / $totalProjectsIncompleteCounter;	
+		$this->set(compact(
+			'inhouseProjects',
+			'offshoreProjects',
+			'completeProjects',
+			'incompleteProjects',
+			'richMedia',
+			'standardMedia',
+			'incompleteOffshoreProjects',
+			'completeOffshoreProjects',
+			'completeInhouseProjects',
+			'incompleteInhouseProjects',
+			'lowPriorityProjects',
+			'mediumPriorityProjects',
+			'highPriorityProjects',
+			'criticalPriorityProjects',
+			'percentageComplete',
+			'incompleteUnits'
+		));
 		
 		$this->paginate = array( 
-							'limit' => 100,
-							'conditions' => array('Project.complete' =>0),
+							'conditions' => array(
+								'Project.complete' => 0
+							),
 							'order' => array(
-												'Project.priority' => 'desc',
-												'Client.name' => 'asc'
-												//'Project.type' => 'asc'
-												),
-							'contain' => array('Client','ProductionManager')
-							);
-							
+											'Project.priority' => 'desc',
+											'Client.name' => 'asc'
+											//'Project.type' => 'asc'
+											),
+							'contain' => array(
+								'Client' => array('fields' => array('id','name')),
+								'ProductionManager' => array('fields' => array('id','title','fullname','slug'))
+							),
+							'limit' => 100,
+							'page' => 1
+						);
 		$this->set('projects', $this->paginate('Project'));
 	}
 	
@@ -861,6 +1090,8 @@ class ProjectsController extends AppController {
 	}
 
 	function add() {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
 		
 		if (!empty($this->data)) {
 			//debug($this->data);
@@ -918,6 +1149,9 @@ class ProjectsController extends AppController {
 	}
 
 	function edit($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid project', true));
 			$this->redirect(array('action' => 'index'));
@@ -977,6 +1211,9 @@ class ProjectsController extends AppController {
 	}
 
 	function delete($id = null) {
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for project', true));
 			$this->redirect(array('action'=>'index'));
@@ -992,6 +1229,9 @@ class ProjectsController extends AppController {
 	}
 	
 	function full_report(){
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		$this->Project->recursive = 1;
 		$offshoreProjects = $this->Project->find('all',array(
 			'conditions'=>array('Project.offshore'=>1)
@@ -1037,6 +1277,9 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_report(){
+		//Check to see if the user has permission to access
+		$this->checkUserRoles(array('admin','manager'));
+		
 		$this->Project->recursive = 1;
 		$offshoreProjects = $this->Project->find('all',array(
 			'conditions'=>array('Project.offshore'=>1)
@@ -1134,6 +1377,7 @@ class ProjectsController extends AppController {
 	}*/
 	
 	function exportxls(){ 
+		
 		$this->layout = 'ajax';
 		$this->autoLayout = false;
 		//$this->autoRender = false;
@@ -1489,6 +1733,7 @@ class ProjectsController extends AppController {
 	}
 	
 	function offshore_exportPdf(){
+		
 		$this->layout = 'pdf'; //this will use the pdf.ctp layout 
 		$this->autoLayout = false;
 		//$this->autoRender = false;
