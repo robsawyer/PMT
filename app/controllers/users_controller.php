@@ -8,7 +8,7 @@ class UsersController extends AppController {
 	*/
 	function beforeFilter(){
 		parent::beforeFilter();
-		$this->Auth->allow(array('create'));
+		$this->Auth->allow(array('create','find'));
 		$this->Auth->fields = array('username' => 'username', 'password' => 'password');
 		$this->Auth->autoRedirect = false;
 		$this->Auth->loginRedirect = array('controller' => 'projects', 'action' => 'index');
@@ -27,17 +27,23 @@ class UsersController extends AppController {
 			//The person must be in the system before they can create an account
 			$user_email = trim($this->data['User']['email']);
 			$production_manager = $this->User->ProductionManager->find('first',array(
-																					'conditions'=>array('ProductionManager.email' => $user_email),
+																					'conditions'=>array(
+																						'ProductionManager.email LIKE' => '%' . $user_email . '%'
+																					),
 																					'recursive' => -1
-																					));
+																				));
 			$project_manager = $this->User->ProjectManager->find('first',array(
-																				'conditions'=>array('ProjectManager.email' => $user_email),
+																				'conditions'=>array(
+																					'ProjectManager.email LIKE' => '%' . $user_email . '%'
+																				),
 																				'recursive' => -1
-																				));
+																			));
 			$offshore_project_manager = $this->User->OffshoreProjectManager->find('first',array(
-																				'conditions'=>array('OffshoreProjectManager.email' => $user_email),
+																				'conditions'=>array(
+																					'OffshoreProjectManager.email LIKE' => '%' . $user_email . '%'
+																				),
 																				'recursive' => -1
-																				));
+																			));
 																																				
 			$passValidation = false;
 			if(!empty($production_manager)){
@@ -61,6 +67,7 @@ class UsersController extends AppController {
 					
 					$user['User']['username'] = $this->data['User']['username'];
 					$user['User']['password'] = $this->data['User']['password'];
+					$user['User']['role'] = "manager";
 					$this->Auth->login($user); //Log the new user in
 					
 					$this->redirect($this->Auth->loginRedirect);
@@ -72,6 +79,33 @@ class UsersController extends AppController {
 			}
 		}
 	}
+
+/**
+ * Helper method to update accounts
+ */
+	/*function update_roles(){
+		$this->autoRender = false;
+		$users = $this->User->find('all',array(
+			'fields' => array('id','role','username'),
+			'recursive' => -1
+		));
+		debug($users);
+		for($i=0;$i<count($users);$i++){
+			if($users[$i]['User']['id'] == 3){ //Apply admin status to robsa
+				$users[$i]['User']['role'] = 'admin';
+			}else{
+				$users[$i]['User']['role'] = 'manager';
+			}
+		}
+		debug($users);
+		if($this->User->saveAll($users, array('fieldList' => array('role')))){
+			$users = $this->User->find('all',array(
+				'fields' => array('id','role','username'),
+				'recursive' => -1
+			));
+			debug($users);
+		}
+	}*/
 	
     /**
      *  The AuthComponent provides the needed functionality

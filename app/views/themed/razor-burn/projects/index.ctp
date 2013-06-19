@@ -307,12 +307,13 @@ $('#accordion ul:eq(0)').show();
  |<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?></div><!-- end of paging -->
 
 <div class="actions">
-<h3><?php __('Actions'); ?></h3>
-<ul>
-<li><?php echo $this->Html->link('RSS Feed', '/projects/rss'); ?></li>
-<li><?php echo $this->Html->link(__('New Project', true), array('action' => 'add')); ?></li>
+<h3 style="float:left; display: inline"><?php __('Actions: '); ?></h3>
+<ul style="float:left; margin-left: 5px; display: inline">
+	<li style="display: inline; margin-right: 5px;"><?php echo $this->Html->link('RSS Feed', '/projects/rss'); ?></li>
+	<li style="display: inline;"><?php echo $this->Html->link(__('New Project', true), array('action' => 'add')); ?></li>
 </ul>
+<div class="clear"></div>
 </div><!-- end of actions -->
-
+<br><br><br>
 <?php echo $this->Html->script('data-toggle'); ?>
 
