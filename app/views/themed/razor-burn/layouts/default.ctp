@@ -35,7 +35,7 @@
 			
 			echo "<!-- Include jquery 1.4.2 via google apis -->" . "\n";
 			echo $this->Html->script('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js') . "\n";
-			//echo $javascript->link('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js');
+			//echo $this->Html->script('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js');
 			echo $this->Html->script('jquery-ui-1.7.2.custom.min') . "\n";
 			echo $this->Html->script('jquery.autocomplete.min') . "\n";
 			echo $this->Html->script('jquery.jeditable.mini') . "\n";

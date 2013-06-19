@@ -39,10 +39,10 @@ a:visited{
 	text-decoration:none !important;
 	/*padding:0 3px 0 3px;*/
 }
-a:hover,a.hover,a:hover span,span.anchor-hover{
+a:hover,a.hover,span.anchor-hover{
+	background-color:#000;
+	color:#fff;
 	cursor:pointer;
-	background-color:#000 !important;
-	color:#ccc;
 	/*padding:3px 4px  !important;*/
 	}
 a img{
@@ -228,7 +228,7 @@ div.nippleBox div.bar h4{
 	float: left;
 	clear: none;
 	font-style:normal;
-	margin:0px 10px 0 0px;
+	margin:0px 5px 0 5px;
 	padding:0;
 }
 
@@ -467,22 +467,13 @@ div.nippleBox div.bar h4{
 	color:#bed300;
 	font-weight:700;
 }
-table tr.on-hold td, table tr.on-hold td a{
-	/*opacity:0.5;
-	filter:alpha(opacity=50);*/
-	color:#ccc !important;
-}
-table tr.on-hold td.actions, table tr.on-hold td.actions a{
-	/*opacity:1 !important;
-	filter:alpha(opacity=100) !important;*/
-	color:inherit !important;
-}
 
-table td.cli, table td.actions, table td.act, table td.rig{
+
+table td.cli, table td.actions, table td.act{
 	border-right:1px solid #ddd;
 	height:24px;
 }
-table td.cli, table td.lef{
+table td.cli{
 	border-left:1px solid #ddd;
 	height:24px;
 }
@@ -587,7 +578,7 @@ ul.details-panel li.new-row{
 /* SEARCH FORM */
 #ProjectFindForm{
 	border: 1px solid #666666;
-	/*padding: 10px;*/
+	padding: 10px;
 	margin-top: 20px !important;
 }
 
