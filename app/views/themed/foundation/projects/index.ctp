@@ -1,7 +1,6 @@
 <?php echo $this->Html->meta('RSS Feed', '/projects/rss'); ?>
 <div class="row">
 	<div class="section-container accordion" data-section="accordion">
-
 		<section>
 			<p class="title" data-section-title><?php echo $this->Html->link('All Projects','#all'); ?></p>
 			<div class="content" data-slug="all" data-section-content>
@@ -42,7 +41,7 @@
 				</ul>
 			</div>
 		</section>
-		
+
 		<section>
 			<p class="title" data-section-title><?php echo $this->Html->link('Projects by Type','#type'); ?></p>
 			<div class="content" data-slug="type" data-section-content>
@@ -81,28 +80,27 @@
 				</ul>
 			</div>
 		</section>
-		
 	</div>
+	<hr>
 </div>
 <div class="row">
-	<hr>
 	<table class="responsive">
 		<thead>
 			<tr>
-				<th><?php echo $this->Paginator->sort('client_id');?></th>
-				<th><?php echo $this->Paginator->sort('type');?></th>
-				<th><?php echo $this->Paginator->sort('name');?></th>
-				<th><?php echo $this->Paginator->sort('URL');?></th>
-				<th><?php echo $this->Paginator->sort('number');?></th>
-				<th><?php echo $this->Paginator->sort('offshore');?></th>
-				<th><?php echo $this->Paginator->sort('started');?></th>
-				<th><?php echo $this->Paginator->sort('on_hold');?></th>
-				<th><?php echo $this->Paginator->sort('complete');?></th>
-				<th><?php echo $this->Paginator->sort('priority');?></th>
-				<th><?php echo $this->Paginator->sort('due');?></th>
-				<th><?php __('Production Manager(s)');?></th>
+				<th style="width:15%"><?php echo $this->Paginator->sort('client_id');?>&nbsp;</th>
+				<th style="width:15%"><?php echo $this->Paginator->sort('type');?>&nbsp;</th>
+				<th style="width:25%"><?php echo $this->Paginator->sort('name');?>&nbsp;</th>
+				<th style="width:30%"><?php echo $this->Paginator->sort('URL');?>&nbsp;</th>
+				<th style="width:10%"><?php echo $this->Paginator->sort('number');?>&nbsp;</th>
+				<th style="width:5%"><?php echo $this->Paginator->sort('offshore');?>&nbsp;</th>
+				<th style="width:5%"><?php echo $this->Paginator->sort('started');?>&nbsp;</th>
+				<th style="width:5%"><?php echo $this->Paginator->sort('on_hold');?>&nbsp;</th>
+				<th style="width:5%"><?php echo $this->Paginator->sort('complete');?>&nbsp;</th>
+				<th style="width:5%"><?php echo $this->Paginator->sort('priority');?>&nbsp;</th>
+				<th style="width:10%"><?php echo $this->Paginator->sort('due'); ?>&nbsp;</th>
+				<th style="width:15%"><?php echo $this->Paginator->sort('Production Manager(s)','ProductionManagerProjects.production_manager_id'); ?></th>
 				<?php if($userRole == "admin" || $userRole == "manager"): ?>
-				<th class="actions"><?php // __('Actions');?></th>
+				<th style="width:30%" class="actions"><?php __('Actions');?>&nbsp;</th>
 				<?php endif; ?>
 			</tr>
 		</thead>
@@ -171,22 +169,26 @@
 				}
 			?>
 			<tr class="<?php echo $classCla; ?> <?php echo $holdClassCla; ?>">
-				<td class="cli"><?php echo $this->Html->link($project['Client']['name'], array('controller' => 'clients', 'action' => 'view', $project['Client']['id'])); ?></td>
-				<td><?php echo $project['Project']['type']; ?>&nbsp;</td>
-				<td><span><?php echo $this->Html->link(__($project['Project']['title'], true), array('action' => 'view', $project['Project']['id']));?></span>&nbsp;</td>
-				<td>
+				<td style="width:15%" class="cli"><?php echo $this->Html->link($project['Client']['name'], array('controller' => 'clients', 'action' => 'view', $project['Client']['id'])); ?></td>
+				<td style="width:15%"><?php echo $project['Project']['type']; ?>&nbsp;</td>
+				<td style="width:25%"><span><?php echo $this->Html->link(__($project['Project']['title'], true), array('action' => 'view', $project['Project']['id']));?></span>&nbsp;</td>
+				<td style="width:30%">
 				<?php 
 				//Clean up the Jira link
+				$cleanURL = $project['Project']['url'];
 				//Remove the 'https://razorfish.jira.com/browse/' and replace with just the task URL
-				$cleanURL = str_replace("https://razorfish.jira.com/browse/","",$project['Project']['url']);
-				$cleanURL = str_replace("https://razorfish-nw.atlassian.net/browse/","",$project['Project']['url']);
-	
+				if(strpos($project['Project']['url'], "https://razorfish.jira.com/browse/") !== false){
+					$cleanURL = str_replace("https://razorfish.jira.com/browse/","",$project['Project']['url']);
+				}
+				if(strpos($project['Project']['url'], "https://razorfish-nw.atlassian.net/browse/") !== false){
+					$cleanURL = str_replace("https://razorfish-nw.atlassian.net/browse/","",$project['Project']['url']);
+				}
 				if($project['Project']['url']){
 					echo $this->Html->link($cleanURL,$project['Project']['url'],array('target'=>'_blank'));
 				} 
 				?>&nbsp;</td>
-				<td><?php if($project['Project']['number']) echo $this->Html->link(__($project['Project']['number'], true), array('action' => 'view', $project['Project']['id'])); ?>&nbsp;</td>
-				<td><?php 
+				<td style="width:10%"><?php if($project['Project']['number']) echo $this->Html->link(__($project['Project']['number'], true), array('action' => 'view', $project['Project']['id'])); ?>&nbsp;</td>
+				<td style="width:5%"><?php 
 						if($project['Project']['offshore'] == 1){
 							$offshoreVal = "<i class='icon-ok'></i>"; 
 						}else{
@@ -194,7 +196,7 @@
 						}
 						echo $this->Js->link($offshoreVal,'/projects/ajax_toggle_offshore/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_offshore','success'=>'toggleOffshore(data);','escape'=>false,'title'=>"Offshore"));
 					?>&nbsp;</td>
-				<td><?php 
+				<td style="width:5%"><?php 
 						if($project['Project']['started'] == 1){
 							$startedVal = "<i class='icon-ok'></i>"; 
 						}else{
@@ -202,11 +204,11 @@
 						}
 						echo $this->Js->link($startedVal,'/projects/ajax_toggle_started/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_started','success'=>'toggleStarted(data);','escape'=>false,'title'=>"Started"));
 					?>&nbsp;</td>
-				<td<?php echo $holdClass; ?>>
+				<td style="width:5%" <?php echo $holdClass; ?>>
 				<?php 
 						echo $this->Js->link($holdVal,'/projects/ajax_toggle_hold/'.$project['Project']['id'],array('id'=>$project['Project']['id'].'_hold','success'=>'toggleHold(data);','escape'=>false,'title'=>"On hold"));
 					?>&nbsp;</td>
-				<td><?php 
+				<td style="width:5%"><?php 
 						if($project['Project']['complete'] == 1){
 							$completeVal = "<i class='icon-ok'></i>"; 
 						}else{
@@ -223,7 +225,7 @@
 						$QAClass = '';
 					}
 					?>
-				<td class="stat">
+				<td style="width:5%" class="stat">
 				<?php 
 							switch($project['Project']['priority']){
 								case 1:
@@ -240,8 +242,8 @@
 									break;
 							}
 						?>&nbsp;</td>
-				<td title="Due date"><?php echo $this->Time->relativeTime($project['Project']['due']); ?>&nbsp;</td>
-				<td class="prod">
+				<td style="width:10%" title="Due date"><?php echo $this->Time->relativeTime($project['Project']['due']); ?>&nbsp;</td>
+				<td style="width:15%" class="prod">
 				<?php 
 						$counter = count($project['ProductionManager']);
 						foreach($project['ProductionManager'] as $pm){
@@ -253,7 +255,7 @@
 						}
 						?>&nbsp;</td>
 				<?php if($userRole == "admin" || $userRole == "manager"): ?>
-				<td class="actions" class="prod">
+				<td class="actions">
 				<?php //echo $this->Html->link(__('View', true), array('action' => 'view', $project['Project']['id'])); ?>
 				<?php echo $this->Html->link(__('Duplicate', true), array('action' => 'duplicate', $project['Project']['id']),array('class'=>'small button')); ?>
 				<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $project['Project']['id']),array('class'=>'small button')); ?>
@@ -263,6 +265,7 @@
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<hr>
 </div>
 <div class="row">
 	<p><?php
@@ -274,12 +277,13 @@
 	<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?> | <?php echo $this->Paginator->numbers();?> | <?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div><!-- end of paging -->
 </div>
-<hr>
-<div class="row actions">
-	<ul class="inline-list">
-		<li><?php echo $this->Html->link('RSS Feed', '/projects/rss',array('class'=>'small button')); ?></li>
-		<li><?php echo $this->Html->link(__('New Project', true), array('action' => 'add'),array('class'=>'small button')); ?></li>
-	</ul>
+<div class="row">
+	<div class="actions">
+		<ul class="inline-list">
+			<li><?php echo $this->Html->link('RSS Feed', '/projects/rss',array('class'=>'small button')); ?></li>
+			<li><?php echo $this->Html->link(__('New Project', true), array('action' => 'add'),array('class'=>'small button')); ?></li>
+		</ul>
+	</div>
 </div><!-- end of actions -->
 <script type="text/javascript">
 $(document).foundation(

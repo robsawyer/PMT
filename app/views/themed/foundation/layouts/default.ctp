@@ -19,12 +19,15 @@
 	echo $this->Html->css('foundation.min');
 	echo $this->Html->css('font-awesome.min');
 	echo $this->Html->css('responsive-tables');
+	echo $this->Html->css('app');
+	echo $this->Html->css('chosen/chosen');
 
 	echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js');
 
 	echo $this->Html->script('vendor/modernizr.foundation.js');
 	echo $this->Html->script('foundation.min');
 	echo $this->Html->script('responsive-tables');
+	echo $this->Html->script('chosen/chosen.jquery.min');
 
 	echo $scripts_for_layout;
 	
@@ -38,40 +41,38 @@
 </head>
 <body class="antialiased">
 	<!-- This is for the popup plugin -->
-	<div class="popups" style="z-index: 1000;"></div>
+	<div class="container popups" style="z-index: 1000;"></div>
 	<?php if(!empty($username)): ?>
 	<?php echo $this->element('nav'); ?>
 	<?php endif; ?>
 	<div class="row">
-		<div class="large-12 columns">
-			<div class="label"><?php echo $this->Session->flash(); ?></div>
-			<?php echo $content_for_layout; ?>
-		</div><!-- end of content -->
-		<div class="large-12 columns">
-			<div class="footer row">
-				<?php 
-					if(!empty($current_user['project_manager_id'])){
-						$controller = "project_managers";
-						$id = $current_user['project_manager_id'];
-					}
-					if(!empty($current_user['production_manager_id'])){
-						$controller = "production_managers";
-						$id = $current_user['production_manager_id'];
-					}
-					if($current_user['role'] == "admin"){
-						echo "Logged in as $username (Admin) - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
-					}else{
-						echo "Welcome $username! - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
-					}
-				?>
-			</div>
-		</div><!-- end of footer -->
-		<div class="large-12 columns">
-			<?php 
-				echo $this->Js->writeBuffer(); // Write cached scripts
-				echo $this->element('sql_dump'); 
-			?>
+		<?php echo $this->Session->flash(); ?>
+		<?php echo $content_for_layout; ?>
+	</div>
+	<div class="row">
+		<div class="footer">
+		<?php 
+			if(!empty($current_user['project_manager_id'])){
+				$controller = "project_managers";
+				$id = $current_user['project_manager_id'];
+			}
+			if(!empty($current_user['production_manager_id'])){
+				$controller = "production_managers";
+				$id = $current_user['production_manager_id'];
+			}
+			if($current_user['role'] == "admin"){
+				echo "Logged in as $username (Admin) - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+			}else{
+				echo "Welcome $username! - ".$this->Html->link('Edit your profile',array('controller'=>$controller,'action'=>'edit',$id))." - ".$this->Html->link("Logout",array('controller'=>'users','action'=>'logout'));
+			}
+		?>
 		</div>
+	</div>
+	<div class="row">
+	<?php 
+		echo $this->Js->writeBuffer(); // Write cached scripts
+		echo $this->element('sql_dump'); 
+	?>
 	</div>
 	<?php
 	echo $this->Html->script('jquery.form');

@@ -23,6 +23,65 @@
   
   pre { -moz-border-radius: 5px; border-radius: 5px; -webkit-border-radius: 5px; margin: 0; display: block; font: 11px Monaco, monospace !important; padding: 15px; background-color: #1C1C1C; overflow: auto; color: #D0D0D0; line-height: 125%; margin-bottom: 30px; }
 
+  .footer{
+    font-size: 12px;
+    text-align: right;
+    padding: 10px 10px 10px 20px;
+    background-color: black;
+    color: #fff;
+  }
+  .footer a{
+    color: #fff;
+    font-weight: bold;
+  }
+  .footer a:hover{
+    color: #f7f7f7;
+  }
+
+  table {
+    width: 100% !important;
+    max-width: inherit;
+  }
+  table thead,
+  table tbody,
+  table tbody tr{
+    width: 100% !important;
+    max-width: inherit;
+  }
+  table thead th,
+  table tbody tr td{
+    border-right: 1px dotted #cccccc;
+    word-break: hyphenate !important;
+    word-wrap: break-word;
+  }
+  table thead th:last-child,
+  table tbody tr td:last-child{
+    border-right: none;
+  }
+
+  .cake-debug{
+    background-color: #f7f7f7;
+    color: #888888;
+  }
+
+  /** Paging **/
+  div.paging {
+    background:#fff;
+    color: #ccc;
+    margin-top: 1em;
+    clear:both;
+  }
+  div.paging span.disabled {
+    color: #ddd;
+    display: inline;
+  }
+  div.paging span.current {
+    color: #c73e14;
+  }
+  div.paging span a {
+  }
+
+
 /* -----------------------------------------
    Page Name 1
 ----------------------------------------- */
